@@ -13,6 +13,8 @@ class RootTableVC: UITableViewController {
     
     var toDos = [CKRecord]()
     var refresh:UIRefreshControl!
+    var db: CKDatabase!
+    var currentRecords:[CKRecord] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,9 @@ class RootTableVC: UITableViewController {
         
         query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         publicData.performQuery(query, inZoneWithID: nil) { (results:[CKRecord]?, error:NSError?) -> Void in
+            
+            self.currentRecords.removeAll()
+            self.currentRecords = results!
             
             if let toDos = results {
                 self.toDos = toDos
@@ -104,7 +109,47 @@ class RootTableVC: UITableViewController {
         
         return cell
     }
-
+    
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            
+            // handle delete (by removing the data from your array and updating the tableview)
+            let selectedToDo = toDos[indexPath.row]
+            let deleteMe = selectedToDo.objectForKey("content") as! String
+            
+            deleteRecord(deleteMe)
+            //            let ref = CKReference(record: toDo, action: CKReferenceAction.DeleteSelf)
+            print("Delete button tapped")
+        }
+    }
+    
+    func deleteRecord(recordName: String) {
+        
+        var recordToDelete: CKRecord?
+        
+        for record in currentRecords {
+            let item: String = record.objectForKey("content") as! String
+            if item == recordName {
+                recordToDelete = record
+            }
+        }
+        if recordToDelete == nil {
+            return
+        }
+        db.deleteRecordWithID(recordToDelete!.recordID) { (rID, error:NSError?) -> Void in
+            if error != nil {
+            return
+            }
+            NSOperationQueue.mainQueue().addOperationWithBlock({() -> Void in
+            self.tableView.reloadData()
+            })
+        }
+    }
     
     
     /*

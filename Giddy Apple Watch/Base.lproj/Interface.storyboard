@@ -8,16 +8,26 @@
         <!--giddyWatch-->
         <scene sceneID="q4t-YE-Yqp">
             <objects>
-                <controller identifier="giddyWatch" id="oTg-S9-Xrh">
+                <controller identifier="giddyWatch" id="oTg-S9-Xrh" customClass="AppleWatchInterfaceController" customModule="Giddy_Apple_Watch_Extension">
                     <items>
                         <table alignment="left" id="CZ6-1Q-hKg">
                             <items>
-                                <tableRow id="ps2-7D-faY">
-                                    <group key="rootItem" width="1" alignment="left" id="o4r-vA-zec"/>
+                                <tableRow identifier="ToDoTableRowController" id="ps2-7D-faY" customClass="ToDoWatchItem" customModule="Giddy">
+                                    <group key="rootItem" width="1" alignment="left" id="o4r-vA-zec">
+                                        <items>
+                                            <label alignment="left" text="Label" id="wKa-ve-abT"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="titleLabel" destination="wKa-ve-abT" id="vxs-5a-YIE"/>
+                                    </connections>
                                 </tableRow>
                             </items>
                         </table>
                     </items>
+                    <connections>
+                        <outlet property="tableView" destination="CZ6-1Q-hKg" id="z9f-Un-dpg"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="367"/>
