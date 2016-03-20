@@ -4,15 +4,30 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Giddy Apple Watch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Giddy.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Notification - Giddy Apple Watch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>4A3DC0341C9E0C15009AB92A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4A3DC0551C9F1F66009AB92A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

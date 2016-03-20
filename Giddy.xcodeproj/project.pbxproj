@@ -13,7 +13,58 @@
 		4A3DC0431C9E0C15009AB92A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC0411C9E0C15009AB92A /* LaunchScreen.storyboard */; };
 		4A3DC04E1C9E0DB4009AB92A /* RootTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC04D1C9E0DB4009AB92A /* RootTableVC.swift */; };
 		4A3DC0531C9E2240009AB92A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3DC0521C9E2240009AB92A /* CloudKit.framework */; };
+		4A3DC05A1C9F1F66009AB92A /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC0581C9F1F66009AB92A /* Interface.storyboard */; };
+		4A3DC05C1C9F1F66009AB92A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC05B1C9F1F66009AB92A /* Assets.xcassets */; };
+		4A3DC0631C9F1F66009AB92A /* Giddy Apple Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4A3DC0621C9F1F66009AB92A /* Giddy Apple Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4A3DC06C1C9F1F66009AB92A /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC06B1C9F1F66009AB92A /* ExtensionDelegate.swift */; };
+		4A3DC06E1C9F1F66009AB92A /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC06D1C9F1F66009AB92A /* NotificationController.swift */; };
+		4A3DC0701C9F1F66009AB92A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC06F1C9F1F66009AB92A /* Assets.xcassets */; };
+		4A3DC0741C9F1F66009AB92A /* Giddy Apple Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 4A3DC0561C9F1F66009AB92A /* Giddy Apple Watch.app */; };
+		4A3DC07D1C9F209A009AB92A /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC06B1C9F1F66009AB92A /* ExtensionDelegate.swift */; };
+		4A3DC07E1C9F20A9009AB92A /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC06D1C9F1F66009AB92A /* NotificationController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4A3DC0641C9F1F66009AB92A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A3DC02D1C9E0C15009AB92A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A3DC0611C9F1F66009AB92A;
+			remoteInfo = "Giddy Apple Watch Extension";
+		};
+		4A3DC0721C9F1F66009AB92A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A3DC02D1C9E0C15009AB92A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A3DC0551C9F1F66009AB92A;
+			remoteInfo = "Giddy Apple Watch";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4A3DC0781C9F1F66009AB92A /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4A3DC0631C9F1F66009AB92A /* Giddy Apple Watch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A3DC07C1C9F1F66009AB92A /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				4A3DC0741C9F1F66009AB92A /* Giddy Apple Watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4A3DC0351C9E0C15009AB92A /* Giddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Giddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -25,6 +76,16 @@
 		4A3DC04A1C9E0CB4009AB92A /* Giddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Giddy.entitlements; sourceTree = "<group>"; };
 		4A3DC04D1C9E0DB4009AB92A /* RootTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTableVC.swift; sourceTree = "<group>"; };
 		4A3DC0521C9E2240009AB92A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		4A3DC0561C9F1F66009AB92A /* Giddy Apple Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Giddy Apple Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A3DC0591C9F1F66009AB92A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		4A3DC05B1C9F1F66009AB92A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4A3DC05D1C9F1F66009AB92A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A3DC0621C9F1F66009AB92A /* Giddy Apple Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Giddy Apple Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A3DC0681C9F1F66009AB92A /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		4A3DC06B1C9F1F66009AB92A /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		4A3DC06D1C9F1F66009AB92A /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		4A3DC06F1C9F1F66009AB92A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4A3DC0711C9F1F66009AB92A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +94,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A3DC0531C9E2240009AB92A /* CloudKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A3DC05F1C9F1F66009AB92A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +113,8 @@
 				4A3DC0521C9E2240009AB92A /* CloudKit.framework */,
 				4A3DC0371C9E0C15009AB92A /* Giddy */,
 				4A3DC04F1C9E0DBC009AB92A /* Supporting files */,
+				4A3DC0571C9F1F66009AB92A /* Giddy Apple Watch */,
+				4A3DC0661C9F1F66009AB92A /* Giddy Apple Watch Extension */,
 				4A3DC0361C9E0C15009AB92A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,6 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				4A3DC0351C9E0C15009AB92A /* Giddy.app */,
+				4A3DC0561C9F1F66009AB92A /* Giddy Apple Watch.app */,
+				4A3DC0621C9F1F66009AB92A /* Giddy Apple Watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,6 +167,36 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		4A3DC0571C9F1F66009AB92A /* Giddy Apple Watch */ = {
+			isa = PBXGroup;
+			children = (
+				4A3DC0581C9F1F66009AB92A /* Interface.storyboard */,
+				4A3DC05B1C9F1F66009AB92A /* Assets.xcassets */,
+				4A3DC05D1C9F1F66009AB92A /* Info.plist */,
+			);
+			path = "Giddy Apple Watch";
+			sourceTree = "<group>";
+		};
+		4A3DC0661C9F1F66009AB92A /* Giddy Apple Watch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4A3DC06B1C9F1F66009AB92A /* ExtensionDelegate.swift */,
+				4A3DC06D1C9F1F66009AB92A /* NotificationController.swift */,
+				4A3DC06F1C9F1F66009AB92A /* Assets.xcassets */,
+				4A3DC0711C9F1F66009AB92A /* Info.plist */,
+				4A3DC0671C9F1F66009AB92A /* Supporting Files */,
+			);
+			path = "Giddy Apple Watch Extension";
+			sourceTree = "<group>";
+		};
+		4A3DC0671C9F1F66009AB92A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4A3DC0681C9F1F66009AB92A /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -105,15 +207,51 @@
 				4A3DC0311C9E0C15009AB92A /* Sources */,
 				4A3DC0321C9E0C15009AB92A /* Frameworks */,
 				4A3DC0331C9E0C15009AB92A /* Resources */,
+				4A3DC07C1C9F1F66009AB92A /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4A3DC0731C9F1F66009AB92A /* PBXTargetDependency */,
 			);
 			name = Giddy;
 			productName = Giddy;
 			productReference = 4A3DC0351C9E0C15009AB92A /* Giddy.app */;
 			productType = "com.apple.product-type.application";
+		};
+		4A3DC0551C9F1F66009AB92A /* Giddy Apple Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A3DC0791C9F1F66009AB92A /* Build configuration list for PBXNativeTarget "Giddy Apple Watch" */;
+			buildPhases = (
+				4A3DC0541C9F1F66009AB92A /* Resources */,
+				4A3DC0781C9F1F66009AB92A /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A3DC0651C9F1F66009AB92A /* PBXTargetDependency */,
+			);
+			name = "Giddy Apple Watch";
+			productName = "Giddy Apple Watch";
+			productReference = 4A3DC0561C9F1F66009AB92A /* Giddy Apple Watch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		4A3DC0611C9F1F66009AB92A /* Giddy Apple Watch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A3DC0751C9F1F66009AB92A /* Build configuration list for PBXNativeTarget "Giddy Apple Watch Extension" */;
+			buildPhases = (
+				4A3DC05E1C9F1F66009AB92A /* Sources */,
+				4A3DC05F1C9F1F66009AB92A /* Frameworks */,
+				4A3DC0601C9F1F66009AB92A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Giddy Apple Watch Extension";
+			productName = "Giddy Apple Watch Extension";
+			productReference = 4A3DC0621C9F1F66009AB92A /* Giddy Apple Watch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -134,6 +272,13 @@
 							};
 						};
 					};
+					4A3DC0551C9F1F66009AB92A = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = MZLXP99C33;
+					};
+					4A3DC0611C9F1F66009AB92A = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 				};
 			};
 			buildConfigurationList = 4A3DC0301C9E0C15009AB92A /* Build configuration list for PBXProject "Giddy" */;
@@ -150,6 +295,8 @@
 			projectRoot = "";
 			targets = (
 				4A3DC0341C9E0C15009AB92A /* Giddy */,
+				4A3DC0551C9F1F66009AB92A /* Giddy Apple Watch */,
+				4A3DC0611C9F1F66009AB92A /* Giddy Apple Watch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -165,6 +312,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4A3DC0541C9F1F66009AB92A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A3DC05C1C9F1F66009AB92A /* Assets.xcassets in Resources */,
+				4A3DC05A1C9F1F66009AB92A /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A3DC0601C9F1F66009AB92A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A3DC0701C9F1F66009AB92A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -174,10 +338,34 @@
 			files = (
 				4A3DC04E1C9E0DB4009AB92A /* RootTableVC.swift in Sources */,
 				4A3DC0391C9E0C15009AB92A /* AppDelegate.swift in Sources */,
+				4A3DC07E1C9F20A9009AB92A /* NotificationController.swift in Sources */,
+				4A3DC07D1C9F209A009AB92A /* ExtensionDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A3DC05E1C9F1F66009AB92A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A3DC06E1C9F1F66009AB92A /* NotificationController.swift in Sources */,
+				4A3DC06C1C9F1F66009AB92A /* ExtensionDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4A3DC0651C9F1F66009AB92A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A3DC0611C9F1F66009AB92A /* Giddy Apple Watch Extension */;
+			targetProxy = 4A3DC0641C9F1F66009AB92A /* PBXContainerItemProxy */;
+		};
+		4A3DC0731C9F1F66009AB92A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A3DC0551C9F1F66009AB92A /* Giddy Apple Watch */;
+			targetProxy = 4A3DC0721C9F1F66009AB92A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4A3DC03C1C9E0C15009AB92A /* Main.storyboard */ = {
@@ -194,6 +382,14 @@
 				4A3DC0421C9E0C15009AB92A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		4A3DC0581C9F1F66009AB92A /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4A3DC0591C9F1F66009AB92A /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -304,6 +500,66 @@
 			};
 			name = Release;
 		};
+		4A3DC0761C9F1F66009AB92A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Giddy Apple Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasnaude.Giddy.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Debug;
+		};
+		4A3DC0771C9F1F66009AB92A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Giddy Apple Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasnaude.Giddy.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
+		4A3DC07A1C9F1F66009AB92A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = Giddy_Apple_Watch_Extension;
+				INFOPLIST_FILE = "Giddy Apple Watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasnaude.Giddy.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Debug;
+		};
+		4A3DC07B1C9F1F66009AB92A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = Giddy_Apple_Watch_Extension;
+				INFOPLIST_FILE = "Giddy Apple Watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasnaude.Giddy.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -321,6 +577,22 @@
 			buildConfigurations = (
 				4A3DC0481C9E0C15009AB92A /* Debug */,
 				4A3DC0491C9E0C15009AB92A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4A3DC0751C9F1F66009AB92A /* Build configuration list for PBXNativeTarget "Giddy Apple Watch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A3DC0761C9F1F66009AB92A /* Debug */,
+				4A3DC0771C9F1F66009AB92A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4A3DC0791C9F1F66009AB92A /* Build configuration list for PBXNativeTarget "Giddy Apple Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A3DC07A1C9F1F66009AB92A /* Debug */,
+				4A3DC07B1C9F1F66009AB92A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

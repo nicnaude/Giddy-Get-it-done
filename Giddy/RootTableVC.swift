@@ -77,9 +77,6 @@ class RootTableVC: UITableViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    //    func errorAlert () {
-    //    let alert = UIAlertController(title: "Not saved", message: "An error occured. Please try again later", preferredStyle: .Alert)
-    //    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
@@ -102,16 +99,12 @@ class RootTableVC: UITableViewController {
         let toDo = toDos[indexPath.row]
         
         if let toDosContent = toDo["content"] as? String {
-            let dateFormat = NSDateFormatter()
-            dateFormat.dateFormat = "MM/dd/yyyy"
-            let dateString = dateFormat.stringFromDate(toDo.creationDate!)
-            
             cell.textLabel?.text = toDosContent
-            cell.detailTextLabel?.text = dateString
         }
         
         return cell
     }
+
     
     
     /*
