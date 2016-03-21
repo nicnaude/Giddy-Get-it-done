@@ -118,36 +118,39 @@ class RootTableVC: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             
-            // handle delete (by removing the data from your array and updating the tableview)
-            let selectedToDo = toDos[indexPath.row]
-            let deleteMe = selectedToDo.objectForKey("content") as! String
             
-            deleteRecord(deleteMe)
-            //            let ref = CKReference(record: toDo, action: CKReferenceAction.DeleteSelf)
-            print("Delete button tapped")
-        }
-    }
-    
-    func deleteRecord(recordName: String) {
-        
-        var recordToDelete: CKRecord?
-        
-        for record in currentRecords {
-            let item: String = record.objectForKey("content") as! String
-            if item == recordName {
-                recordToDelete = record
-            }
-        }
-        if recordToDelete == nil {
-            return
-        }
-        db.deleteRecordWithID(recordToDelete!.recordID) { (rID, error:NSError?) -> Void in
-            if error != nil {
-            return
-            }
-            NSOperationQueue.mainQueue().addOperationWithBlock({() -> Void in
-            self.tableView.reloadData()
+            let container = CKContainer.defaultContainer()
+            let publicData = container.publicCloudDatabase
+            
+            //            let query = CKQuery(recordType: "toDo", predicate: NSPredicate(format: "TRUEPREDICATE", argumentArray: [selectedToDo.recordID.recordName]))
+            
+            
+            let selectedToDo = self.toDos[indexPath.row].recordID
+            print("selectedToDo: \(selectedToDo)")
+            
+            let query = CKQuery(recordType: "toDo", predicate: NSPredicate(format: "(content == %@)", argumentArray: [selectedToDo.recordName]))
+            print("query: \(query)")
+            
+            publicData.performQuery(query, inZoneWithID: nil, completionHandler: { results, error in
+                
+                if error == nil {
+                    if results!.count > 0 {
+                        let record: CKRecord! = results![0]
+                        print(record)
+                        
+                        publicData.deleteRecordWithID(record.recordID, completionHandler: { recordID, error in
+                            if error != nil {
+                                print(error)
+                            }
+                        })
+                    }
+                }
+                else {
+                    print("Fuck! ERROR")
+                }
             })
+            loadData()
+            print("Delete button tapped")
         }
     }
     
