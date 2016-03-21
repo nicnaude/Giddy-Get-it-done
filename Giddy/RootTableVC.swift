@@ -84,6 +84,8 @@ class RootTableVC: UITableViewController {
                 let textField = alert.textFields?.first
                 if textField!.text != "" {
                     let newToDo = CKRecord(recordType: "ToDo")
+                    var checkedOrNot = Bool()
+                    
                     newToDo["content"] = textField!.text
                     
                     let privateData = CKContainer.defaultContainer().privateCloudDatabase
@@ -95,6 +97,7 @@ class RootTableVC: UITableViewController {
                                 self.toDos.insert(newToDo, atIndex: 0)
                                 let indexPath = NSIndexPath(forRow: 0, inSection: 0)
                                 self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Top)
+                                self.tableView.reloadData()
                                 self.tableView.endUpdates()
                             })
                         } else {
@@ -139,7 +142,33 @@ class RootTableVC: UITableViewController {
             cell.textLabel?.text = toDosContent
         }
         
+        let selectedToDo = self.toDos[indexPath.row].recordID
+        print("selectedToDo: \(selectedToDo)")
+        
+        let checkedChecker = CKQuery(recordType: "toDo", predicate: NSPredicate(format: "(checkedOrNot == %@)", argumentArray: [selectedToDo]))
+        
+        if (checkedChecker == false) {
+            cell.accessoryType = .None
+        } else {
+            cell.accessoryType = .Checkmark
+        }
+        
+        print("checkedChecker: \(checkedChecker)")
+        
         return cell
+    }
+    
+    
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+            cell.accessoryType = .None
+        }
+    }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+            cell.accessoryType = .Checkmark
+            
+        }
     }
     
     
@@ -153,37 +182,28 @@ class RootTableVC: UITableViewController {
             
             let container = CKContainer.defaultContainer()
             let privateData = container.privateCloudDatabase
-        
-            let selectedToDo = self.toDos[indexPath.row].recordID.recordName
+            
+            let selectedToDo = self.toDos[indexPath.row].recordID
             print("selectedToDo: \(selectedToDo)")
             
             let query = CKQuery(recordType: "toDo", predicate: NSPredicate(format: "(content == %@)", argumentArray: [selectedToDo]))
             print("query: \(query)")
             
-            privateData.performQuery(query, inZoneWithID: nil, completionHandler: { results, error in
-                print("Error: \(error)")
-                print("Results: \(results!.count)")
-                
-                if error == nil {
-                    if results!.count > 0 {
-                        print(results!.count)
-                        let record: CKRecord! = results![0]
-                        print(record)
-                        
-                        privateData.deleteRecordWithID(record.recordID, completionHandler: { recordID, error in
-                            if error != nil {
-                                print(error)
-                            }
-                        })
-                    }
+            privateData.deleteRecordWithID(selectedToDo) { record, error in
+                if error != nil
+                {
+                    self.loadData()
+                    self.tableView.reloadData()
+                    //                    print("ERR RECORD ID: \(self.record.recordID)")
+                    //                    completion(success: false, message: "could not delete entry", error: error)
                 }
-                else {
-                    print("Fuck! ERROR")
+                else
+                {
+                    self.loadData()
+                    //                    print("DEL RECORD ID: \(self.record.recordID)")
+                    //                    completion(success: true, message: "successfully deleted entry", error: nil)
                 }
-            })
-            loadData()
-            print("Delete button tapped")
+            }
         }
     }
-    
 }
