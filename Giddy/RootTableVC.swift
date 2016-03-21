@@ -15,11 +15,10 @@ class RootTableVC: UITableViewController {
     var refresh:UIRefreshControl!
     var currentRecords:[CKRecord] = []
     let privateData = CKContainer.defaultContainer().privateCloudDatabase
+    var iCloudStatus = Bool()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // TO DO: Add check to see if user is logged in to iCloud.
         
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -57,51 +56,62 @@ class RootTableVC: UITableViewController {
         if let currentToken = NSFileManager.defaultManager().ubiquityIdentityToken {
             print(currentToken)
             print("iCloud is signed in")
+            iCloudStatus = true
             return true
         }
         else {
-            let alertController = UIAlertController(title: "iOScreator", message:
-                "Hello, world!", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "iCloud Unavailable", message:
+                "Please sign into iCloud in Settings and restart Giddy", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
             
             self.presentViewController(alertController, animated: true, completion: nil)
             print("NOT signed into iCloud")
+            iCloudStatus = false
             return false
         }
     }
     
     
     @IBAction func sendToDo(sender: AnyObject) {
-        let alert = UIAlertController(title: "Get it done", message: "Add a new todo", preferredStyle: .Alert)
-        alert.addTextFieldWithConfigurationHandler { (textField:UITextField) -> Void in
-            textField.placeholder = "Buy milk"
-        }
         
-        alert.addAction(UIAlertAction(title: "Add", style: .Default, handler: { (action:UIAlertAction) -> Void in
-            let textField = alert.textFields?.first
-            if textField!.text != "" {
-                let newToDo = CKRecord(recordType: "ToDo")
-                newToDo["content"] = textField!.text
-                
-                let privateData = CKContainer.defaultContainer().privateCloudDatabase
-                privateData.saveRecord(newToDo, completionHandler: { (record:CKRecord?, error:NSError?) -> Void in
-                    
-                    if error == nil {
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.tableView.beginUpdates()
-                            self.toDos.insert(newToDo, atIndex: 0)
-                            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-                            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Top)
-                            self.tableView.endUpdates()
-                        })
-                    } else {
-                        print("Error!")
-                    }
-                })
+        if iCloudStatus == true {
+            let alert = UIAlertController(title: "Get it done", message: "Add a new todo", preferredStyle: .Alert)
+            alert.addTextFieldWithConfigurationHandler { (textField:UITextField) -> Void in
+                textField.placeholder = "Buy milk"
             }
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+            
+            alert.addAction(UIAlertAction(title: "Add", style: .Default, handler: { (action:UIAlertAction) -> Void in
+                let textField = alert.textFields?.first
+                if textField!.text != "" {
+                    let newToDo = CKRecord(recordType: "ToDo")
+                    newToDo["content"] = textField!.text
+                    
+                    let privateData = CKContainer.defaultContainer().privateCloudDatabase
+                    privateData.saveRecord(newToDo, completionHandler: { (record:CKRecord?, error:NSError?) -> Void in
+                        
+                        if error == nil {
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                self.tableView.beginUpdates()
+                                self.toDos.insert(newToDo, atIndex: 0)
+                                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+                                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Top)
+                                self.tableView.endUpdates()
+                            })
+                        } else {
+                            print("Error!")
+                        }
+                    })
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            let alertController = UIAlertController(title: "iCloud Unavailable", message:
+                "Please sign into iCloud in Settings and restart Giddy", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
     }
     
     
@@ -143,20 +153,20 @@ class RootTableVC: UITableViewController {
             
             let container = CKContainer.defaultContainer()
             let privateData = container.privateCloudDatabase
-            
-            //            let query = CKQuery(recordType: "toDo", predicate: NSPredicate(format: "TRUEPREDICATE", argumentArray: [selectedToDo.recordID.recordName]))
-            
-            
-            let selectedToDo = self.toDos[indexPath.row].recordID
+        
+            let selectedToDo = self.toDos[indexPath.row].recordID.recordName
             print("selectedToDo: \(selectedToDo)")
             
-            let query = CKQuery(recordType: "toDo", predicate: NSPredicate(format: "(content == %@)", argumentArray: [selectedToDo.recordName]))
+            let query = CKQuery(recordType: "toDo", predicate: NSPredicate(format: "(content == %@)", argumentArray: [selectedToDo]))
             print("query: \(query)")
             
             privateData.performQuery(query, inZoneWithID: nil, completionHandler: { results, error in
+                print("Error: \(error)")
+                print("Results: \(results!.count)")
                 
                 if error == nil {
                     if results!.count > 0 {
+                        print(results!.count)
                         let record: CKRecord! = results![0]
                         print(record)
                         
@@ -175,51 +185,5 @@ class RootTableVC: UITableViewController {
             print("Delete button tapped")
         }
     }
-    
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the specified item to be editable.
-    return true
-    }
-    */
-    
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete {
-    // Delete the row from the data source
-    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    } else if editingStyle == .Insert {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-    }
-    */
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
     
 }
