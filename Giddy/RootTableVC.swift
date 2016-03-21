@@ -14,11 +14,14 @@ class RootTableVC: UITableViewController {
     var toDos = [CKRecord]()
     var refresh:UIRefreshControl!
     var currentRecords:[CKRecord] = []
-    let privateData = CKContainer.defaultContainer().privateCloudDatabase
+    var db: CKDatabase!
+    let privateDB = CKContainer.defaultContainer().privateCloudDatabase
     var iCloudStatus = Bool()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        db = CKContainer.defaultContainer().privateCloudDatabase
         
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -36,7 +39,7 @@ class RootTableVC: UITableViewController {
         let query = CKQuery (recordType: "toDo", predicate: NSPredicate(format: "TRUEPREDICATE", argumentArray: nil))
         
         query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        privateData.performQuery(query, inZoneWithID: nil) { (results:[CKRecord]?, error:NSError?) -> Void in
+        privateDB.performQuery(query, inZoneWithID: nil) { (results:[CKRecord]?, error:NSError?) -> Void in
             
             self.currentRecords.removeAll()
             self.currentRecords = results!
@@ -71,30 +74,40 @@ class RootTableVC: UITableViewController {
         }
     }
     
+    func howToAddRecordsToDB () {
+        let itemRecord:CKRecord = CKRecord(recordType: "ToDo")
+        itemRecord.setObject("theObjectSendingTheData", forKey: "The Key")
+        db.saveRecord(itemRecord) { (record:CKRecord?, error:NSError?) -> Void in
+            if error == nil {
+                print("Saved successfully")
+                NSOperationQueue.mainQueue().addOperationWithBlock({() -> Void in
+                    print("Update the UI here.")
+                })
+            }
+        }
+    }
+    
     
     @IBAction func sendToDo(sender: AnyObject) {
-        
+        print("Add button tapped")
         if iCloudStatus == true {
             let alert = UIAlertController(title: "Get it done", message: "Add a new todo", preferredStyle: .Alert)
             alert.addTextFieldWithConfigurationHandler { (textField:UITextField) -> Void in
                 textField.placeholder = "Buy milk"
             }
-            
             alert.addAction(UIAlertAction(title: "Add", style: .Default, handler: { (action:UIAlertAction) -> Void in
                 let textField = alert.textFields?.first
                 if textField!.text != "" {
-                    let newToDo = CKRecord(recordType: "ToDo")
-                    var checkedOrNot = Bool()
+                    let itemRecord = CKRecord(recordType: "ToDo")
+                    itemRecord.setObject(textField!.text, forKey: "content")
+                    itemRecord.setObject("false", forKey: "checked")
                     
-                    newToDo["content"] = textField!.text
-                    
-                    let privateData = CKContainer.defaultContainer().privateCloudDatabase
-                    privateData.saveRecord(newToDo, completionHandler: { (record:CKRecord?, error:NSError?) -> Void in
+                    self.db.saveRecord(itemRecord) { (record:CKRecord?, error:NSError?) -> Void in
                         
                         if error == nil {
                             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                 self.tableView.beginUpdates()
-                                self.toDos.insert(newToDo, atIndex: 0)
+                                self.toDos.insert(itemRecord, atIndex: 0)
                                 let indexPath = NSIndexPath(forRow: 0, inSection: 0)
                                 self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Top)
                                 self.tableView.reloadData()
@@ -103,7 +116,7 @@ class RootTableVC: UITableViewController {
                         } else {
                             print("Error!")
                         }
-                    })
+                    }
                 }
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
@@ -145,15 +158,14 @@ class RootTableVC: UITableViewController {
         let selectedToDo = self.toDos[indexPath.row].recordID
         print("selectedToDo: \(selectedToDo)")
         
-        let checkedChecker = CKQuery(recordType: "toDo", predicate: NSPredicate(format: "(checkedOrNot == %@)", argumentArray: [selectedToDo]))
+        let checkedChecker = CKQuery(recordType: "checked", predicate: NSPredicate(format: "(checked == %@)", argumentArray: [selectedToDo]))
+        print("checkedChecker: \(checkedChecker)")
         
-        if (checkedChecker == false) {
+        if (checkedChecker == 0) {
             cell.accessoryType = .None
         } else {
             cell.accessoryType = .Checkmark
         }
-        
-        print("checkedChecker: \(checkedChecker)")
         
         return cell
     }
