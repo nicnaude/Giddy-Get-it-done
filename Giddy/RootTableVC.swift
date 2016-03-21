@@ -13,11 +13,13 @@ class RootTableVC: UITableViewController {
     
     var toDos = [CKRecord]()
     var refresh:UIRefreshControl!
-    var db: CKDatabase!
     var currentRecords:[CKRecord] = []
+    let privateData = CKContainer.defaultContainer().privateCloudDatabase
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // TO DO: Add check to see if user is logged in to iCloud.
         
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -25,16 +27,17 @@ class RootTableVC: UITableViewController {
         self.tableView.addSubview(refresh)
         
         loadData()
+        isICloudContainerAvailable()
     }
+    
     
     func loadData() {
         toDos = [CKRecord]()
         
-        let publicData = CKContainer.defaultContainer().publicCloudDatabase
         let query = CKQuery (recordType: "toDo", predicate: NSPredicate(format: "TRUEPREDICATE", argumentArray: nil))
         
         query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        publicData.performQuery(query, inZoneWithID: nil) { (results:[CKRecord]?, error:NSError?) -> Void in
+        privateData.performQuery(query, inZoneWithID: nil) { (results:[CKRecord]?, error:NSError?) -> Void in
             
             self.currentRecords.removeAll()
             self.currentRecords = results!
@@ -49,6 +52,25 @@ class RootTableVC: UITableViewController {
         }
     }
     
+    
+    func isICloudContainerAvailable() -> Bool {
+        if let currentToken = NSFileManager.defaultManager().ubiquityIdentityToken {
+            print(currentToken)
+            print("iCloud is signed in")
+            return true
+        }
+        else {
+            let alertController = UIAlertController(title: "iOScreator", message:
+                "Hello, world!", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            print("NOT signed into iCloud")
+            return false
+        }
+    }
+    
+    
     @IBAction func sendToDo(sender: AnyObject) {
         let alert = UIAlertController(title: "Get it done", message: "Add a new todo", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler { (textField:UITextField) -> Void in
@@ -61,8 +83,8 @@ class RootTableVC: UITableViewController {
                 let newToDo = CKRecord(recordType: "ToDo")
                 newToDo["content"] = textField!.text
                 
-                let publicData = CKContainer.defaultContainer().publicCloudDatabase
-                publicData.saveRecord(newToDo, completionHandler: { (record:CKRecord?, error:NSError?) -> Void in
+                let privateData = CKContainer.defaultContainer().privateCloudDatabase
+                privateData.saveRecord(newToDo, completionHandler: { (record:CKRecord?, error:NSError?) -> Void in
                     
                     if error == nil {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -120,7 +142,7 @@ class RootTableVC: UITableViewController {
             
             
             let container = CKContainer.defaultContainer()
-            let publicData = container.publicCloudDatabase
+            let privateData = container.privateCloudDatabase
             
             //            let query = CKQuery(recordType: "toDo", predicate: NSPredicate(format: "TRUEPREDICATE", argumentArray: [selectedToDo.recordID.recordName]))
             
@@ -131,14 +153,14 @@ class RootTableVC: UITableViewController {
             let query = CKQuery(recordType: "toDo", predicate: NSPredicate(format: "(content == %@)", argumentArray: [selectedToDo.recordName]))
             print("query: \(query)")
             
-            publicData.performQuery(query, inZoneWithID: nil, completionHandler: { results, error in
+            privateData.performQuery(query, inZoneWithID: nil, completionHandler: { results, error in
                 
                 if error == nil {
                     if results!.count > 0 {
                         let record: CKRecord! = results![0]
                         print(record)
                         
-                        publicData.deleteRecordWithID(record.recordID, completionHandler: { recordID, error in
+                        privateData.deleteRecordWithID(record.recordID, completionHandler: { recordID, error in
                             if error != nil {
                                 print(error)
                             }
