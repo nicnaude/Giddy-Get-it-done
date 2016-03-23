@@ -17,11 +17,17 @@ class RootTableVC: UITableViewController {
     var db: CKDatabase!
     let privateDB = CKContainer.defaultContainer().privateCloudDatabase
     var iCloudStatus = Bool()
+    var checked = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.barTintColor = UIColor(red:0.98, green:0.68, blue:0.09, alpha:1.0)
+        
+        //UI setup
         db = CKContainer.defaultContainer().privateCloudDatabase
+        navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -64,7 +70,7 @@ class RootTableVC: UITableViewController {
         }
         else {
             let alertController = UIAlertController(title: "iCloud Unavailable", message:
-                "Please sign into iCloud in Settings and restart Giddy", preferredStyle: UIAlertControllerStyle.Alert)
+                "Giddy uses iCloud to save your todos. Please sign into iCloud in the Settings app and restart Giddy.", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
             
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -89,25 +95,31 @@ class RootTableVC: UITableViewController {
     
     
     @IBAction func sendToDo(sender: AnyObject) {
-        print("Add button tapped")
+        
         if iCloudStatus == true {
             let alert = UIAlertController(title: "Get it done", message: "Add a new todo", preferredStyle: .Alert)
             alert.addTextFieldWithConfigurationHandler { (textField:UITextField) -> Void in
                 textField.placeholder = "Buy milk"
             }
+            
             alert.addAction(UIAlertAction(title: "Add", style: .Default, handler: { (action:UIAlertAction) -> Void in
                 let textField = alert.textFields?.first
                 if textField!.text != "" {
-                    let itemRecord = CKRecord(recordType: "ToDo")
-                    itemRecord.setObject(textField!.text, forKey: "content")
-                    itemRecord.setObject("false", forKey: "checked")
+                    //                    let newToDo = CKRecord(recordType: "ToDo")
+                    //                    var checkedOrNot = Bool()
+                    //                    newToDo["content"] = textField!.text
                     
-                    self.db.saveRecord(itemRecord) { (record:CKRecord?, error:NSError?) -> Void in
+                    let newToDo = CKRecord(recordType: "ToDo")
+                    newToDo.setObject(textField!.text, forKey: "content")
+                    newToDo.setObject(self.checked, forKey: "checked")
+                    
+                    
+                    self.privateDB.saveRecord(newToDo, completionHandler: { (record:CKRecord?, error:NSError?) -> Void in
                         
                         if error == nil {
                             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                 self.tableView.beginUpdates()
-                                self.toDos.insert(itemRecord, atIndex: 0)
+                                self.toDos.insert(newToDo, atIndex: 0)
                                 let indexPath = NSIndexPath(forRow: 0, inSection: 0)
                                 self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Top)
                                 self.tableView.reloadData()
@@ -116,14 +128,14 @@ class RootTableVC: UITableViewController {
                         } else {
                             print("Error!")
                         }
-                    }
+                    })
                 }
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         } else {
             let alertController = UIAlertController(title: "iCloud Unavailable", message:
-                "Please sign into iCloud in Settings and restart Giddy", preferredStyle: UIAlertControllerStyle.Alert)
+                "Giddy uses iCloud to save your todos. Please sign into iCloud in the Settings app and restart Giddy.", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
             
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -158,14 +170,31 @@ class RootTableVC: UITableViewController {
         let selectedToDo = self.toDos[indexPath.row].recordID
         print("selectedToDo: \(selectedToDo)")
         
-        let checkedChecker = CKQuery(recordType: "checked", predicate: NSPredicate(format: "(checked == %@)", argumentArray: [selectedToDo]))
-        print("checkedChecker: \(checkedChecker)")
         
-        if (checkedChecker == 0) {
-            cell.accessoryType = .None
-        } else {
-            cell.accessoryType = .Checkmark
-        }
+        // Check checkedStatus
+        
+//        self.privateDB.fetchRecordWithID(selectedToDo) { (record: CKRecord?, error: NSError?) -> Void in
+//            if (error == nil){
+//                print("Record: \(record)")
+//                if (){
+//                } else {
+//                print("No checked status")
+//                }
+//            } else {
+//            print("Error")
+//            }
+//        }
+        
+//        let query = CKQuery(recordType: "toDo", predicate: NSPredicate(format: "%@ == checked", "creatorUserRecordID" ,CKReference(recordID: selectedToDo, action: CKReferenceAction.None)))
+//        
+//        //        let checkedChecker = CKQuery(recordType: "ToDo", predicate: NSPredicate(format: "(checked == %@)", argumentArray: [selectedToDo]))
+//        print("query: \(query)")
+//        
+//        if (query == false) {
+//            cell.accessoryType = .None
+//        } else {
+//            cell.accessoryType = .Checkmark
+//        }
         
         return cell
     }
