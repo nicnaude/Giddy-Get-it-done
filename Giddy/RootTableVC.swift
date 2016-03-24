@@ -18,28 +18,11 @@ class RootTableVC: UITableViewController {
     let privateDB = CKContainer.defaultContainer().privateCloudDatabase
     var iCloudStatus = Bool()
     var checked = true
-    var actionButton: ActionButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
-
-        // Action button
-        let twitterImage = UIImage(named: "G")!
-        let plusImage = UIImage(named: "checked")!
         
-        let twitter = ActionButtonItem(title: "Twitter", image: twitterImage)
-        twitter.action = { item in print("Twitter...") }
-        
-        let google = ActionButtonItem(title: "unchecked", image: plusImage)
-        google.action = { item in print("Google Plus...") }
-        
-        actionButton = ActionButton(attachedToView: self.view, items: [twitter, google])
-        actionButton.action = { button in button.toggleMenu() }
-        actionButton.setTitle("+", forState: .Normal)
-        
-        actionButton.backgroundColor = UIColor(red: 238.0/255.0, green: 130.0/255.0, blue: 34.0/255.0, alpha:1.0)
-        // end of Action button
         
         navigationController?.navigationBar.barTintColor = UIColor(red:0.98, green:0.68, blue:0.09, alpha:1.0)
         
@@ -116,17 +99,18 @@ class RootTableVC: UITableViewController {
     @IBAction func sendToDo(sender: AnyObject) {
         
         if iCloudStatus == true {
+            
             let alert = UIAlertController(title: "Get it done", message: "Add a new todo", preferredStyle: .Alert)
+            
+            alert.view.tintColor = UIColor(red:0.98, green:0.68, blue:0.09, alpha:1.0)
             alert.addTextFieldWithConfigurationHandler { (textField:UITextField) -> Void in
                 textField.placeholder = "Buy milk"
             }
             
             alert.addAction(UIAlertAction(title: "Add", style: .Default, handler: { (action:UIAlertAction) -> Void in
+                
                 let textField = alert.textFields?.first
                 if textField!.text != "" {
-                    //                    let newToDo = CKRecord(recordType: "ToDo")
-                    //                    var checkedOrNot = Bool()
-                    //                    newToDo["content"] = textField!.text
                     
                     let newToDo = CKRecord(recordType: "ToDo")
                     newToDo.setObject(textField!.text, forKey: "content")
@@ -190,51 +174,12 @@ class RootTableVC: UITableViewController {
         print("selectedToDo: \(selectedToDo)")
         
 
-        var image : UIImage = UIImage(named: "unchecked")!
+        var image : UIImage = UIImage(named: "checked")!
         
         cell.imageView!.image = image
         
-        
-        // Check checkedStatus
-        
-//        self.privateDB.fetchRecordWithID(selectedToDo) { (record: CKRecord?, error: NSError?) -> Void in
-//            if (error == nil){
-//                print("Record: \(record)")
-//                if (){
-//                } else {
-//                print("No checked status")
-//                }
-//            } else {
-//            print("Error")
-//            }
-//        }
-        
-//        let query = CKQuery(recordType: "toDo", predicate: NSPredicate(format: "%@ == checked", "creatorUserRecordID" ,CKReference(recordID: selectedToDo, action: CKReferenceAction.None)))
-//        
-//        //        let checkedChecker = CKQuery(recordType: "ToDo", predicate: NSPredicate(format: "(checked == %@)", argumentArray: [selectedToDo]))
-//        print("query: \(query)")
-//        
-//        if (query == false) {
-//            cell.accessoryType = .None
-//        } else {
-//            cell.accessoryType = .Checkmark
-//        }
-        
         return cell
     }
-    
-    
-//    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-//        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-//            cell.accessoryType = .None
-//        }
-//    }
-//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-//            cell.accessoryType = .Checkmark
-//            
-//        }
-//    }
     
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -259,14 +204,10 @@ class RootTableVC: UITableViewController {
                 {
                     self.loadData()
                     self.tableView.reloadData()
-                    //                    print("ERR RECORD ID: \(self.record.recordID)")
-                    //                    completion(success: false, message: "could not delete entry", error: error)
                 }
                 else
                 {
                     self.loadData()
-                    //                    print("DEL RECORD ID: \(self.record.recordID)")
-                    //                    completion(success: true, message: "successfully deleted entry", error: nil)
                 }
             }
         }
