@@ -18,9 +18,28 @@ class RootTableVC: UITableViewController {
     let privateDB = CKContainer.defaultContainer().privateCloudDatabase
     var iCloudStatus = Bool()
     var checked = true
+    var actionButton: ActionButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.tableFooterView = UIView()
+
+        // Action button
+        let twitterImage = UIImage(named: "G")!
+        let plusImage = UIImage(named: "checked")!
+        
+        let twitter = ActionButtonItem(title: "Twitter", image: twitterImage)
+        twitter.action = { item in print("Twitter...") }
+        
+        let google = ActionButtonItem(title: "unchecked", image: plusImage)
+        google.action = { item in print("Google Plus...") }
+        
+        actionButton = ActionButton(attachedToView: self.view, items: [twitter, google])
+        actionButton.action = { button in button.toggleMenu() }
+        actionButton.setTitle("+", forState: .Normal)
+        
+        actionButton.backgroundColor = UIColor(red: 238.0/255.0, green: 130.0/255.0, blue: 34.0/255.0, alpha:1.0)
+        // end of Action button
         
         navigationController?.navigationBar.barTintColor = UIColor(red:0.98, green:0.68, blue:0.09, alpha:1.0)
         
@@ -170,6 +189,11 @@ class RootTableVC: UITableViewController {
         let selectedToDo = self.toDos[indexPath.row].recordID
         print("selectedToDo: \(selectedToDo)")
         
+
+        var image : UIImage = UIImage(named: "unchecked")!
+        
+        cell.imageView!.image = image
+        
         
         // Check checkedStatus
         
@@ -200,17 +224,17 @@ class RootTableVC: UITableViewController {
     }
     
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            cell.accessoryType = .None
-        }
-    }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            cell.accessoryType = .Checkmark
-            
-        }
-    }
+//    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+//        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+//            cell.accessoryType = .None
+//        }
+//    }
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+//            cell.accessoryType = .Checkmark
+//            
+//        }
+//    }
     
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
