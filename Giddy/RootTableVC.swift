@@ -19,6 +19,7 @@ class RootTableVC: UITableViewController {
     var iCloudStatus = Bool()
     var checked = true
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
@@ -33,7 +34,7 @@ class RootTableVC: UITableViewController {
         
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refresh.addTarget(self, action: "loadData", forControlEvents: .ValueChanged)
+        refresh.addTarget(self, action: #selector(RootTableVC.loadData), forControlEvents: .ValueChanged)
         self.tableView.addSubview(refresh)
         
         loadData()
@@ -96,7 +97,7 @@ class RootTableVC: UITableViewController {
     }
     
     
-    @IBAction func sendToDo(sender: AnyObject) {
+    @IBAction func saveToDo(sender: AnyObject) {
         
         if iCloudStatus == true {
             
@@ -108,7 +109,6 @@ class RootTableVC: UITableViewController {
             }
             
             alert.addAction(UIAlertAction(title: "Add", style: .Default, handler: { (action:UIAlertAction) -> Void in
-                
                 let textField = alert.textFields?.first
                 if textField!.text != "" {
                     
@@ -174,7 +174,7 @@ class RootTableVC: UITableViewController {
         print("selectedToDo: \(selectedToDo)")
         
 
-        var image : UIImage = UIImage(named: "checked")!
+        let image : UIImage = UIImage(named: "checked")!
         
         cell.imageView!.image = image
         

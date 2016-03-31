@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A3245A21CA4A64900A996E3 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3245A11CA4A64900A996E3 /* ToDo.swift */; };
 		4A3DC0391C9E0C15009AB92A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC0381C9E0C15009AB92A /* AppDelegate.swift */; };
 		4A3DC03E1C9E0C15009AB92A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC03C1C9E0C15009AB92A /* Main.storyboard */; };
 		4A3DC0401C9E0C15009AB92A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC03F1C9E0C15009AB92A /* Assets.xcassets */; };
@@ -26,8 +27,6 @@
 		4A3DC0851C9F305D009AB92A /* ToDoWatchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC0831C9F2B0A009AB92A /* ToDoWatchItem.swift */; };
 		4A3DC0871C9F30B0009AB92A /* AppleWatchInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC0811C9F2549009AB92A /* AppleWatchInterfaceController.swift */; };
 		4A3DC0881C9F30B1009AB92A /* AppleWatchInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC0811C9F2549009AB92A /* AppleWatchInterfaceController.swift */; };
-		4A9821CF1CA378F3008A18DD /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9821CE1CA378F3008A18DD /* ActionButton.swift */; };
-		4A9821D11CA3791D008A18DD /* ActionButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9821D01CA3791D008A18DD /* ActionButtonItem.swift */; };
 		4ABD924B1CA36D7500C43F6C /* Onboard1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924A1CA36D7500C43F6C /* Onboard1VC.swift */; };
 		4ABD924D1CA36D8400C43F6C /* Onboard2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924C1CA36D8400C43F6C /* Onboard2VC.swift */; };
 		4ABD924F1CA36D9000C43F6C /* Onboard3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924E1CA36D9000C43F6C /* Onboard3VC.swift */; };
@@ -78,6 +77,7 @@
 
 /* Begin PBXFileReference section */
 		2FDE641A502A0175F39A2FD9 /* Pods-Giddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Giddy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Giddy/Pods-Giddy.release.xcconfig"; sourceTree = "<group>"; };
+		4A3245A11CA4A64900A996E3 /* ToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		4A3DC0351C9E0C15009AB92A /* Giddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Giddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A3DC0381C9E0C15009AB92A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A3DC03D1C9E0C15009AB92A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -99,8 +99,6 @@
 		4A3DC0711C9F1F66009AB92A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A3DC0811C9F2549009AB92A /* AppleWatchInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppleWatchInterfaceController.swift; path = ../AppleWatchInterfaceController.swift; sourceTree = "<group>"; };
 		4A3DC0831C9F2B0A009AB92A /* ToDoWatchItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoWatchItem.swift; sourceTree = "<group>"; };
-		4A9821CE1CA378F3008A18DD /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
-		4A9821D01CA3791D008A18DD /* ActionButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButtonItem.swift; sourceTree = "<group>"; };
 		4ABD924A1CA36D7500C43F6C /* Onboard1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard1VC.swift; sourceTree = "<group>"; };
 		4ABD924C1CA36D8400C43F6C /* Onboard2VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard2VC.swift; sourceTree = "<group>"; };
 		4ABD924E1CA36D9000C43F6C /* Onboard3VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard3VC.swift; sourceTree = "<group>"; };
@@ -128,6 +126,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A3245A01CA4A60F00A996E3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4A3245A11CA4A64900A996E3 /* ToDo.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		4A3DC02C1C9E0C15009AB92A = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +161,7 @@
 		4A3DC0371C9E0C15009AB92A /* Giddy */ = {
 			isa = PBXGroup;
 			children = (
+				4A3245A01CA4A60F00A996E3 /* Model */,
 				4A3DC0511C9E0DDC009AB92A /* Controllers */,
 				4A3DC0501C9E0DCC009AB92A /* View */,
 			);
@@ -187,8 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				4A3DC04D1C9E0DB4009AB92A /* RootTableVC.swift */,
-				4A9821D01CA3791D008A18DD /* ActionButtonItem.swift */,
-				4A9821CE1CA378F3008A18DD /* ActionButton.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -442,9 +447,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A9821D11CA3791D008A18DD /* ActionButtonItem.swift in Sources */,
 				4ABD924F1CA36D9000C43F6C /* Onboard3VC.swift in Sources */,
 				4A3DC04E1C9E0DB4009AB92A /* RootTableVC.swift in Sources */,
+				4A3245A21CA4A64900A996E3 /* ToDo.swift in Sources */,
 				4ABD924B1CA36D7500C43F6C /* Onboard1VC.swift in Sources */,
 				4A3DC0841C9F2B0A009AB92A /* ToDoWatchItem.swift in Sources */,
 				4ABD924D1CA36D8400C43F6C /* Onboard2VC.swift in Sources */,
@@ -452,7 +457,6 @@
 				4A3DC07E1C9F20A9009AB92A /* NotificationController.swift in Sources */,
 				4A3DC0871C9F30B0009AB92A /* AppleWatchInterfaceController.swift in Sources */,
 				4A3DC07D1C9F209A009AB92A /* ExtensionDelegate.swift in Sources */,
-				4A9821CF1CA378F3008A18DD /* ActionButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
