@@ -57,7 +57,7 @@
                         </view>
                         <barButtonItem key="rightBarButtonItem" title="New" id="WWp-Pq-dPr">
                             <connections>
-                                <action selector="sendToDo:" destination="gHz-CU-SlN" id="uJw-FX-SbY"/>
+                                <action selector="saveToDo:" destination="gHz-CU-SlN" id="RRY-7U-b18"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

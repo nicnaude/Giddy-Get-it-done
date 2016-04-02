@@ -9,33 +9,22 @@
 import Foundation
 import CloudKit
 
+class ToDo: NSObject {
+//    var recordID: CKRecordID!
+    var content: String!
+    var doneStatus: String!
 
-class Message: EVCloudKitDataObject {
-    // From which Channel is this message
-    var From: CKReference? // = CKReference(recordID: CKRecordID(recordName: "N/A"), action: CKReferenceAction.None)
-    var From_ID: String = ""
-    func setFromFields(id: String) {
-        self.From_ID = id
-        self.From = CKReference(recordID: CKRecordID(recordName: id), action: CKReferenceAction.DeleteSelf)
+    func createNewToDo(content: String, doneStatus: String) {
+//        self.recordID = recordID
+        self.content = content
+        self.doneStatus = doneStatus
+        
+//        self.userId = userId
+//        self.name = name
+//        self.profilePicture = profilePicture
+//        self.gender = gender
+//        self.latitude = latitude
+//        self.longitude = longitude
+//        self.bio = bio
+    }
 }
-}
-
-
-
-//struct ToDo {
-//    
-//    let key: String!
-//    let toDo: String!
-//    var checked: String!
-//    var db: CKDatabase!
-//    //    let ref: Firebase?
-//    
-//    // Initialize from arbitrary data
-//    init(key: String, toDo: String, checked: String) {
-//        //init(name: String, completed: Bool, key: String = "") {
-//        self.key = key
-//        self.toDo = toDo
-//        self.checked = checked
-//        //        self.ref = nil
-//    }
-//    
