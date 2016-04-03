@@ -14,11 +14,16 @@ class ToDo: CKRecord {
     var giddyRecordID: CKRecordID!
     var content: String = ""
     var doneStatus: String = ""
-    
+
     func createNewToDo(recordID: CKRecordID, content: String, doneStatus: String) {
         self.giddyRecordID = recordID
         self.content = content
         self.doneStatus = doneStatus
+    }
+    
+    required init(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)!
     }
     
     //    convenience init(content: String, doneStatus: String) {
@@ -31,3 +36,4 @@ class ToDo: CKRecord {
     //        fatalError("init(coder:) has not been implemented")
     //    }
 }
+

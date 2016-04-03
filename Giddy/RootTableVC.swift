@@ -11,15 +11,15 @@ import CloudKit
 
 class RootTableVC: UITableViewController {
     
-    var toDos = [ToDo]()
+    var toDos = [CKRecord]()
     var refresh:UIRefreshControl!
     var currentRecords:[CKRecord] = []
     var db: CKDatabase!
     let privateDB = CKContainer.defaultContainer().publicCloudDatabase //.privateCloudDatabase
     var iCloudStatus = Bool()
-    var newToDo: ToDo
-    let toDo: ToDo
-
+    var newToDo = ToDo()
+    let toDo = ToDo()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,61 +43,59 @@ class RootTableVC: UITableViewController {
     }
     
     // START
-    func loadData() {
-        let pred = NSPredicate(value: true)
-        let sort = NSSortDescriptor(key: "creationDate", ascending: false)
-        let query = CKQuery(recordType: "ToDos", predicate: pred) //Whistles
-        query.sortDescriptors = [sort]
+    //    func loadData() {
+    //        let pred = NSPredicate(value: true)
+    //        let sort = NSSortDescriptor(key: "creationDate", ascending: false)
+    //        let query = CKQuery(recordType: "ToDos", predicate: pred) //Whistles
+    //        query.sortDescriptors = [sort]
+    //
+    //        let operation = CKQueryOperation(query: query)
+    //        operation.desiredKeys = ["content", "doneStatus"]
+    //        // operation.resultsLimit = 50
+    //        var newToDos = [ToDo]()
+    //
+    //        operation.recordFetchedBlock = { (record) in
+    //            //            let toDo = ToDo()
+    //            toDo.recordID = record.recordID
+    //            //            self.toDo.giddyRecordID = record["giddyRecordID"] as! CKRecordID
+    //            self.toDo.content = record["Content"] as! String
+    //            self.toDo.doneStatus = record["No"] as! String
+    //            newToDos.append(self.toDo)
+    //        }
+    //
+    //        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+    //            dispatch_async(dispatch_get_main_queue()) {
+    //                if error == nil {
+    //                    self.toDos = newToDos
+    //                    self.tableView.reloadData()
+    //                } else {
+    //                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of whistles; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
+    //                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+    //                    self.presentViewController(ac, animated: true, completion: nil)
+    //                }
+    //            }
+    //        }
+    //    }
+    // END
+    
+    // START
+    func loadData () {
+        var toDoRecords = [CKRecord]()
         
-        let operation = CKQueryOperation(query: query)
-        operation.desiredKeys = ["content", "doneStatus"]
-        // operation.resultsLimit = 50
-        var newToDos = [ToDo]()
-        
-        operation.recordFetchedBlock = { (record) in
-//            let toDo = ToDo()
-            var <#name#> = <#value#>
-            toDo.recordID = record.recordID
-//            self.toDo.giddyRecordID = record["giddyRecordID"] as! CKRecordID
-            self.toDo.content = record["Content"] as! String
-            self.toDo.doneStatus = record["No"] as! String
-            newToDos.append(self.toDo)
-        }
-        
-        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
-            dispatch_async(dispatch_get_main_queue()) {
-                if error == nil {
-                    self.toDos = newToDos
+        let publicData = CKContainer.defaultContainer().publicCloudDatabase
+        let query = CKQuery(recordType: "Sweet", predicate: NSPredicate(format: "TRUEPREDICATE", argumentArray: nil))
+        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        publicData.performQuery(query, inZoneWithID: nil) { (results:[CKRecord]?, error:NSError?) -> Void in
+            if let singleToDo = results {
+                toDoRecords = singleToDo
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.tableView.reloadData()
-                } else {
-                    let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of whistles; please try again: \(error!.localizedDescription)", preferredStyle: .Alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self.presentViewController(ac, animated: true, completion: nil)
-                }
+                    self.refresh.endRefreshing()
+                })
             }
         }
     }
     // END
-    
-//        func loadData() {
-//    
-//            let query = CKQuery (recordType: "toDo", predicate: NSPredicate(format: "TRUEPREDICATE", argumentArray: nil))
-//    
-//            query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-//            privateDB.performQuery(query, inZoneWithID: nil) { (results:[CKRecord]?, error:NSError?) -> Void in
-//    
-//                self.currentRecords.removeAll()
-//                self.currentRecords = results!
-//    
-//                if let toDos = results {
-//                    self.toDos = toDos
-//                    dispatch_async(dispatch_get_main_queue(), {() -> Void in
-//                        self.tableView.reloadData()
-//                        self.refresh.endRefreshing()
-//                    })
-//                }
-//            }
-//        }
     
     
     func isICloudContainerAvailable() -> Bool {
@@ -149,15 +147,15 @@ class RootTableVC: UITableViewController {
                 if textField!.text != "" {
                     
                     // var recordID = CKRecordID(recordName: userRecordID.recordName)
-//                    let random = Int(arc4random_uniform(999999))
-//                    let date = NSDate()
-//                    
-//                    let recordID = CKRecordID(recordName: "\(date)\(random)")
-//                    let content = textField!.text
-//                    let doneStatus = "No"
+                    //                    let random = Int(arc4random_uniform(999999))
+                    //                    let date = NSDate()
+                    //
+                    //                    let recordID = CKRecordID(recordName: "\(date)\(random)")
+                    //                    let content = textField!.text
+                    //                    let doneStatus = "No"
                     
-//                    self.newToDo.createNewToDo(recordID, content: content!, doneStatus: doneStatus) //content!, doneStatus: doneStatus)
-//                    var currentToDo = self.newToDo
+                    //                    self.newToDo.createNewToDo(recordID, content: content!, doneStatus: doneStatus) //content!, doneStatus: doneStatus)
+                    //                    var currentToDo = self.newToDo
                     
                     let currentToDo = CKRecord(recordType: "ToDo")
                     
@@ -197,60 +195,55 @@ class RootTableVC: UITableViewController {
     }
     
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
-        return 1
-    }
-    
-    
+    // number of cells in tableView
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDos.count
     }
     
+    
+    // tableView data source
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
         if toDos.count == 0 {
             return cell
-        }
-        
-        let toDo = toDos[indexPath.row]
-        
-        let selectectedToDoContent = toDo.content
-        cell.textLabel?.text = selectectedToDoContent
-        // if let toDosContent = toDo["content"] as? String {
-        // cell.textLabel?.text = toDosContent
-        
-        if let toDoContent = toDo.content as? String {
-            let dateFormat = NSDateFormatter()
-            dateFormat.dateFormat = "MM/dd/yyyy"
+        } else {
             
-            cell.textLabel?.text = toDoContent
+            let toDo = toDos[indexPath.row]
+            
+            let selectectedToDoContent = toDo["content"] as? String
+            cell.textLabel?.text = selectectedToDoContent
+            // if let toDosContent = toDo["content"] as? String {
+            // cell.textLabel?.text = toDosContent
+            
+            if let toDoContent = toDo["content"] as? String {
+                let dateFormat = NSDateFormatter()
+                dateFormat.dateFormat = "MM/dd/yyyy"
+                
+                cell.textLabel?.text = toDoContent
+            }
+            
+            let selectedToDoRecordID = self.toDos[indexPath.row]
+            
+            let selectedToDo = self.toDos[indexPath.row].recordID
+            print("selectedToDo: \(selectedToDo)")
+            
+            // need an if statement here to determine checked.
+            let image : UIImage = UIImage(named: "checked")!
+            
+            cell.imageView!.image = image
+            
+            return cell
         }
-
-        
-        
-        let selectedToDoRecordID = self.toDos[indexPath.row]
-        
-        let selectedToDo = self.toDos[indexPath.row].giddyRecordID
-        print("selectedToDo: \(selectedToDo)")
-        
-        // need an if statement here to determine checked.
-        let image : UIImage = UIImage(named: "checked")!
-        
-        cell.imageView!.image = image
-        
-        return cell
     }
     
     
-    
-    
+    // Can edit tableView
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
-
     
+    // commit editing style
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             
@@ -258,7 +251,7 @@ class RootTableVC: UITableViewController {
             let container = CKContainer.defaultContainer()
             let privateData = container.privateCloudDatabase //privateCloudDatabase
             
-            let selectedToDo = self.toDos[indexPath.row].giddyRecordID
+            let selectedToDo = self.toDos[indexPath.row].recordID
             print("selectedToDo: \(selectedToDo)")
             
             let query = CKQuery(recordType: "toDo", predicate: NSPredicate(format: "(content == %@)", argumentArray: [selectedToDo]))
