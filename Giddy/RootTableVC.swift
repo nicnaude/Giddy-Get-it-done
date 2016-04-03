@@ -17,12 +17,18 @@ class RootTableVC: UITableViewController {
     var db: CKDatabase!
     let privateDB = CKContainer.defaultContainer().publicCloudDatabase //.privateCloudDatabase
     var iCloudStatus = Bool()
-    var newToDo = ToDo()
-    let toDo = ToDo()
+    var newToDo = ToDoItem()
+//    var currentToDo: CKRecord
+    var toDo = ToDoItem()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.currentToDo = CKRecord(String)
+        self.newToDo = ToDoItem()
+        self.toDo = ToDoItem()
+        
         self.tableView.tableFooterView = UIView()
         
         navigationController?.navigationBar.barTintColor = UIColor(red:0.98, green:0.68, blue:0.09, alpha:1.0)
@@ -158,10 +164,6 @@ class RootTableVC: UITableViewController {
                     //                    var currentToDo = self.newToDo
                     
                     let currentToDo = CKRecord(recordType: "ToDo")
-                    
-                    let random = Int(arc4random_uniform(999999))
-                    let date = NSDate()
-                    currentToDo["giddyRecordID"] = "\(date)\(random)"
                     currentToDo["content"] = textField!.text
                     currentToDo["doneStatus"] = "No"
                     
@@ -171,7 +173,7 @@ class RootTableVC: UITableViewController {
                         if error == nil {
                             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                 self.tableView.beginUpdates()
-                                self.toDos.insert(self.newToDo, atIndex: 0)
+                                self.toDos.insert(currentToDo, atIndex: 0)
                                 let indexPath = NSIndexPath(forRow: 0, inSection: 0)
                                 self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Top)
                                 self.tableView.reloadData()

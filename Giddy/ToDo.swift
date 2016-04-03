@@ -9,7 +9,7 @@
 import Foundation
 import CloudKit
 
-class ToDo: CKRecord {
+class ToDo {
     //    var recordID: CKRecordID = CKRecordID(recordName: NSUUID().UUIDString)
     var giddyRecordID: CKRecordID!
     var content: String = ""
@@ -19,12 +19,13 @@ class ToDo: CKRecord {
         self.giddyRecordID = recordID
         self.content = content
         self.doneStatus = doneStatus
+//        super.init()
     }
     
-    required init(coder aDecoder: NSCoder)
-    {
-        super.init(coder: aDecoder)!
-    }
+//    required init(coder aDecoder: NSCoder)
+//    {
+//        super.init(coder: aDecoder)!
+//    }
     
     //    convenience init(content: String, doneStatus: String) {
     //        let content = content

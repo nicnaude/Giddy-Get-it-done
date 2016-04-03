@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A2519DD1CB1C1AF007CF8EE /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */; };
 		4A3245A21CA4A64900A996E3 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3245A11CA4A64900A996E3 /* ToDo.swift */; };
 		4A3DC0391C9E0C15009AB92A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC0381C9E0C15009AB92A /* AppDelegate.swift */; };
 		4A3DC03E1C9E0C15009AB92A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC03C1C9E0C15009AB92A /* Main.storyboard */; };
@@ -77,6 +78,7 @@
 
 /* Begin PBXFileReference section */
 		2FDE641A502A0175F39A2FD9 /* Pods-Giddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Giddy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Giddy/Pods-Giddy.release.xcconfig"; sourceTree = "<group>"; };
+		4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		4A3245A11CA4A64900A996E3 /* ToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		4A3DC0351C9E0C15009AB92A /* Giddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Giddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A3DC0381C9E0C15009AB92A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				4A3245A11CA4A64900A996E3 /* ToDo.swift */,
+				4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				4A3DC0841C9F2B0A009AB92A /* ToDoWatchItem.swift in Sources */,
 				4ABD924D1CA36D8400C43F6C /* Onboard2VC.swift in Sources */,
 				4A3DC0391C9E0C15009AB92A /* AppDelegate.swift in Sources */,
+				4A2519DD1CB1C1AF007CF8EE /* ToDoItem.swift in Sources */,
 				4A3DC07E1C9F20A9009AB92A /* NotificationController.swift in Sources */,
 				4A3DC0871C9F30B0009AB92A /* AppleWatchInterfaceController.swift in Sources */,
 				4A3DC07D1C9F209A009AB92A /* ExtensionDelegate.swift in Sources */,
