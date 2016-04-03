@@ -18,14 +18,14 @@ class RootTableVC: UITableViewController {
     let privateDB = CKContainer.defaultContainer().publicCloudDatabase //.privateCloudDatabase
     var iCloudStatus = Bool()
     var newToDo = ToDoItem()
-//    var currentToDo: CKRecord
+    //    var currentToDo: CKRecord
     var toDo = ToDoItem()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.currentToDo = CKRecord(String)
+        //        self.currentToDo = CKRecord(String)
         self.newToDo = ToDoItem()
         self.toDo = ToDoItem()
         
@@ -214,26 +214,31 @@ class RootTableVC: UITableViewController {
             let toDo = toDos[indexPath.row]
             
             let selectectedToDoContent = toDo["content"] as? String
+            
             cell.textLabel?.text = selectectedToDoContent
             // if let toDosContent = toDo["content"] as? String {
             // cell.textLabel?.text = toDosContent
             
             if let toDoContent = toDo["content"] as? String {
-                let dateFormat = NSDateFormatter()
-                dateFormat.dateFormat = "MM/dd/yyyy"
-                
                 cell.textLabel?.text = toDoContent
             }
             
-            let selectedToDoRecordID = self.toDos[indexPath.row]
+//            let selectedToDoRecordID = self.toDos[indexPath.row]
             
             let selectedToDo = self.toDos[indexPath.row].recordID
             print("selectedToDo: \(selectedToDo)")
             
             // need an if statement here to determine checked.
-            let image : UIImage = UIImage(named: "checked")!
+            let selectedtedToDoStatus = toDo["doneStatus"] as! String
+            print(selectedtedToDoStatus)
+            if selectedtedToDoStatus == "No" {
+                let image : UIImage = UIImage(named: "unchecked")!
+                cell.imageView!.image = image
+            } else if (selectedtedToDoStatus == "Yes") {
+                let image : UIImage = UIImage(named: "checked")!
+                cell.imageView!.image = image
+            }
             
-            cell.imageView!.image = image
             
             return cell
         }
