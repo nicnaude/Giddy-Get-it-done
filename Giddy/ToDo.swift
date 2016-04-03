@@ -9,22 +9,25 @@
 import Foundation
 import CloudKit
 
-class ToDo: NSObject {
-//    var recordID: CKRecordID!
-    var content: String!
-    var doneStatus: String!
-
-    func createNewToDo(content: String, doneStatus: String) {
-//        self.recordID = recordID
+class ToDo: CKRecord {
+    //    var recordID: CKRecordID = CKRecordID(recordName: NSUUID().UUIDString)
+    var giddyRecordID: CKRecordID!
+    var content: String = ""
+    var doneStatus: String = ""
+    
+    func createNewToDo(recordID: CKRecordID, content: String, doneStatus: String) {
+        self.giddyRecordID = recordID
         self.content = content
         self.doneStatus = doneStatus
-        
-//        self.userId = userId
-//        self.name = name
-//        self.profilePicture = profilePicture
-//        self.gender = gender
-//        self.latitude = latitude
-//        self.longitude = longitude
-//        self.bio = bio
     }
+    
+    //    convenience init(content: String, doneStatus: String) {
+    //        let content = content
+    //        let doneStatus = doneStatus
+    ////        self.init(content: content, doneStatus: doneStatus)
+    //    }
+    //
+    //    required init?(coder aDecoder: NSCoder) {
+    //        fatalError("init(coder:) has not been implemented")
+    //    }
 }
