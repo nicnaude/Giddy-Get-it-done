@@ -15,28 +15,25 @@ class RootTableVC: UITableViewController {
     var refresh:UIRefreshControl!
     var currentRecords:[CKRecord] = []
     var db: CKDatabase!
-    let privateDB = CKContainer.defaultContainer().publicCloudDatabase //.privateCloudDatabase
+    let privateDB = CKContainer.defaultContainer().privateCloudDatabase //.privateCloudDatabase
     var iCloudStatus = Bool()
-    var newToDo = ToDoItem()
+//    var newToDo = ToDoItem()
     //    var currentToDo: CKRecord
-    var toDo = ToDoItem()
+//    var toDo = ToDoItem()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //        self.currentToDo = CKRecord(String)
-        self.newToDo = ToDoItem()
-        self.toDo = ToDoItem()
-        
+                
         self.tableView.tableFooterView = UIView()
         
         navigationController?.navigationBar.barTintColor = UIColor(red:0.98, green:0.68, blue:0.09, alpha:1.0)
-        
-        //UI setup
-        db = CKContainer.defaultContainer().publicCloudDatabase //privateCloudDatabase
         navigationController?.navigationBar.barStyle = UIBarStyle.Black
         navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        
+        //UI setup
+        db = CKContainer.defaultContainer().privateCloudDatabase //privateCloudDatabase
+        
         
         //Refresh control
         refresh = UIRefreshControl()
@@ -86,14 +83,11 @@ class RootTableVC: UITableViewController {
     
     // START
     func loadData () {
-        var toDoRecords = [CKRecord]()
-        
-        let publicData = CKContainer.defaultContainer().publicCloudDatabase
-        let query = CKQuery(recordType: "Sweet", predicate: NSPredicate(format: "TRUEPREDICATE", argumentArray: nil))
+        let query = CKQuery(recordType: "ToDo", predicate: NSPredicate(format: "TRUEPREDICATE", argumentArray: nil))
         query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        publicData.performQuery(query, inZoneWithID: nil) { (results:[CKRecord]?, error:NSError?) -> Void in
+        db.performQuery(query, inZoneWithID: nil) { (results:[CKRecord]?, error:NSError?) -> Void in
             if let singleToDo = results {
-                toDoRecords = singleToDo
+                self.toDos = singleToDo
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.tableView.reloadData()
                     self.refresh.endRefreshing()
@@ -229,6 +223,8 @@ class RootTableVC: UITableViewController {
             print("selectedToDo: \(selectedToDo)")
             
             // need an if statement here to determine checked.
+            
+            
             let selectedtedToDoStatus = toDo["doneStatus"] as! String
             print(selectedtedToDoStatus)
             if selectedtedToDoStatus == "No" {
@@ -242,6 +238,32 @@ class RootTableVC: UITableViewController {
             
             return cell
         }
+    }
+    
+    
+    // change toDo status on tap
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let currentToDoStatus = toDos[indexPath.row]
+        
+        // fetch the record here and set it to the opposite of what it is now.
+        
+        currentToDoStatus["doneStatus"] = "No"
+        
+        
+        self.privateDB.saveRecord(currentToDoStatus, completionHandler: { (record:CKRecord?, error:NSError?) -> Void in
+            
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadData()
+                    self.tableView.endUpdates()
+                    print("\(currentToDoStatus) tapped.")
+                })
+            } else {
+                print("Error!")
+            }
+        })
     }
     
     

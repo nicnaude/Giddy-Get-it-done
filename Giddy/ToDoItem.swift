@@ -9,12 +9,14 @@
 import Foundation
 import CloudKit
 
-struct ToDoItem {
+class ToDoItem: CKRecord {
+//    var recordID: CKRecordID = ""
     var content: String = ""
     var doneStatus: String = ""
     
-    mutating func createNewToDoItem(recordID: CKRecordID, content: String, doneStatus: String) {
-        self.content = content
-        self.doneStatus = doneStatus
-    }
+//    mutating func createNewToDoItem(recordID: CKRecordID, content: String, doneStatus: String) {
+//        self.recordID = recordID
+//        self.content = content
+//        self.doneStatus = doneStatus
+//    }
 }

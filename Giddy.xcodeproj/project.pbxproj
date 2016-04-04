@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4A2519DD1CB1C1AF007CF8EE /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */; };
 		4A251A011CB24B1A007CF8EE /* ToDosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A251A001CB24B1A007CF8EE /* ToDosVC.swift */; };
+		4A251A041CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A251A021CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld */; };
 		4A3245A21CA4A64900A996E3 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3245A11CA4A64900A996E3 /* ToDo.swift */; };
 		4A3DC0391C9E0C15009AB92A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC0381C9E0C15009AB92A /* AppDelegate.swift */; };
 		4A3DC03E1C9E0C15009AB92A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC03C1C9E0C15009AB92A /* Main.storyboard */; };
@@ -81,6 +82,7 @@
 		2FDE641A502A0175F39A2FD9 /* Pods-Giddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Giddy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Giddy/Pods-Giddy.release.xcconfig"; sourceTree = "<group>"; };
 		4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		4A251A001CB24B1A007CF8EE /* ToDosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDosVC.swift; sourceTree = "<group>"; };
+		4A251A031CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GiddyDataModel.xcdatamodel; sourceTree = "<group>"; };
 		4A3245A11CA4A64900A996E3 /* ToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		4A3DC0351C9E0C15009AB92A /* Giddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Giddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A3DC0381C9E0C15009AB92A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				4A3DC04A1C9E0CB4009AB92A /* Giddy.entitlements */,
 				4A3DC0441C9E0C15009AB92A /* Info.plist */,
 				4A3DC0381C9E0C15009AB92A /* AppDelegate.swift */,
+				4A251A021CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld */,
 			);
 			name = "Supporting files";
 			path = Giddy;
@@ -456,6 +459,7 @@
 				4ABD924F1CA36D9000C43F6C /* Onboard3VC.swift in Sources */,
 				4A3DC04E1C9E0DB4009AB92A /* RootTableVC.swift in Sources */,
 				4A3245A21CA4A64900A996E3 /* ToDo.swift in Sources */,
+				4A251A041CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld in Sources */,
 				4A251A011CB24B1A007CF8EE /* ToDosVC.swift in Sources */,
 				4ABD924B1CA36D7500C43F6C /* Onboard1VC.swift in Sources */,
 				4A3DC0841C9F2B0A009AB92A /* ToDoWatchItem.swift in Sources */,
@@ -729,6 +733,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4A251A021CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4A251A031CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodel */,
+			);
+			currentVersion = 4A251A031CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodel */;
+			path = GiddyDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4A3DC02D1C9E0C15009AB92A /* Project object */;
 }

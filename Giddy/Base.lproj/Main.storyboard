@@ -79,17 +79,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Get it done" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wz9-1l-l7h">
-                                <rect key="frame" x="20" y="71" width="280" height="30"/>
-                                <color key="backgroundColor" red="0.96564268122564101" green="0.96564268122564101" blue="0.96564268122564101" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="ryw-mg-vhz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" returnKeyType="done"/>
-                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JYm-mZ-iSs">
-                                <rect key="frame" x="0.0" y="108" width="320" height="372"/>
+                                <rect key="frame" x="0.0" y="107" width="320" height="373"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="667-r7-exn">
                                     <rect key="frame" x="0.0" y="72" width="320" height="44"/>
@@ -101,7 +92,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HPQ-50-fxx" id="pGS-rY-Cr0">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVe-jH-87h">
@@ -139,20 +130,42 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Get It Done" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wz9-1l-l7h">
+                                <rect key="frame" x="8" y="71" width="305" height="30"/>
+                                <color key="backgroundColor" red="0.96564268122564101" green="0.96564268122564101" blue="0.96564268122564101" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" returnKeyType="done"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wz9-1l-l7h" firstAttribute="centerX" secondItem="JYm-mZ-iSs" secondAttribute="centerX" id="5wi-l1-SSl"/>
                             <constraint firstItem="JYm-mZ-iSs" firstAttribute="leading" secondItem="aR5-HA-9hP" secondAttribute="leading" id="7Pa-XQ-0oH"/>
-                            <constraint firstItem="wz9-1l-l7h" firstAttribute="leading" secondItem="aR5-HA-9hP" secondAttribute="leadingMargin" constant="4" id="ClO-2o-r04"/>
-                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="top" secondItem="wz9-1l-l7h" secondAttribute="bottom" constant="7" id="Jfs-Zi-cec"/>
+                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="top" secondItem="wz9-1l-l7h" secondAttribute="bottom" constant="6" id="IBv-6K-VsY"/>
+                            <constraint firstItem="wz9-1l-l7h" firstAttribute="leading" secondItem="aR5-HA-9hP" secondAttribute="leading" constant="8" id="OqO-M7-SEr"/>
                             <constraint firstItem="JYm-mZ-iSs" firstAttribute="bottom" secondItem="syH-S7-4qe" secondAttribute="top" id="Q15-gy-3lY"/>
-                            <constraint firstItem="wz9-1l-l7h" firstAttribute="top" secondItem="A9K-iQ-HcH" secondAttribute="bottom" constant="7" id="TUc-VP-2Dt"/>
                             <constraint firstAttribute="trailing" secondItem="JYm-mZ-iSs" secondAttribute="trailing" id="bXX-DJ-WpW"/>
-                            <constraint firstItem="wz9-1l-l7h" firstAttribute="centerX" secondItem="JYm-mZ-iSs" secondAttribute="centerX" id="dFr-1c-SsO"/>
+                            <constraint firstAttribute="trailing" secondItem="wz9-1l-l7h" secondAttribute="trailing" constant="7" id="gEq-Ob-Y3I"/>
+                            <constraint firstItem="wz9-1l-l7h" firstAttribute="top" secondItem="A9K-iQ-HcH" secondAttribute="bottom" constant="7" id="mtu-VV-tgN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Kxm-xR-tbt">
                         <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="lAY-ql-lxW">
+                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Giddy logo" translatesAutoresizingMaskIntoConstraints="NO" id="XjG-FZ-ajb">
+                                    <rect key="frame" x="0.0" y="5" width="128" height="25"/>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="XjG-FZ-ajb" secondAttribute="trailing" id="4WH-Fu-4tR"/>
+                                <constraint firstItem="XjG-FZ-ajb" firstAttribute="leading" secondItem="lAY-ql-lxW" secondAttribute="leading" id="VPP-FG-t3t"/>
+                                <constraint firstAttribute="bottom" secondItem="XjG-FZ-ajb" secondAttribute="bottom" constant="3" id="cXT-4k-Ask"/>
+                                <constraint firstItem="XjG-FZ-ajb" firstAttribute="top" secondItem="lAY-ql-lxW" secondAttribute="top" constant="5" id="prO-jC-kfi"/>
+                            </constraints>
+                        </view>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
@@ -385,5 +398,5 @@
     <resources>
         <image name="Giddy logo" width="166" height="61"/>
     </resources>
-    <color key="tintColor" red="0.9882352941176471" green="0.49411764705882355" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
+    <color key="tintColor" red="0.97647058819999999" green="0.69019607839999997" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>
