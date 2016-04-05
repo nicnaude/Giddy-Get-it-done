@@ -23,7 +23,8 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         
         super.viewDidLoad()
         self.saveButton.enabled = false
-        addToDoTextField.becomeFirstResponder()
+        
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         //setup textField
         addToDoTextField.layer.backgroundColor = UIColor.whiteColor().CGColor
