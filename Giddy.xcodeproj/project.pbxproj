@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A202EF01CB3C4C100643252 /* GiddyToDo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A202EEE1CB3C4C100643252 /* GiddyToDo+CoreDataProperties.swift */; };
+		4A202EF11CB3C4C100643252 /* GiddyToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A202EEF1CB3C4C100643252 /* GiddyToDo.swift */; };
 		4A2519DD1CB1C1AF007CF8EE /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */; };
 		4A251A011CB24B1A007CF8EE /* ToDosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A251A001CB24B1A007CF8EE /* ToDosVC.swift */; };
 		4A251A041CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A251A021CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld */; };
@@ -33,6 +35,8 @@
 		4ABD924B1CA36D7500C43F6C /* Onboard1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924A1CA36D7500C43F6C /* Onboard1VC.swift */; };
 		4ABD924D1CA36D8400C43F6C /* Onboard2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924C1CA36D8400C43F6C /* Onboard2VC.swift */; };
 		4ABD924F1CA36D9000C43F6C /* Onboard3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924E1CA36D9000C43F6C /* Onboard3VC.swift */; };
+		4AFD90D31CB2F287000B6706 /* EditToDoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFD90D21CB2F287000B6706 /* EditToDoVC.swift */; };
+		4AFD90D91CB2FE52000B6706 /* ToDoObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFD90D81CB2FE52000B6706 /* ToDoObject.swift */; };
 		6ED9B6B0E1EE00AACCD67E4D /* Pods_Giddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 590E06F7877135B36A45D041 /* Pods_Giddy.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +84,8 @@
 
 /* Begin PBXFileReference section */
 		2FDE641A502A0175F39A2FD9 /* Pods-Giddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Giddy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Giddy/Pods-Giddy.release.xcconfig"; sourceTree = "<group>"; };
+		4A202EEE1CB3C4C100643252 /* GiddyToDo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GiddyToDo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4A202EEF1CB3C4C100643252 /* GiddyToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiddyToDo.swift; sourceTree = "<group>"; };
 		4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		4A251A001CB24B1A007CF8EE /* ToDosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDosVC.swift; sourceTree = "<group>"; };
 		4A251A031CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GiddyDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -108,6 +114,8 @@
 		4ABD924A1CA36D7500C43F6C /* Onboard1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard1VC.swift; sourceTree = "<group>"; };
 		4ABD924C1CA36D8400C43F6C /* Onboard2VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard2VC.swift; sourceTree = "<group>"; };
 		4ABD924E1CA36D9000C43F6C /* Onboard3VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard3VC.swift; sourceTree = "<group>"; };
+		4AFD90D21CB2F287000B6706 /* EditToDoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditToDoVC.swift; sourceTree = "<group>"; };
+		4AFD90D81CB2FE52000B6706 /* ToDoObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoObject.swift; sourceTree = "<group>"; };
 		590E06F7877135B36A45D041 /* Pods_Giddy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Giddy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8D0DCCF96785FFF6395DADC /* Pods-Giddy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Giddy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Giddy/Pods-Giddy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +145,7 @@
 			children = (
 				4A3245A11CA4A64900A996E3 /* ToDo.swift */,
 				4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */,
+				4AFD90D81CB2FE52000B6706 /* ToDoObject.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -181,7 +190,7 @@
 				4A3DC04A1C9E0CB4009AB92A /* Giddy.entitlements */,
 				4A3DC0441C9E0C15009AB92A /* Info.plist */,
 				4A3DC0381C9E0C15009AB92A /* AppDelegate.swift */,
-				4A251A021CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld */,
+				4AFD90DC1CB3B3F5000B6706 /* CoreData */,
 			);
 			name = "Supporting files";
 			path = Giddy;
@@ -203,6 +212,7 @@
 			children = (
 				4A3DC04D1C9E0DB4009AB92A /* RootTableVC.swift */,
 				4A251A001CB24B1A007CF8EE /* ToDosVC.swift */,
+				4AFD90D21CB2F287000B6706 /* EditToDoVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -247,6 +257,16 @@
 				4ABD924E1CA36D9000C43F6C /* Onboard3VC.swift */,
 			);
 			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		4AFD90DC1CB3B3F5000B6706 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				4A202EEE1CB3C4C100643252 /* GiddyToDo+CoreDataProperties.swift */,
+				4A202EEF1CB3C4C100643252 /* GiddyToDo.swift */,
+				4A251A021CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		809396941571D1B063388A63 /* Pods */ = {
@@ -463,9 +483,13 @@
 				4A251A011CB24B1A007CF8EE /* ToDosVC.swift in Sources */,
 				4ABD924B1CA36D7500C43F6C /* Onboard1VC.swift in Sources */,
 				4A3DC0841C9F2B0A009AB92A /* ToDoWatchItem.swift in Sources */,
+				4A202EF11CB3C4C100643252 /* GiddyToDo.swift in Sources */,
 				4ABD924D1CA36D8400C43F6C /* Onboard2VC.swift in Sources */,
 				4A3DC0391C9E0C15009AB92A /* AppDelegate.swift in Sources */,
 				4A2519DD1CB1C1AF007CF8EE /* ToDoItem.swift in Sources */,
+				4AFD90D91CB2FE52000B6706 /* ToDoObject.swift in Sources */,
+				4A202EF01CB3C4C100643252 /* GiddyToDo+CoreDataProperties.swift in Sources */,
+				4AFD90D31CB2F287000B6706 /* EditToDoVC.swift in Sources */,
 				4A3DC07E1C9F20A9009AB92A /* NotificationController.swift in Sources */,
 				4A3DC0871C9F30B0009AB92A /* AppleWatchInterfaceController.swift in Sources */,
 				4A3DC07D1C9F209A009AB92A /* ExtensionDelegate.swift in Sources */,
@@ -613,10 +637,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Giddy/Giddy.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Giddy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasnaude.Giddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -626,10 +653,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Giddy/Giddy.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Giddy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasnaude.Giddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
