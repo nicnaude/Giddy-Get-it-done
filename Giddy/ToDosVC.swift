@@ -14,6 +14,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     @IBOutlet weak var addToDoTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var plusButton: UIButton!
     
     //    var storedResults = [GiddyToDo]()
     var giddyToDo : [GiddyToDo] = []
@@ -43,6 +44,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
             managedObjectContext = appDelegate.managedObjectContext
         }
         
+        
         // set nav color
         navigationController?.navigationBar.barTintColor = UIColor(red:0.98, green:0.68, blue:0.09, alpha:1.0)
         navigationController?.navigationBar.barStyle = UIBarStyle.Black
@@ -51,7 +53,21 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         //watch textField for changes
         addToDoTextField.addTarget(self, action: #selector(ToDosVC.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         
+    } //END OF VIEWDIDLOAD
+    
+    //SETUP BUTTON
+    func configureButton()
+    {
+        plusButton.layer.cornerRadius = 0.5 * plusButton.bounds.size.width
+        plusButton.layer.borderColor = UIColor(red:0.0/255.0, green:122.0/255.0, blue:255.0/255.0, alpha:1).CGColor as CGColorRef
+        plusButton.layer.borderWidth = 0
+        plusButton.clipsToBounds = true
     }
+    
+    override func viewDidLayoutSubviews() {
+        configureButton()
+    }
+    //
     
     
     func textFieldDidChange(textField: UITextField) {
@@ -82,6 +98,35 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
             }
         }
     }
+    
+    
+    //
+    @IBAction func onPlusButtonTapped(sender: UIButton) {
+        addToDoTextField.becomeFirstResponder()
+        if addToDoTextField.text != "" {
+            let context = self.fetchedResultsController.managedObjectContext
+            let entity = self.fetchedResultsController.fetchRequest.entity!
+            let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
+            
+            newManagedObject.setValue(addToDoTextField.text, forKey: "content")
+            newManagedObject.setValue(NSDate(), forKey: "timeStamp")
+            
+            // Save the context.
+            do {
+                try context.save()
+                print("Saved successfully.")
+                addToDoTextField.text = ""
+                addToDoTextField.resignFirstResponder()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                //print("Unresolved error \(error), \(error.userInfo)")
+                abort()
+            }
+        }
+    }
+    //
+    
     
     func insertNewObject(sender: AnyObject) {
 
@@ -117,8 +162,9 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         //        cell.textLabel!.text = currentToDo.content
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
         cell.textLabel!.text = object.valueForKey("content")!.description as String
-        let image : UIImage = UIImage(named: "checked")!
+        let image : UIImage = UIImage(named: "unchecked")!
         cell.imageView!.image = image
+//        cell.textLabel!.font = UIFont(name:"Avenir", size:16)
         
 //        if selectedtedToDoStatus == "No" {
 //            let image : UIImage = UIImage(named: "unchecked")!

@@ -101,11 +101,11 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HPQ-50-fxx" id="pGS-rY-Cr0">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Jkb-Au-rLG" kind="presentation" id="AII-Xv-n2a"/>
+                                            <segue destination="Jkb-Au-rLG" kind="show" id="AII-Xv-n2a"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -114,16 +114,33 @@
                                     <outlet property="delegate" destination="XPF-OX-6p2" id="JeJ-Uy-eOp"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DjO-kr-TuO">
+                                <rect key="frame" x="245" y="405" width="55" height="55"/>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.69019607839999997" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="ke2-kp-5gI"/>
+                                    <constraint firstAttribute="height" constant="55" id="opJ-n3-AMn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" backgroundImage="plus">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onPlusButtonTapped:" destination="XPF-OX-6p2" eventType="touchUpInside" id="oDv-BF-Tlj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="leading" secondItem="aR5-HA-9hP" secondAttribute="leading" id="8a2-45-xuZ"/>
-                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="centerX" secondItem="wz9-1l-l7h" secondAttribute="centerX" id="BNi-fj-XGY"/>
-                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="top" secondItem="wz9-1l-l7h" secondAttribute="bottom" constant="8" symbolic="YES" id="Cg7-8b-gdg"/>
+                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="bottom" secondItem="syH-S7-4qe" secondAttribute="top" id="0Po-Lj-K2d"/>
+                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="centerX" secondItem="wz9-1l-l7h" secondAttribute="centerX" id="BqJ-H4-bYt"/>
+                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="top" secondItem="wz9-1l-l7h" secondAttribute="bottom" constant="8" symbolic="YES" id="LKs-cg-tiW"/>
                             <constraint firstItem="wz9-1l-l7h" firstAttribute="leading" secondItem="aR5-HA-9hP" secondAttribute="leading" constant="8" id="OqO-M7-SEr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DjO-kr-TuO" secondAttribute="trailing" constant="4" id="UMX-nL-ehe"/>
                             <constraint firstAttribute="trailing" secondItem="wz9-1l-l7h" secondAttribute="trailing" constant="7" id="gEq-Ob-Y3I"/>
                             <constraint firstItem="wz9-1l-l7h" firstAttribute="top" secondItem="A9K-iQ-HcH" secondAttribute="bottom" constant="7" id="mtu-VV-tgN"/>
-                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="bottom" secondItem="syH-S7-4qe" secondAttribute="top" id="uz7-wH-7II"/>
+                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="leading" secondItem="aR5-HA-9hP" secondAttribute="leading" id="pyj-tu-kfL"/>
+                            <constraint firstAttribute="bottom" secondItem="DjO-kr-TuO" secondAttribute="bottom" constant="20" symbolic="YES" id="xQF-Nc-UxP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Kxm-xR-tbt">
@@ -138,14 +155,14 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Giddy logo" translatesAutoresizingMaskIntoConstraints="NO" id="XjG-FZ-ajb">
-                                    <rect key="frame" x="0.0" y="5" width="128" height="25"/>
+                                    <rect key="frame" x="0.0" y="5" width="128" height="28"/>
                                 </imageView>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="XjG-FZ-ajb" secondAttribute="trailing" id="4WH-Fu-4tR"/>
-                                <constraint firstItem="XjG-FZ-ajb" firstAttribute="leading" secondItem="lAY-ql-lxW" secondAttribute="leading" id="VPP-FG-t3t"/>
-                                <constraint firstAttribute="bottom" secondItem="XjG-FZ-ajb" secondAttribute="bottom" constant="3" id="cXT-4k-Ask"/>
-                                <constraint firstItem="XjG-FZ-ajb" firstAttribute="top" secondItem="lAY-ql-lxW" secondAttribute="top" constant="5" id="prO-jC-kfi"/>
+                                <constraint firstAttribute="bottom" secondItem="XjG-FZ-ajb" secondAttribute="bottom" id="RBl-oe-UqN"/>
+                                <constraint firstItem="XjG-FZ-ajb" firstAttribute="top" secondItem="lAY-ql-lxW" secondAttribute="top" constant="5" id="YQt-gk-oUe"/>
+                                <constraint firstItem="XjG-FZ-ajb" firstAttribute="leading" secondItem="lAY-ql-lxW" secondAttribute="leading" id="mUz-Pg-Oky"/>
+                                <constraint firstAttribute="trailing" secondItem="XjG-FZ-ajb" secondAttribute="trailing" id="mYt-Xn-J6U"/>
                             </constraints>
                         </view>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="uRe-gJ-V0R">
@@ -157,6 +174,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="addToDoTextField" destination="wz9-1l-l7h" id="z2M-LG-QqD"/>
+                        <outlet property="plusButton" destination="DjO-kr-TuO" id="dxM-7z-e4y"/>
                         <outlet property="saveButton" destination="uRe-gJ-V0R" id="6Jh-BC-jhT"/>
                         <outlet property="tableView" destination="JYm-mZ-iSs" id="rXs-oX-E2N"/>
                     </connections>
@@ -402,6 +420,7 @@
     </scenes>
     <resources>
         <image name="Giddy logo" width="166" height="61"/>
+        <image name="plus" width="205" height="205"/>
     </resources>
     <color key="tintColor" red="0.97647058819999999" green="0.69019607839999997" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>
