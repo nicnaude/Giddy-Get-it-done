@@ -13,34 +13,19 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     
     @IBOutlet weak var addToDoTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var textFieldView: UIView!
+    @IBOutlet weak var darkOverlay: UIView!
     
-    //    var storedResults = [GiddyToDo]()
     var giddyToDo : [GiddyToDo] = []
     var managedObjectContext: NSManagedObjectContext? = nil
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        self.saveButton.enabled = false
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
-        //setup textField
-//        addToDoTextField.layer.backgroundColor = UIColor.whiteColor().CGColor
-//        addToDoTextField.layer.borderColor = UIColor.whiteColor().CGColor
-//        addToDoTextField.layer.borderWidth = 1
-//        addToDoTextField.layer.cornerRadius = 5
-//        addToDoTextField.layer.masksToBounds = true
-        //        addToDoTextField.layer.shadowRadius = 2.0
-        //        addToDoTextField.layer.shadowColor = UIColor.blackColor().CGColor
-        //        addToDoTextField.layer.shadowOffset = CGSizeMake(1.0, 1.0)
-        //        addToDoTextField.layer.shadowOpacity = 1.0
-        //        addToDoTextField.layer.shadowRadius = 1.0
-        
-        
+
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             managedObjectContext = appDelegate.managedObjectContext
         }
@@ -54,6 +39,9 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         //watch textField for changes
         addToDoTextField.addTarget(self, action: #selector(ToDosVC.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
     
+        hideTextFieldView()
+        self.darkOverlay.alpha = 0
+        
     } //END OF VIEWDIDLOAD
     
     
@@ -69,57 +57,55 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     override func viewDidLayoutSubviews() {
         configureButton()
     }
-    //
     
     
     func textFieldDidChange(textField: UITextField) {
-        self.saveButton.enabled = true
     }
     
     
-    @IBAction func onSaveButtonTapped(sender: UIBarButtonItem) {
-        if addToDoTextField.text != "" {
-            let context = self.fetchedResultsController.managedObjectContext
-            let entity = self.fetchedResultsController.fetchRequest.entity!
-            let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
-            
-            newManagedObject.setValue(addToDoTextField.text, forKey: "content")
-            newManagedObject.setValue(NSDate(), forKey: "timeStamp")
-            
-            // Save the context.
-            do {
-                try context.save()
-                print("Saved successfully.")
-                addToDoTextField.text = ""
-                addToDoTextField.resignFirstResponder()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                //print("Unresolved error \(error), \(error.userInfo)")
-                abort()
-            }
-        }
-    }
-    
-    //
     func slideOutTextFieldView() {
-        UIView.animateWithDuration(0.7, delay: 1.0, options: .CurveEaseIn, animations: {
+        self.textFieldView.alpha = 1
+        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseIn, animations: {
             var textFieldViewToAnimate = self.textFieldView.frame
-            textFieldViewToAnimate.origin.y -= textFieldViewToAnimate.size.height - textFieldViewToAnimate.size.height - textFieldViewToAnimate.size.height
+            textFieldViewToAnimate.origin.y += textFieldViewToAnimate.size.height
             
             self.textFieldView.frame = textFieldViewToAnimate
             }, completion: { finished in
-                print("Slide")
+                print("Slide out")
         })
     }
     
-    //
     
-    //
+    func hideTextFieldView() {
+        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseIn, animations: {
+            self.textFieldView.alpha = 0
+            }, completion: { finished in
+                print("Slide out")
+        })
+    }
+    
+    
+    func fadeInOverlay() {
+        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseIn, animations: {
+            self.darkOverlay.alpha = 0.5
+            }, completion: { finished in
+                print("Slide out")
+        })
+    }
+    
+    func fadeOutOverlay() {
+        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseIn, animations: {
+            self.darkOverlay.alpha = 0
+            }, completion: { finished in
+                print("fade out out")
+        })
+    }
     
     
     @IBAction func onPlusButtonTapped(sender: UIButton) {
         slideOutTextFieldView()
+        self.plusButton.hidden = true
+        fadeInOverlay()
         addToDoTextField.becomeFirstResponder()
         if addToDoTextField.text != "" {
             let context = self.fetchedResultsController.managedObjectContext
@@ -129,7 +115,6 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
             newManagedObject.setValue(addToDoTextField.text, forKey: "content")
             newManagedObject.setValue(NSDate(), forKey: "timeStamp")
             
-            // Save the context.
             do {
                 try context.save()
                 print("Saved successfully.")
@@ -176,28 +161,16 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
-        //        let currentToDo = storedResults[indexPath.row]
-        //        cell.textLabel!.text = currentToDo.content
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
         cell.textLabel!.text = object.valueForKey("content")!.description as String
         let image : UIImage = UIImage(named: "unchecked")!
         cell.imageView!.image = image
-        //        cell.textLabel!.font = UIFont(name:"Avenir", size:16)
-        
-        //        if selectedtedToDoStatus == "No" {
-        //            let image : UIImage = UIImage(named: "unchecked")!
-        //            cell.imageView!.image = image
-        //        } else if (selectedtedToDoStatus == "Yes") {
-        //            let image : UIImage = UIImage(named: "checked")!
-        //            cell.imageView!.image = image
-        //        }
         
         return cell
     }
     
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
-        // this is not very DRY:
         if addToDoTextField.text != "" {
             let context = self.fetchedResultsController.managedObjectContext
             let entity = self.fetchedResultsController.fetchRequest.entity!
@@ -212,6 +185,9 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
                 print("Saved successfully.")
                 addToDoTextField.text = ""
                 addToDoTextField.resignFirstResponder()
+                hideTextFieldView()
+                fadeOutOverlay()
+                self.plusButton.hidden = false
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
