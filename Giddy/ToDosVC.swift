@@ -15,6 +15,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet weak var textFieldView: UIView!
     
     //    var storedResults = [GiddyToDo]()
     var giddyToDo : [GiddyToDo] = []
@@ -28,16 +29,16 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         //setup textField
-        addToDoTextField.layer.backgroundColor = UIColor.whiteColor().CGColor
-        addToDoTextField.layer.borderColor = UIColor.whiteColor().CGColor
-        addToDoTextField.layer.borderWidth = 1
-        addToDoTextField.layer.cornerRadius = 5
-        addToDoTextField.layer.masksToBounds = true
-//        addToDoTextField.layer.shadowRadius = 2.0
-//        addToDoTextField.layer.shadowColor = UIColor.blackColor().CGColor
-//        addToDoTextField.layer.shadowOffset = CGSizeMake(1.0, 1.0)
-//        addToDoTextField.layer.shadowOpacity = 1.0
-//        addToDoTextField.layer.shadowRadius = 1.0
+//        addToDoTextField.layer.backgroundColor = UIColor.whiteColor().CGColor
+//        addToDoTextField.layer.borderColor = UIColor.whiteColor().CGColor
+//        addToDoTextField.layer.borderWidth = 1
+//        addToDoTextField.layer.cornerRadius = 5
+//        addToDoTextField.layer.masksToBounds = true
+        //        addToDoTextField.layer.shadowRadius = 2.0
+        //        addToDoTextField.layer.shadowColor = UIColor.blackColor().CGColor
+        //        addToDoTextField.layer.shadowOffset = CGSizeMake(1.0, 1.0)
+        //        addToDoTextField.layer.shadowOpacity = 1.0
+        //        addToDoTextField.layer.shadowRadius = 1.0
         
         
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
@@ -52,8 +53,9 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         
         //watch textField for changes
         addToDoTextField.addTarget(self, action: #selector(ToDosVC.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
-        
+    
     } //END OF VIEWDIDLOAD
+    
     
     //SETUP BUTTON
     func configureButton()
@@ -99,9 +101,25 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         }
     }
     
+    //
+    func slideOutTextFieldView() {
+        UIView.animateWithDuration(0.7, delay: 1.0, options: .CurveEaseIn, animations: {
+            var textFieldViewToAnimate = self.textFieldView.frame
+            textFieldViewToAnimate.origin.y -= textFieldViewToAnimate.size.height - textFieldViewToAnimate.size.height - textFieldViewToAnimate.size.height
+            
+            self.textFieldView.frame = textFieldViewToAnimate
+            }, completion: { finished in
+                print("Slide")
+        })
+    }
     
     //
+    
+    //
+    
+    
     @IBAction func onPlusButtonTapped(sender: UIButton) {
+        slideOutTextFieldView()
         addToDoTextField.becomeFirstResponder()
         if addToDoTextField.text != "" {
             let context = self.fetchedResultsController.managedObjectContext
@@ -129,7 +147,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     
     
     func insertNewObject(sender: AnyObject) {
-
+        
     }
     
     
@@ -164,22 +182,22 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         cell.textLabel!.text = object.valueForKey("content")!.description as String
         let image : UIImage = UIImage(named: "unchecked")!
         cell.imageView!.image = image
-//        cell.textLabel!.font = UIFont(name:"Avenir", size:16)
+        //        cell.textLabel!.font = UIFont(name:"Avenir", size:16)
         
-//        if selectedtedToDoStatus == "No" {
-//            let image : UIImage = UIImage(named: "unchecked")!
-//            cell.imageView!.image = image
-//        } else if (selectedtedToDoStatus == "Yes") {
-//            let image : UIImage = UIImage(named: "checked")!
-//            cell.imageView!.image = image
-//        }
+        //        if selectedtedToDoStatus == "No" {
+        //            let image : UIImage = UIImage(named: "unchecked")!
+        //            cell.imageView!.image = image
+        //        } else if (selectedtedToDoStatus == "Yes") {
+        //            let image : UIImage = UIImage(named: "checked")!
+        //            cell.imageView!.image = image
+        //        }
         
         return cell
     }
     
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
-// this is not very DRY:
+        // this is not very DRY:
         if addToDoTextField.text != "" {
             let context = self.fetchedResultsController.managedObjectContext
             let entity = self.fetchedResultsController.fetchRequest.entity!
