@@ -42,8 +42,20 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         hideTextFieldView()
         self.darkOverlay.alpha = 0
         
+        // Gesture recognizer:
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
+        self.darkOverlay.addGestureRecognizer(gestureRecognizer)
+        
     } //END OF VIEWDIDLOAD
     
+    
+    // Gesture recognizer function:
+    func handleTap(gestureRecognizer: UIGestureRecognizer) {
+        hideTextFieldView()
+        fadeOutOverlay()
+        self.addToDoTextField.resignFirstResponder()
+        self.plusButton.hidden = false
+    }
     
     //SETUP BUTTON
     func configureButton()
@@ -87,7 +99,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     
     func fadeInOverlay() {
         UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseIn, animations: {
-            self.darkOverlay.alpha = 0.5
+            self.darkOverlay.alpha = 0.6
             }, completion: { finished in
                 print("Slide out")
         })
@@ -164,6 +176,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
         cell.textLabel!.text = object.valueForKey("content")!.description as String
         let image : UIImage = UIImage(named: "unchecked")!
+        cell.textLabel!.font = UIFont(name:"Helvetica", size:16)
         cell.imageView!.image = image
         
         return cell

@@ -120,9 +120,13 @@
                                     <action selector="onPlusButtonTapped:" destination="XPF-OX-6p2" eventType="touchUpInside" id="oDv-BF-Tlj"/>
                                 </connections>
                             </button>
-                            <view userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ej-bb-jfB">
+                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ej-bb-jfB">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="6qr-wa-NIo" appends="YES" id="6ai-kp-piQ"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ptI-C9-C0R">
                                 <rect key="frame" x="0.0" y="64" width="320" height="46"/>
@@ -192,6 +196,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kbZ-gD-AER" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="6qr-wa-NIo"/>
             </objects>
             <point key="canvasLocation" x="1084" y="987"/>
         </scene>
