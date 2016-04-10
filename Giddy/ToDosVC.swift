@@ -26,11 +26,11 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         super.viewDidLoad()
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-
+        
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             managedObjectContext = appDelegate.managedObjectContext
         }
-    
+        
         // set nav color
         navigationController?.navigationBar.barTintColor = UIColor(red:0.98, green:0.68, blue:0.09, alpha:1.0)
         navigationController?.navigationBar.barStyle = UIBarStyle.Black
@@ -38,15 +38,19 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         
         //watch textField for changes
         addToDoTextField.addTarget(self, action: #selector(ToDosVC.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
-    
+        
         hideTextFieldView()
         self.darkOverlay.alpha = 0
         
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ToDosVC.handleTap(_:)))
         self.darkOverlay.addGestureRecognizer(gestureRecognizer)
-        
     }
     //
+    
+    func imageTapped(img: AnyObject)
+    {
+        // Your action
+    }
     
     
     override func viewDidLayoutSubviews() {
@@ -155,6 +159,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
             let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
             
             newManagedObject.setValue(addToDoTextField.text, forKey: "content")
+            newManagedObject.setValue("no", forKey: "doneStatus")
             newManagedObject.setValue(NSDate(), forKey: "timeStamp")
             
             do {
@@ -181,6 +186,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
             let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
             
             newManagedObject.setValue(addToDoTextField.text, forKey: "content")
+            newManagedObject.setValue("no", forKey: "doneStatus")
             newManagedObject.setValue(NSDate(), forKey: "timeStamp")
             
             do {
@@ -210,20 +216,95 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
         cell.textLabel!.text = object.valueForKey("content")!.description as String
-        let image : UIImage = UIImage(named: "unchecked")!
         cell.textLabel!.font = UIFont(name:"San Francisco", size:16)
-        cell.textLabel!.numberOfLines = 0
         
         //imageView
+        if object.valueForKey("doneStatus") as! String == "no" {
+            let image : UIImage = UIImage(named: "unchecked")!
+            cell.imageView!.image = image
+        } else if object.valueForKey("doneStatus") as! String == "yes" {
+            let image : UIImage = UIImage(named: "checked")!
+            cell.imageView!.image = image
+        }
+        
         cell.imageView!.userInteractionEnabled = true
         cell.imageView!.tag = indexPath.row
-        cell.imageView!.transform = CGAffineTransformMakeScale(0.1, 0.1)
-        cell.imageView!.image = image
+        cell.imageView!.transform = CGAffineTransformMakeScale(0.4, 0.4)
+        
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ToDosVC.tappedMe))
+//        cell.imageView!.addGestureRecognizer(tap)
+//        cell.imageView!.userInteractionEnabled = true
         
         return cell
     }
     //
     
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .Destructive, title: "Delete") { (action, indexPath) in
+            // delete item at indexPath
+        }
+        
+        let share = UITableViewRowAction(style: .Normal, title: "Disable") { (action, indexPath) in
+            // share item at indexPath
+        }
+        
+        share.backgroundColor = UIColor.blueColor()
+        
+        return [delete, share]
+    }
+    //
+    
+    
+    func tappedMe()
+    {
+//        let cell = view.superview as! cell
+//        
+//        let indexPath = tableView.indexPathForCell(cell)
+//        
+////        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+//        
+//        let object = self.fetchedResultsController.objectAtIndexPath(indexPath!)
+//        
+//        let selectedobject = self.fetchedResultsController.objectAtIndexPath(indexPath!)
+//        
+//        if object.valueForKey("doneStatus") as! String == "no" {
+//            selectedobject.setValue("yes", forKey: "doneStatus")
+//            cell.imageView?.image = UIImage(named: "checked")
+//            print("The to-do is now done")
+//        } else if object.valueForKey("doneStatus") as! String == "yes" {
+//            selectedobject.setValue("no", forKey: "doneStatus")
+//            cell.imageView?.image = UIImage(named: "unchecked")
+//            print("The to-do is NOT done")
+//        }
+//        print(object)
+        print("Tapped on Image")
+    }
+    //
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+       
+        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+       
+        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
+        
+        let selectedobject = self.fetchedResultsController.objectAtIndexPath(indexPath)
+        
+        if object.valueForKey("doneStatus") as! String == "no" {
+            selectedobject.setValue("yes", forKey: "doneStatus")
+            cell.imageView?.image = UIImage(named: "checked")
+//            cell.textLabel?.text = NSAttributedString.
+            print("The to-do is now done")
+        } else if object.valueForKey("doneStatus") as! String == "yes" {
+            selectedobject.setValue("no", forKey: "doneStatus")
+            cell.imageView?.image = UIImage(named: "unchecked")
+            print("The to-do is NOT done")
+        }
+        print(object)
+    }
+    //
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
@@ -234,11 +315,11 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //        return storedResults.count
         let sectionInfo = self.fetchedResultsController.sections![section]
-            if sectionInfo.numberOfObjects == 0 {
-                fadeInDefaultImage()
-            } else {
-                fadeOutDefaultImage()
-            }
+        if sectionInfo.numberOfObjects == 0 {
+            fadeInDefaultImage()
+        } else {
+            fadeOutDefaultImage()
+        }
         return sectionInfo.numberOfObjects
     }
     //
