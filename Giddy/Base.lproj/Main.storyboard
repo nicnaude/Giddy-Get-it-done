@@ -92,12 +92,9 @@
                                         <rect key="frame" x="0.0" y="92" width="320" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HPQ-50-fxx" id="pGS-rY-Cr0">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="42.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Jkb-Au-rLG" kind="showDetail" id="AII-Xv-n2a"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -105,23 +102,24 @@
                                     <outlet property="delegate" destination="XPF-OX-6p2" id="JeJ-Uy-eOp"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DjO-kr-TuO">
-                                <rect key="frame" x="250" y="410" width="50" height="50"/>
-                                <color key="backgroundColor" red="0.97647058819999999" green="0.69019607839999997" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4c-ch-IGn">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Giddy logo" translatesAutoresizingMaskIntoConstraints="NO" id="bbl-aJ-Xal">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="ke2-kp-5gI"/>
-                                    <constraint firstAttribute="height" constant="50" id="opJ-n3-AMn"/>
+                                    <constraint firstItem="bbl-aJ-Xal" firstAttribute="top" secondItem="f4c-ch-IGn" secondAttribute="top" id="Id5-GW-o3z"/>
+                                    <constraint firstAttribute="bottom" secondItem="bbl-aJ-Xal" secondAttribute="bottom" id="isw-8E-qXP"/>
+                                    <constraint firstAttribute="trailing" secondItem="bbl-aJ-Xal" secondAttribute="trailing" id="vsH-Lu-YH4"/>
+                                    <constraint firstItem="bbl-aJ-Xal" firstAttribute="leading" secondItem="f4c-ch-IGn" secondAttribute="leading" id="zdi-MJ-LzF"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" backgroundImage="plus">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="onPlusButtonTapped:" destination="XPF-OX-6p2" eventType="touchUpInside" id="oDv-BF-Tlj"/>
-                                </connections>
-                            </button>
+                            </view>
                             <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ej-bb-jfB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -150,20 +148,39 @@
                                     <constraint firstAttribute="height" constant="46" id="c7E-B6-Qif"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DjO-kr-TuO">
+                                <rect key="frame" x="250" y="410" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.69019607839999997" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="ke2-kp-5gI"/>
+                                    <constraint firstAttribute="height" constant="50" id="opJ-n3-AMn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" backgroundImage="plus">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onPlusButtonTapped:" destination="XPF-OX-6p2" eventType="touchUpInside" id="oDv-BF-Tlj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="top" secondItem="1ej-bb-jfB" secondAttribute="top" id="3hm-xF-sid"/>
                             <constraint firstItem="JYm-mZ-iSs" firstAttribute="top" secondItem="aR5-HA-9hP" secondAttribute="top" id="3kr-eg-h7j"/>
                             <constraint firstItem="JYm-mZ-iSs" firstAttribute="bottom" secondItem="syH-S7-4qe" secondAttribute="top" id="6uc-HQ-PPr"/>
-                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="trailing" secondItem="1ej-bb-jfB" secondAttribute="trailing" id="71H-qa-d2a"/>
-                            <constraint firstItem="1ej-bb-jfB" firstAttribute="bottom" secondItem="syH-S7-4qe" secondAttribute="top" id="9Ar-9F-q4L"/>
+                            <constraint firstItem="1ej-bb-jfB" firstAttribute="trailing" secondItem="ptI-C9-C0R" secondAttribute="trailing" id="8vw-FU-I1L"/>
+                            <constraint firstItem="1ej-bb-jfB" firstAttribute="leading" secondItem="ptI-C9-C0R" secondAttribute="leading" id="Dw8-ef-tnX"/>
                             <constraint firstItem="JYm-mZ-iSs" firstAttribute="leading" secondItem="aR5-HA-9hP" secondAttribute="leading" id="Ic3-1P-egV"/>
                             <constraint firstItem="JYm-mZ-iSs" firstAttribute="leading" secondItem="ptI-C9-C0R" secondAttribute="leading" id="NiY-Zw-1oU"/>
+                            <constraint firstItem="f4c-ch-IGn" firstAttribute="bottom" secondItem="syH-S7-4qe" secondAttribute="top" id="ONP-Pa-2xk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DjO-kr-TuO" secondAttribute="trailing" constant="4" id="UMX-nL-ehe"/>
                             <constraint firstAttribute="trailing" secondItem="JYm-mZ-iSs" secondAttribute="trailing" id="UUJ-0j-e7T"/>
-                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="leading" secondItem="1ej-bb-jfB" secondAttribute="leading" id="eiV-Mi-TCE"/>
-                            <constraint firstItem="1ej-bb-jfB" firstAttribute="trailing" secondItem="ptI-C9-C0R" secondAttribute="trailing" id="x0J-Pl-ZZA"/>
+                            <constraint firstItem="1ej-bb-jfB" firstAttribute="bottom" secondItem="syH-S7-4qe" secondAttribute="top" id="VOV-zG-L48"/>
+                            <constraint firstItem="f4c-ch-IGn" firstAttribute="leading" secondItem="1ej-bb-jfB" secondAttribute="leading" id="Zdi-6S-GjP"/>
+                            <constraint firstItem="f4c-ch-IGn" firstAttribute="top" secondItem="1ej-bb-jfB" secondAttribute="top" id="k9s-NL-GQr"/>
+                            <constraint firstItem="1ej-bb-jfB" firstAttribute="top" secondItem="ptI-C9-C0R" secondAttribute="top" id="nKQ-VS-K4R"/>
+                            <constraint firstItem="1ej-bb-jfB" firstAttribute="trailing" secondItem="JYm-mZ-iSs" secondAttribute="trailing" id="w5c-g3-Cwb"/>
+                            <constraint firstItem="f4c-ch-IGn" firstAttribute="trailing" secondItem="ptI-C9-C0R" secondAttribute="trailing" id="wkf-lJ-GcB"/>
                             <constraint firstAttribute="bottom" secondItem="DjO-kr-TuO" secondAttribute="bottom" constant="20" symbolic="YES" id="xQF-Nc-UxP"/>
                             <constraint firstItem="ptI-C9-C0R" firstAttribute="top" secondItem="A9K-iQ-HcH" secondAttribute="bottom" id="yJ4-Zw-CHo"/>
                         </constraints>
@@ -190,6 +207,7 @@
                     <connections>
                         <outlet property="addToDoTextField" destination="wz9-1l-l7h" id="z2M-LG-QqD"/>
                         <outlet property="darkOverlay" destination="1ej-bb-jfB" id="cBp-hQ-Yc4"/>
+                        <outlet property="imageOverlay" destination="f4c-ch-IGn" id="Vy5-Jq-zgE"/>
                         <outlet property="plusButton" destination="DjO-kr-TuO" id="dxM-7z-e4y"/>
                         <outlet property="tableView" destination="JYm-mZ-iSs" id="rXs-oX-E2N"/>
                         <outlet property="textFieldView" destination="ptI-C9-C0R" id="GaI-eJ-SY5"/>

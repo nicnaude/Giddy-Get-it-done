@@ -17,6 +17,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     @IBOutlet weak var textFieldView: UIView!
     @IBOutlet weak var darkOverlay: UIView!
     
+    @IBOutlet weak var imageOverlay: UIView!
     var giddyToDo : [GiddyToDo] = []
     var managedObjectContext: NSManagedObjectContext? = nil
     
@@ -29,8 +30,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             managedObjectContext = appDelegate.managedObjectContext
         }
-        
-        
+    
         // set nav color
         navigationController?.navigationBar.barTintColor = UIColor(red:0.98, green:0.68, blue:0.09, alpha:1.0)
         navigationController?.navigationBar.barStyle = UIBarStyle.Black
@@ -42,22 +42,29 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         hideTextFieldView()
         self.darkOverlay.alpha = 0
         
-        // Gesture recognizer:
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ToDosVC.handleTap(_:)))
         self.darkOverlay.addGestureRecognizer(gestureRecognizer)
         
-    } //END OF VIEWDIDLOAD
+    }
+    //
     
     
-    // Gesture recognizer function:
+    override func viewDidLayoutSubviews() {
+        configureButton()
+    }
+    //
+    
+    
     func handleTap(gestureRecognizer: UIGestureRecognizer) {
         hideTextFieldView()
-        fadeOutOverlay()
         self.addToDoTextField.resignFirstResponder()
         self.plusButton.hidden = false
+        fadeOutOverlay()
+        self.addToDoTextField.text = ""
     }
+    //
     
-    //SETUP BUTTON
+    
     func configureButton()
     {
         plusButton.layer.cornerRadius = 0.5 * plusButton.bounds.size.width
@@ -65,53 +72,76 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         plusButton.layer.borderWidth = 0
         plusButton.clipsToBounds = true
     }
-    
-    override func viewDidLayoutSubviews() {
-        configureButton()
-    }
+    //
     
     
     func textFieldDidChange(textField: UITextField) {
     }
+    //
     
     
+    // MARK: Animations
     func slideOutTextFieldView() {
         self.textFieldView.alpha = 1
-        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseIn, animations: {
+        UIView.animateWithDuration(0.2, delay: 0.1, options: .CurveEaseIn, animations: {
             var textFieldViewToAnimate = self.textFieldView.frame
             textFieldViewToAnimate.origin.y += textFieldViewToAnimate.size.height
             
             self.textFieldView.frame = textFieldViewToAnimate
             }, completion: { finished in
-                print("Slide out")
+                print("Textfield visible")
         })
     }
+    //
     
     
     func hideTextFieldView() {
-        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseIn, animations: {
+        UIView.animateWithDuration(0.2, delay: 0.1, options: .CurveEaseOut, animations: {
             self.textFieldView.alpha = 0
             }, completion: { finished in
-                print("Slide out")
+                print("Textfield hidden")
         })
     }
+    //
     
     
     func fadeInOverlay() {
         UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseIn, animations: {
             self.darkOverlay.alpha = 0.6
             }, completion: { finished in
-                print("Slide out")
+                print("Fade in overlay")
         })
     }
+    //
+    
     
     func fadeOutOverlay() {
-        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseIn, animations: {
+        UIView.animateWithDuration(0.2, delay: 0.1, options: .CurveEaseOut, animations: {
             self.darkOverlay.alpha = 0
             }, completion: { finished in
-                print("fade out out")
+                print("Fade out overlay")
         })
     }
+    //
+    
+    func fadeInDefaultImage() {
+        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseIn, animations: {
+            self.imageOverlay.alpha = 1
+            }, completion: { finished in
+                print("Fade in default image")
+        })
+    }
+    //
+    
+    
+    func fadeOutDefaultImage() {
+        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
+            self.imageOverlay.alpha = 0
+            }, completion: { finished in
+                print("Fade out default image")
+        })
+    }
+    //
     
     
     @IBAction func onPlusButtonTapped(sender: UIButton) {
@@ -143,47 +173,8 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     //
     
     
-    func insertNewObject(sender: AnyObject) {
-        
-    }
-    
-    
-    @IBAction func loadCoreData(sender: UIBarButtonItem) {
-        print("Load tapped")
-        let appDel: AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        let context: NSManagedObjectContext = appDel.managedObjectContext
-        
-        let request = NSFetchRequest(entityName: "GiddyToDo")
-        request.returnsObjectsAsFaults = false
-        request.predicate = NSPredicate(format: "content = %@", addToDoTextField.text!)
-        
-        do {
-            let results: NSArray = try context.executeFetchRequest(request)
-            
-            if results.count > 0 {
-                print("\(results.count) results found!")
-            }
-        } catch {
-            print("No results found!")
-        }
-    }
-    
-    
-    // MARK: TableView methods:
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
-        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-        cell.textLabel!.text = object.valueForKey("content")!.description as String
-        let image : UIImage = UIImage(named: "unchecked")!
-        cell.textLabel!.font = UIFont(name:"Helvetica", size:16)
-        cell.imageView!.image = image
-        
-        return cell
-    }
-    
-    
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+    // MARK: Textfield method:
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         if addToDoTextField.text != "" {
             let context = self.fetchedResultsController.managedObjectContext
             let entity = self.fetchedResultsController.fetchRequest.entity!
@@ -192,7 +183,6 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
             newManagedObject.setValue(addToDoTextField.text, forKey: "content")
             newManagedObject.setValue(NSDate(), forKey: "timeStamp")
             
-            // Save the context.
             do {
                 try context.save()
                 print("Saved successfully.")
@@ -209,16 +199,49 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
             }
         }
         
-        //        textField.resignFirstResponder()
         return true
     }
+    //
+    
+    
+    // MARK: TableView methods:
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
+        cell.textLabel!.text = object.valueForKey("content")!.description as String
+        let image : UIImage = UIImage(named: "unchecked")!
+        cell.textLabel!.font = UIFont(name:"San Francisco", size:16)
+        cell.textLabel!.numberOfLines = 0
+        
+        //imageView
+        cell.imageView!.userInteractionEnabled = true
+        cell.imageView!.tag = indexPath.row
+        cell.imageView!.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        cell.imageView!.image = image
+        
+        return cell
+    }
+    //
+    
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    //
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //        return storedResults.count
         let sectionInfo = self.fetchedResultsController.sections![section]
+            if sectionInfo.numberOfObjects == 0 {
+                fadeInDefaultImage()
+            } else {
+                fadeOutDefaultImage()
+            }
         return sectionInfo.numberOfObjects
     }
+    //
     
     
     // allow editing of the tableview
@@ -226,6 +249,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         // Return false if you do not want the specified item to be editable.
         return true
     }
+    //
     
     
     // edit the tableview
@@ -242,6 +266,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
             }
         }
     }
+    //
     
     
     // Configure cell
@@ -249,6 +274,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
         cell.textLabel!.text = object.valueForKey("content")!.description as String
     }
+    //
     
     
     // MARK: - Fetched results controller
@@ -287,6 +313,8 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
     }
+    //
+    
     
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         switch type {
@@ -298,6 +326,8 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
             return
         }
     }
+    //
+    
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
@@ -312,6 +342,8 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
             tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         }
     }
+    //
+    
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
