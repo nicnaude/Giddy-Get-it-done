@@ -231,55 +231,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         cell.imageView!.tag = indexPath.row
         cell.imageView!.transform = CGAffineTransformMakeScale(0.4, 0.4)
         
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(ToDosVC.tappedMe))
-//        cell.imageView!.addGestureRecognizer(tap)
-//        cell.imageView!.userInteractionEnabled = true
-        
         return cell
-    }
-    //
-    
-    
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .Destructive, title: "Delete") { (action, indexPath) in
-            // delete item at indexPath
-        }
-        
-        let share = UITableViewRowAction(style: .Normal, title: "Disable") { (action, indexPath) in
-            // share item at indexPath
-        }
-        
-        share.backgroundColor = UIColor.blueColor()
-        
-        return [delete, share]
-    }
-    //
-    
-    
-    func tappedMe()
-    {
-//        let cell = view.superview as! cell
-//        
-//        let indexPath = tableView.indexPathForCell(cell)
-//        
-////        let cell = tableView.cellForRowAtIndexPath(indexPath)!
-//        
-//        let object = self.fetchedResultsController.objectAtIndexPath(indexPath!)
-//        
-//        let selectedobject = self.fetchedResultsController.objectAtIndexPath(indexPath!)
-//        
-//        if object.valueForKey("doneStatus") as! String == "no" {
-//            selectedobject.setValue("yes", forKey: "doneStatus")
-//            cell.imageView?.image = UIImage(named: "checked")
-//            print("The to-do is now done")
-//        } else if object.valueForKey("doneStatus") as! String == "yes" {
-//            selectedobject.setValue("no", forKey: "doneStatus")
-//            cell.imageView?.image = UIImage(named: "unchecked")
-//            print("The to-do is NOT done")
-//        }
-//        print(object)
-        print("Tapped on Image")
     }
     //
     
@@ -291,6 +243,8 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
         
         let selectedobject = self.fetchedResultsController.objectAtIndexPath(indexPath)
+        
+        self.tableView.reloadData()
         
         if object.valueForKey("doneStatus") as! String == "no" {
             selectedobject.setValue("yes", forKey: "doneStatus")
@@ -306,6 +260,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     }
     //
     
+    
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
@@ -320,6 +275,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         } else {
             fadeOutDefaultImage()
         }
+        
         return sectionInfo.numberOfObjects
     }
     //
@@ -368,9 +324,6 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         let entity = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: self.managedObjectContext!)
         fetchRequest.entity = entity
         
-        // Set the batch size to a suitable number.
-        //        fetchRequest.fetchBatchSize = 30
-        
         // Edit the sort key as appropriate.
         let sortDescriptor = NSSortDescriptor(key: "timeStamp", ascending: false)
         
@@ -400,9 +353,9 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         switch type {
         case .Insert:
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Top)
         case .Delete:
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Top)
         default:
             return
         }
@@ -429,6 +382,6 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
     }
-    
+    //
     
 } //END
