@@ -210,17 +210,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         cell.imageView!.tag = indexPath.row
         cell.imageView!.transform = CGAffineTransformMakeScale(0.4, 0.4)
         
-        //        let tap = UITapGestureRecognizer(target: self, action: #selector(ToDosVC.tappedMe))
-        //        cell.imageView!.addGestureRecognizer(tap)
-        //        cell.imageView!.userInteractionEnabled = true
-        
-        
-        //        let longPress = UILongPressGestureRecognizer(target: self, action: "handleLongPress")
-        //        cell.addGestureRecognizer(longPress)
-        //        longPress.minimumPressDuration = 1.0
-        //        longPress.delegate = longPress.delegate
-        
-        let longPress = UILongPressGestureRecognizer(target: self, action: Selector("longPressGestureRecognized:"))
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(ToDosVC.longPressGestureRecognized(_:)))
         longPress.minimumPressDuration = 0.5
         longPress.numberOfTouchesRequired = 1
         cell.addGestureRecognizer(longPress)
@@ -245,8 +235,6 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
         
-        //        let selectedobject = self.fetchedResultsController.objectAtIndexPath(indexPath)
-        
         let context = self.fetchedResultsController.managedObjectContext
         
         UIView.animateWithDuration(0.7, delay: 4, options: .CurveEaseOut, animations: {
@@ -260,18 +248,6 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
         
         self.tableView.reloadData()
-        //
-        //
-        //        if object.valueForKey("doneStatus") as! String == "no" {
-        //            selectedobject.setValue("yes", forKey: "doneStatus")
-        //            cell.imageView?.image = UIImage(named: "checked")
-        //            //            cell.textLabel?.text = NSAttributedString.
-        //            print("The to-do is now done")
-        //        } else if object.valueForKey("doneStatus") as! String == "yes" {
-        //            selectedobject.setValue("no", forKey: "doneStatus")
-        //            cell.imageView?.image = UIImage(named: "unchecked")
-        //            print("The to-do is NOT done")
-        //        }
         print(object)
     }
     //
@@ -399,4 +375,16 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     }
     //
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "editToDo" {
+            let destination = segue.destinationViewController as! EditToDoVC
+            
+            let point = sender!.convertPoint(CGPointZero, toView: self.tableView)
+            let indexPath = self.tableView.indexPathForRowAtPoint(point)
+            let object = self.fetchedResultsController.objectAtIndexPath(indexPath!)
+            destination.editTextField.text = object.valueForKey("content")!.description as String
+            
+        }
+    }
+
 } //END

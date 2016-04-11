@@ -9,14 +9,23 @@
 import UIKit
 
 class EditToDoVC: UIViewController {
-
+    
+    
+    @IBOutlet weak var editTextField: UITextField!
+    @IBOutlet weak var markAsDoneButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
     @IBAction func onSaveButtonTapped(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: {});
+        print("Save tapped")
+    }
+    
+    @IBAction func onMarkAsDoneTapped(sender: UIButton) {
+        print("Done tapped")
     }
 }

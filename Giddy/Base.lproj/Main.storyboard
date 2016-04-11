@@ -129,7 +129,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="Kxm-xR-tbt">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" image="more" id="s8u-X8-hoQ"/>
+                        <barButtonItem key="leftBarButtonItem" image="square-more" id="s8u-X8-hoQ">
+                            <connections>
+                                <segue destination="Lqo-tk-2jy" kind="presentation" id="69N-x1-8y2"/>
+                            </connections>
+                        </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="lAY-ql-lxW">
                             <rect key="frame" x="96" y="5.5" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -163,6 +167,25 @@
             </objects>
             <point key="canvasLocation" x="1084" y="987"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="4Hp-zT-5et">
+            <objects>
+                <viewController id="Lqo-tk-2jy" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uxa-US-piZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="YRx-mn-xcc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="x73-wy-lW6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hdN-Mh-lRs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1084" y="1581"/>
+        </scene>
         <!--Edit to-do-->
         <scene sceneID="gwM-FO-tfI">
             <objects>
@@ -175,10 +198,53 @@
                     <view key="view" contentMode="scaleToFill" id="9BJ-W0-edq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="py3-1D-zfb">
+                                <rect key="frame" x="20" y="217" width="280" height="46"/>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="av7-Sd-uZc"/>
+                                </constraints>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="onSaveButtonTapped:" destination="Jkb-Au-rLG" eventType="touchUpInside" id="Gup-Uj-pgu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Spc-rw-1WS">
+                                <rect key="frame" x="20" y="271" width="280" height="46"/>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Mark as done"/>
+                                <connections>
+                                    <action selector="onMarkAsDoneTapped:" destination="Jkb-Au-rLG" eventType="touchUpInside" id="PM4-eR-ZD7"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Du-Un-JIv">
+                                <rect key="frame" x="20" y="86" width="280" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="e5M-OX-NYq" firstAttribute="top" secondItem="Spc-rw-1WS" secondAttribute="bottom" constant="163" id="5pf-Hq-KQV"/>
+                            <constraint firstItem="0Du-Un-JIv" firstAttribute="trailing" secondItem="py3-1D-zfb" secondAttribute="trailing" id="6z0-mH-E4m"/>
+                            <constraint firstItem="Spc-rw-1WS" firstAttribute="top" secondItem="py3-1D-zfb" secondAttribute="bottom" constant="8" symbolic="YES" id="DPi-ya-GtA"/>
+                            <constraint firstItem="py3-1D-zfb" firstAttribute="leading" secondItem="Spc-rw-1WS" secondAttribute="leading" id="JtN-Ei-zEp"/>
+                            <constraint firstItem="py3-1D-zfb" firstAttribute="centerY" secondItem="9BJ-W0-edq" secondAttribute="centerY" id="Nu5-bc-Ogq"/>
+                            <constraint firstItem="0Du-Un-JIv" firstAttribute="leading" secondItem="9BJ-W0-edq" secondAttribute="leadingMargin" constant="4" id="RTY-vs-LBe"/>
+                            <constraint firstItem="py3-1D-zfb" firstAttribute="trailing" secondItem="Spc-rw-1WS" secondAttribute="trailing" id="XES-pl-rlf"/>
+                            <constraint firstItem="0Du-Un-JIv" firstAttribute="leading" secondItem="py3-1D-zfb" secondAttribute="leading" id="mI1-JK-xPN"/>
+                            <constraint firstItem="0Du-Un-JIv" firstAttribute="top" secondItem="1aU-mc-G3l" secondAttribute="bottom" constant="22" id="rYe-gu-7J1"/>
+                            <constraint firstItem="0Du-Un-JIv" firstAttribute="centerX" secondItem="9BJ-W0-edq" secondAttribute="centerX" id="x0E-nK-sX4"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit to-do" id="kgm-t1-nxp"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="editTextField" destination="0Du-Un-JIv" id="OU8-dR-gTE"/>
+                        <outlet property="markAsDoneButton" destination="Spc-rw-1WS" id="GQv-Lx-iP8"/>
+                        <outlet property="saveButton" destination="py3-1D-zfb" id="5rs-Bd-Eo9"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1506" y="987"/>
@@ -366,8 +432,8 @@
     <resources>
         <image name="Giddy logo" width="166" height="61"/>
         <image name="love" width="740" height="740"/>
-        <image name="more" width="28" height="33"/>
         <image name="plus" width="205" height="205"/>
+        <image name="square-more" width="23" height="23"/>
     </resources>
     <color key="tintColor" red="0.97647058819999999" green="0.69019607839999997" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>
