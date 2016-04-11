@@ -153,27 +153,6 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         self.plusButton.hidden = true
         fadeInOverlay()
         addToDoTextField.becomeFirstResponder()
-        if addToDoTextField.text != "" {
-            let context = self.fetchedResultsController.managedObjectContext
-            let entity = self.fetchedResultsController.fetchRequest.entity!
-            let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
-            
-            newManagedObject.setValue(addToDoTextField.text, forKey: "content")
-            newManagedObject.setValue("no", forKey: "doneStatus")
-            newManagedObject.setValue(NSDate(), forKey: "timeStamp")
-            
-            do {
-                try context.save()
-                print("Saved successfully.")
-                addToDoTextField.text = ""
-                addToDoTextField.resignFirstResponder()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                //print("Unresolved error \(error), \(error.userInfo)")
-                abort()
-            }
-        }
     }
     //
     
@@ -231,35 +210,71 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         cell.imageView!.tag = indexPath.row
         cell.imageView!.transform = CGAffineTransformMakeScale(0.4, 0.4)
         
+        //        let tap = UITapGestureRecognizer(target: self, action: #selector(ToDosVC.tappedMe))
+        //        cell.imageView!.addGestureRecognizer(tap)
+        //        cell.imageView!.userInteractionEnabled = true
+        
+        
+        //        let longPress = UILongPressGestureRecognizer(target: self, action: "handleLongPress")
+        //        cell.addGestureRecognizer(longPress)
+        //        longPress.minimumPressDuration = 1.0
+        //        longPress.delegate = longPress.delegate
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: Selector("longPressGestureRecognized:"))
+        longPress.minimumPressDuration = 0.5
+        longPress.numberOfTouchesRequired = 1
+        cell.addGestureRecognizer(longPress)
+        
         return cell
     }
     //
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       
-        let cell = tableView.cellForRowAtIndexPath(indexPath)!
-       
-        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-        
-        let selectedobject = self.fetchedResultsController.objectAtIndexPath(indexPath)
-        
-        self.tableView.reloadData()
-        
-        if object.valueForKey("doneStatus") as! String == "no" {
-            selectedobject.setValue("yes", forKey: "doneStatus")
-            cell.imageView?.image = UIImage(named: "checked")
-//            cell.textLabel?.text = NSAttributedString.
-            print("The to-do is now done")
-        } else if object.valueForKey("doneStatus") as! String == "yes" {
-            selectedobject.setValue("no", forKey: "doneStatus")
-            cell.imageView?.image = UIImage(named: "unchecked")
-            print("The to-do is NOT done")
+    func longPressGestureRecognized(gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == UIGestureRecognizerState.Began {
+            performSegueWithIdentifier("editToDo", sender: self)
+            print("Long press detected.")
         }
-        print(object)
     }
     //
     
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+        
+        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
+        
+        //        let selectedobject = self.fetchedResultsController.objectAtIndexPath(indexPath)
+        
+        let context = self.fetchedResultsController.managedObjectContext
+        
+        UIView.animateWithDuration(0.7, delay: 4, options: .CurveEaseOut, animations: {
+            cell.imageView?.image = UIImage(named: "checked")
+            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            
+            }, completion: { finished in
+                print("Object deleted")
+        })
+        
+        context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
+        
+        self.tableView.reloadData()
+        //
+        //
+        //        if object.valueForKey("doneStatus") as! String == "no" {
+        //            selectedobject.setValue("yes", forKey: "doneStatus")
+        //            cell.imageView?.image = UIImage(named: "checked")
+        //            //            cell.textLabel?.text = NSAttributedString.
+        //            print("The to-do is now done")
+        //        } else if object.valueForKey("doneStatus") as! String == "yes" {
+        //            selectedobject.setValue("no", forKey: "doneStatus")
+        //            cell.imageView?.image = UIImage(named: "unchecked")
+        //            print("The to-do is NOT done")
+        //        }
+        print(object)
+    }
+    //
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension

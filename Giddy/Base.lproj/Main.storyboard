@@ -27,7 +27,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="cell" rowHeight="43" id="HPQ-50-fxx">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="cell" rowHeight="43" id="HPQ-50-fxx">
                                         <rect key="frame" x="0.0" y="92" width="320" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HPQ-50-fxx" id="pGS-rY-Cr0">
@@ -78,7 +78,6 @@
                                         </connections>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="wz9-1l-l7h" secondAttribute="bottom" constant="8" id="11e-5Z-9bj"/>
                                     <constraint firstItem="wz9-1l-l7h" firstAttribute="top" secondItem="ptI-C9-C0R" secondAttribute="top" constant="8" id="4YK-yK-Aaw"/>
@@ -104,6 +103,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="JYm-mZ-iSs" firstAttribute="top" secondItem="aR5-HA-9hP" secondAttribute="top" id="3kr-eg-h7j"/>
                             <constraint firstItem="JYm-mZ-iSs" firstAttribute="bottom" secondItem="syH-S7-4qe" secondAttribute="top" id="6uc-HQ-PPr"/>
@@ -123,14 +123,13 @@
                             <constraint firstAttribute="bottom" secondItem="DjO-kr-TuO" secondAttribute="bottom" constant="20" symbolic="YES" id="xQF-Nc-UxP"/>
                             <constraint firstItem="ptI-C9-C0R" firstAttribute="top" secondItem="A9K-iQ-HcH" secondAttribute="bottom" id="yJ4-Zw-CHo"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="0fV-TA-eSB" appends="YES" id="xuy-Gu-t0a"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Kxm-xR-tbt">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" image="more" id="s8u-X8-hoQ">
-                            <connections>
-                                <segue destination="Jkb-Au-rLG" kind="presentation" id="ex6-NH-VCU"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" image="more" id="s8u-X8-hoQ"/>
                         <view key="titleView" contentMode="scaleToFill" id="lAY-ql-lxW">
                             <rect key="frame" x="96" y="5.5" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -155,14 +154,16 @@
                         <outlet property="plusButton" destination="DjO-kr-TuO" id="dxM-7z-e4y"/>
                         <outlet property="tableView" destination="JYm-mZ-iSs" id="rXs-oX-E2N"/>
                         <outlet property="textFieldView" destination="ptI-C9-C0R" id="GaI-eJ-SY5"/>
+                        <segue destination="Jkb-Au-rLG" kind="show" identifier="editToDo" id="bYK-Bo-ada"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kbZ-gD-AER" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="6qr-wa-NIo"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="0fV-TA-eSB"/>
             </objects>
             <point key="canvasLocation" x="1084" y="987"/>
         </scene>
-        <!--Edit To DoVC-->
+        <!--Edit to-do-->
         <scene sceneID="gwM-FO-tfI">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1a-pq-uQL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -174,21 +175,9 @@
                     <view key="view" contentMode="scaleToFill" id="9BJ-W0-edq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbk-Jy-yin">
-                                <rect key="frame" x="20" y="20" width="37" height="30"/>
-                                <state key="normal" title="Done"/>
-                                <connections>
-                                    <action selector="onSaveButtonTapped:" destination="Jkb-Au-rLG" eventType="touchUpInside" id="yVd-55-jya"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="rbk-Jy-yin" firstAttribute="top" secondItem="1aU-mc-G3l" secondAttribute="bottom" id="an5-OZ-z4Z"/>
-                            <constraint firstItem="rbk-Jy-yin" firstAttribute="leading" secondItem="9BJ-W0-edq" secondAttribute="leadingMargin" constant="4" id="bh7-6K-c9d"/>
-                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Edit to-do" id="kgm-t1-nxp"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
             </objects>
