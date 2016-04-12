@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4A202EF01CB3C4C100643252 /* GiddyToDo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A202EEE1CB3C4C100643252 /* GiddyToDo+CoreDataProperties.swift */; };
 		4A202EF11CB3C4C100643252 /* GiddyToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A202EEF1CB3C4C100643252 /* GiddyToDo.swift */; };
+		4A202EF51CBD4C8400643252 /* TableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A202EF41CBD4C8400643252 /* TableViewExtension.swift */; };
 		4A2519DD1CB1C1AF007CF8EE /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */; };
 		4A251A011CB24B1A007CF8EE /* ToDosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A251A001CB24B1A007CF8EE /* ToDosVC.swift */; };
 		4A251A041CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A251A021CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld */; };
@@ -86,6 +87,7 @@
 		2FDE641A502A0175F39A2FD9 /* Pods-Giddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Giddy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Giddy/Pods-Giddy.release.xcconfig"; sourceTree = "<group>"; };
 		4A202EEE1CB3C4C100643252 /* GiddyToDo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GiddyToDo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4A202EEF1CB3C4C100643252 /* GiddyToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiddyToDo.swift; sourceTree = "<group>"; };
+		4A202EF41CBD4C8400643252 /* TableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewExtension.swift; sourceTree = "<group>"; };
 		4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		4A251A001CB24B1A007CF8EE /* ToDosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDosVC.swift; sourceTree = "<group>"; };
 		4A251A031CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GiddyDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				4A3245A11CA4A64900A996E3 /* ToDo.swift */,
 				4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */,
 				4AFD90D81CB2FE52000B6706 /* ToDoObject.swift */,
+				4A202EF41CBD4C8400643252 /* TableViewExtension.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				4A3DC0841C9F2B0A009AB92A /* ToDoWatchItem.swift in Sources */,
 				4A202EF11CB3C4C100643252 /* GiddyToDo.swift in Sources */,
 				4ABD924D1CA36D8400C43F6C /* Onboard2VC.swift in Sources */,
+				4A202EF51CBD4C8400643252 /* TableViewExtension.swift in Sources */,
 				4A3DC0391C9E0C15009AB92A /* AppDelegate.swift in Sources */,
 				4A2519DD1CB1C1AF007CF8EE /* ToDoItem.swift in Sources */,
 				4AFD90D91CB2FE52000B6706 /* ToDoObject.swift in Sources */,

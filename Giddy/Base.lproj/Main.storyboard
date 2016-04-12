@@ -34,6 +34,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="42.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Jkb-Au-rLG" kind="show" id="4bd-kY-rZb"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -435,5 +438,8 @@
         <image name="plus" width="205" height="205"/>
         <image name="square-more" width="23" height="23"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="4bd-kY-rZb"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.97647058819999999" green="0.69019607839999997" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>

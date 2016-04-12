@@ -19,7 +19,6 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     @IBOutlet weak var imageOverlay: UIView!
     var giddyToDo : [GiddyToDo] = []
     var managedObjectContext: NSManagedObjectContext? = nil
-    var cellTag = Int()
     
     override func viewDidLoad() {
         
@@ -211,56 +210,44 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         cell.imageView!.transform = CGAffineTransformMakeScale(0.4, 0.4)
         cell.imageView!.userInteractionEnabled = true
         cell.imageView!.tag = indexPath.row
+        cell.backgroundColor? = UIColor.whiteColor()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(ToDosVC.tappedMe))
         tap.numberOfTapsRequired = 1
         cell.imageView!.addGestureRecognizer(tap)
-//        cell.imageView!.tag = indexPath.row
-        cellTag = indexPath.row
-        //        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(ToDosVC.longPressGestureRecognized(_:)))
-        //        longPress.minimumPressDuration = 0.5
-        //        longPress.numberOfTouchesRequired = 1
-        //        cell.addGestureRecognizer(longPress)
+        //        cell.imageView!.tag = indexPath.row
+        
+        let longPress = UILongPressGestureRecognizer(target: cell, action: #selector(ToDosVC.longPressGestureRecognized(_:)))
+        longPress.minimumPressDuration = 0.5
+        cell.addGestureRecognizer(longPress)
         return cell
     }
     //
     
+    
     func tappedMe(gestureRecognizer: UITapGestureRecognizer, sender: AnyObject?) {
-        if gestureRecognizer.numberOfTapsRequired == 1 {
-            print(sender!.tag)
-            let point = sender!.convertPoint(CGPointZero, toView: self.tableView)
-            let indexPath = self.tableView.indexPathForRowAtPoint(point)
-//            let cellTag = CFStringGetIntValue(sender?.tag as! CFString)
-            let cell = tableView.cellForRowAtIndexPath(indexPath!)!
-            
-            if indexPath != nil {
-                let object = self.fetchedResultsController.objectAtIndexPath(indexPath!)
-                
-                let context = self.fetchedResultsController.managedObjectContext
-                
-                UIView.animateWithDuration(0.7, delay: 4, options: .CurveEaseOut, animations: {
-                    cell.imageView?.image = UIImage(named: "checked")
-                    self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
-                    
-                    }, completion: { finished in
-                        print("Object deleted")
-                })
-                
-                context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath!) as! NSManagedObject)
-                
-                self.tableView.reloadData()
-                print(object)
+        print("Tap detected")
+        let alert: UIAlertController = UIAlertController(title: "Please Confirm", message: "Are you sure you want to delete this car from your database?", preferredStyle: .Alert);
+        alert.addAction(UIAlertAction(title: "Yes", style: .Destructive, handler: { (UIAlertAction) -> Void in
+            if let tv = self.tableView {
+                let point: CGPoint = sender!.locationInView(self.tableView)
+                let indexPath: NSIndexPath = self.tableView.indexPathForRowAtPoint(point)!
+                tv.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                self.performSegueWithIdentifier("editToDo", sender: self)
             }
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    func longPressGestureRecognized(gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == UIGestureRecognizerState.Began {
+            print("Long press detected.")
+            performSegueWithIdentifier("editToDo", sender: self)
         }
     }
     
-    //    func longPressGestureRecognized(gestureRecognizer: UILongPressGestureRecognizer) {
-    //        if gestureRecognizer.state == UIGestureRecognizerState.Began {
-    //            print("Long press detected.")
-    //            performSegueWithIdentifier("editToDo", sender: self)
-    //        }
-    //    }
-    //
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -413,10 +400,10 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         if segue.identifier == "editToDo" {
             let destination = segue.destinationViewController as! EditToDoVC
             
-            let point = sender!.convertPoint(CGPointZero, toView: self.tableView)
-            let indexPath = self.tableView.indexPathForRowAtPoint(point)
-            let object = self.fetchedResultsController.objectAtIndexPath(indexPath!)
-            destination.editTextField.text = object.valueForKey("content")!.description as String
+//            let point = sender!.convertPoint(CGPointZero, toView: self.tableView)
+//            let indexPath = self.tableView.indexPathForRowAtPoint(point)
+//            let object = self.fetchedResultsController.objectAtIndexPath(indexPath!)
+//            destination.editTextField.text = object.valueForKey("content")!.description as String
             
         }
     }
