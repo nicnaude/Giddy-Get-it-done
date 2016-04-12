@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
+class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var addToDoTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -217,59 +217,104 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         cell.imageView!.addGestureRecognizer(tap)
         //        cell.imageView!.tag = indexPath.row
         
-        let longPress = UILongPressGestureRecognizer(target: cell, action: #selector(ToDosVC.longPressGestureRecognized(_:)))
-        longPress.minimumPressDuration = 0.5
-        cell.addGestureRecognizer(longPress)
+        //        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(ToDosVC.longPressGestureRecognized(_:)))
+        //        longPress.minimumPressDuration = 0.5
+        //        cell.addGestureRecognizer(longPress)
         return cell
     }
     //
     
     
-    func tappedMe(gestureRecognizer: UITapGestureRecognizer, sender: AnyObject?) {
+    func tappedMe(sender: UITapGestureRecognizer) {
         print("Tap detected")
-        let alert: UIAlertController = UIAlertController(title: "Please Confirm", message: "Are you sure you want to delete this car from your database?", preferredStyle: .Alert);
-        alert.addAction(UIAlertAction(title: "Yes", style: .Destructive, handler: { (UIAlertAction) -> Void in
-            if let tv = self.tableView {
-                let point: CGPoint = sender!.locationInView(self.tableView)
-                let indexPath: NSIndexPath = self.tableView.indexPathForRowAtPoint(point)!
-                tv.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                self.performSegueWithIdentifier("editToDo", sender: self)
-            }
-        }))
-        alert.addAction(UIAlertAction(title: "No", style: .Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    
-    func longPressGestureRecognized(gestureRecognizer: UILongPressGestureRecognizer) {
-        if gestureRecognizer.state == UIGestureRecognizerState.Began {
-            print("Long press detected.")
-            performSegueWithIdentifier("editToDo", sender: self)
+        let touch = sender.locationInView(tableView)
+        
+        if let indexPath = tableView.indexPathForRowAtPoint(touch) {
+            
+            var cell = self.tableView.cellForRowAtIndexPath(indexPath)
+            let object = fetchedResultsController.objectAtIndexPath(indexPath)
+            
+            let context = fetchedResultsController.managedObjectContext
+            
+            UIView.animateWithDuration(0.7, delay: 4, options: .CurveEaseOut, animations: {
+                cell!.imageView?.image = UIImage(named: "checked")
+                self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                
+                }, completion: { finished in
+                    print("Object deleted")
+            })
+            
+            context.deleteObject(fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
+            
+            self.tableView.reloadData()
+            print(object)
+            //
+        } else {
+            print("Could not find index path")
         }
     }
     
     
+    //func longPressGestureRecognized(sender: UILongPressGestureRecognizer) {
+    //    let touch = sender.locationInView(tableView)
+    //
+    //    if let indexPath = tableView.indexPathForRowAtPoint(touch) {
+    //
+    //        var cell = self.tableView.cellForRowAtIndexPath(indexPath)
+    //        let object = fetchedResultsController.objectAtIndexPath(indexPath)
+    //
+    //        let context = fetchedResultsController.managedObjectContext
+    //
+    //        UIView.animateWithDuration(0.7, delay: 4, options: .CurveEaseOut, animations: {
+    //            cell!.imageView?.image = UIImage(named: "checked")
+    //            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+    //
+    //            }, completion: { finished in
+    //                print("Object deleted")
+    //        })
+    //
+    //        context.deleteObject(fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
+    //
+    //        self.tableView.reloadData()
+    //        print(object)
+    //        //
+    //    } else {
+    //        print("Could not find index path")
+    //    }
+    
+    
+    //    }
+    
+    //        if gestureRecognizer.state == UIGestureRecognizerState.Began {
+    //            print("Long press detected.")
+    //
+    //            let p = gestureRecognizer.locationInView(self.tableView)
+    //            let indexPath = self.tableView.indexPathForRowAtPoint(p)
+    //            performSegueWithIdentifier("editToDo", sender: self)
+    //        }
+    //}
+    
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let cell = tableView.cellForRowAtIndexPath(indexPath)!
-        
-        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-        
-        let context = self.fetchedResultsController.managedObjectContext
-        
-        UIView.animateWithDuration(0.7, delay: 4, options: .CurveEaseOut, animations: {
-            cell.imageView?.image = UIImage(named: "checked")
-            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-            
-            }, completion: { finished in
-                print("Object deleted")
-        })
-        
-        context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
-        
-        self.tableView.reloadData()
-        print(object)
+//        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+//        
+//        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
+//        
+//        let context = self.fetchedResultsController.managedObjectContext
+//        
+//        UIView.animateWithDuration(0.7, delay: 4, options: .CurveEaseOut, animations: {
+//            cell.imageView?.image = UIImage(named: "checked")
+//            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+//            
+//            }, completion: { finished in
+//                print("Object deleted")
+//        })
+//        
+//        context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
+//        
+//        self.tableView.reloadData()
+//        print(object)
     }
     //
     
@@ -400,10 +445,13 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         if segue.identifier == "editToDo" {
             let destination = segue.destinationViewController as! EditToDoVC
             
-//            let point = sender!.convertPoint(CGPointZero, toView: self.tableView)
-//            let indexPath = self.tableView.indexPathForRowAtPoint(point)
-//            let object = self.fetchedResultsController.objectAtIndexPath(indexPath!)
-//            destination.editTextField.text = object.valueForKey("content")!.description as String
+            //            let p = gestureRecognizer.locationInView(self.tableView)
+            //            let indexPath = self.tableView.indexPathForRowAtPoint(p)
+            //
+            //            let point = sender!.convertPoint(CGPointZero, toView: self.tableView)
+            //            let indexPath = self.tableView.indexPathForRowAtPoint(point)
+            //            let object = self.fetchedResultsController.objectAtIndexPath(indexPath!)
+            //            destination.editTextField.text = object.valueForKey("content")!.description as String
             
         }
     }
