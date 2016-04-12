@@ -19,6 +19,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     @IBOutlet weak var imageOverlay: UIView!
     var giddyToDo : [GiddyToDo] = []
     var managedObjectContext: NSManagedObjectContext? = nil
+    var cellTag = Int()
     
     override func viewDidLoad() {
         
@@ -214,6 +215,8 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         let tap = UITapGestureRecognizer(target: self, action: #selector(ToDosVC.tappedMe))
         tap.numberOfTapsRequired = 1
         cell.imageView!.addGestureRecognizer(tap)
+//        cell.imageView!.tag = indexPath.row
+        cellTag = indexPath.row
         //        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(ToDosVC.longPressGestureRecognized(_:)))
         //        longPress.minimumPressDuration = 0.5
         //        longPress.numberOfTouchesRequired = 1
@@ -224,8 +227,10 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     
     func tappedMe(gestureRecognizer: UITapGestureRecognizer, sender: AnyObject?) {
         if gestureRecognizer.numberOfTapsRequired == 1 {
+            print(sender!.tag)
             let point = sender!.convertPoint(CGPointZero, toView: self.tableView)
             let indexPath = self.tableView.indexPathForRowAtPoint(point)
+//            let cellTag = CFStringGetIntValue(sender?.tag as! CFString)
             let cell = tableView.cellForRowAtIndexPath(indexPath!)!
             
             if indexPath != nil {
@@ -288,7 +293,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        return storedResults.count
+        
         let sectionInfo = self.fetchedResultsController.sections![section]
         if sectionInfo.numberOfObjects == 0 {
             fadeInDefaultImage()
