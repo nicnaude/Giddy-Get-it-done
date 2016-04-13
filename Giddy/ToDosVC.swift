@@ -207,7 +207,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         
         
         //        cell.imageView!.tag = indexPath.row
-        cell.imageView!.transform = CGAffineTransformMakeScale(0.4, 0.4)
+        cell.imageView!.transform = CGAffineTransformMakeScale(3, 3)
         cell.imageView!.userInteractionEnabled = true
         cell.imageView!.tag = indexPath.row
         cell.backgroundColor? = UIColor.whiteColor()
@@ -224,6 +224,18 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     }
     //
     
+//    func colorForIndex(index: Int) -> UIColor {
+//        let itemCount = 7
+//        let val = (CGFloat(index) / CGFloat(itemCount)) * 0.6
+//        return UIColor(red: 1.0, green: val, blue: 0.0, alpha: 1.0)
+//    }
+//    
+//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
+//                   forRowAtIndexPath indexPath: NSIndexPath) {
+//        cell.backgroundColor = colorForIndex(indexPath.row)
+//    }
+//    //
+    
     
     func tappedMe(sender: UITapGestureRecognizer) {
         print("Tap detected")
@@ -238,7 +250,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
             
             UIView.animateWithDuration(0.7, delay: 4, options: .CurveEaseOut, animations: {
                 cell!.imageView?.image = UIImage(named: "checked")
-                self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)
                 
                 }, completion: { finished in
                     print("Object deleted")
