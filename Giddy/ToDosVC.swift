@@ -24,7 +24,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         
         super.viewDidLoad()
         
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+//        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             managedObjectContext = appDelegate.managedObjectContext
@@ -194,7 +194,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
         cell.textLabel!.text = object.valueForKey("content")!.description as String
-        cell.textLabel!.font = UIFont(name:"San Francisco", size:16)
+        cell.textLabel!.font = UIFont(name:"SF UI Display Regular", size:18)
         
         //imageView
         if object.valueForKey("doneStatus") as! String == "no" {
@@ -243,15 +243,16 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         
         if let indexPath = tableView.indexPathForRowAtPoint(touch) {
             
-            var cell = self.tableView.cellForRowAtIndexPath(indexPath)
+            let cell = self.tableView.cellForRowAtIndexPath(indexPath)
+            cell?.backgroundColor = UIColor.lightGrayColor()
+            
             let object = fetchedResultsController.objectAtIndexPath(indexPath)
             
             let context = fetchedResultsController.managedObjectContext
             
-            UIView.animateWithDuration(0.7, delay: 4, options: .CurveEaseOut, animations: {
+            UIView.animateWithDuration(1, delay: 4, options: .CurveEaseOut, animations: {
                 cell!.imageView?.image = UIImage(named: "checked")
                 self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)
-                
                 }, completion: { finished in
                     print("Object deleted")
             })
