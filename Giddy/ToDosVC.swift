@@ -193,10 +193,11 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
+    
         cell.textLabel!.text = object.valueForKey("content")!.description as String
+        
         cell.textLabel!.font = UIFont(name:"SF UI Display Regular", size:18)
         
-        //imageView
         if object.valueForKey("doneStatus") as! String == "no" {
             let image : UIImage = UIImage(named: "unchecked")!
             cell.imageView!.image = image
@@ -204,9 +205,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
             let image : UIImage = UIImage(named: "checked")!
             cell.imageView!.image = image
         }
-        
-        
-        //        cell.imageView!.tag = indexPath.row
+    
         cell.imageView!.transform = CGAffineTransformMakeScale(3, 3)
         cell.imageView!.userInteractionEnabled = true
         cell.imageView!.tag = indexPath.row
@@ -215,12 +214,24 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         let tap = UITapGestureRecognizer(target: self, action: #selector(ToDosVC.tappedMe))
         tap.numberOfTapsRequired = 1
         cell.imageView!.addGestureRecognizer(tap)
-        //        cell.imageView!.tag = indexPath.row
         
-        //        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(ToDosVC.longPressGestureRecognized(_:)))
-        //        longPress.minimumPressDuration = 0.5
-        //        cell.addGestureRecognizer(longPress)
         return cell
+    }
+    //
+    
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if(self.tableView.respondsToSelector(Selector("setSeparatorInset:"))){
+            self.tableView.separatorInset = UIEdgeInsetsZero
+        }
+        
+        if(self.tableView.respondsToSelector(Selector("setLayoutMargins:"))){
+            self.tableView.layoutMargins = UIEdgeInsetsZero
+        }
+        
+        if(cell.respondsToSelector(Selector("setLayoutMargins:"))){
+            cell.layoutMargins = UIEdgeInsetsZero
+        }     
     }
     //
     
