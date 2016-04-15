@@ -9,16 +9,12 @@
 /* Begin PBXBuildFile section */
 		4A202EF01CB3C4C100643252 /* GiddyToDo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A202EEE1CB3C4C100643252 /* GiddyToDo+CoreDataProperties.swift */; };
 		4A202EF11CB3C4C100643252 /* GiddyToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A202EEF1CB3C4C100643252 /* GiddyToDo.swift */; };
-		4A202EF51CBD4C8400643252 /* TableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A202EF41CBD4C8400643252 /* TableViewExtension.swift */; };
-		4A2519DD1CB1C1AF007CF8EE /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */; };
 		4A251A011CB24B1A007CF8EE /* ToDosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A251A001CB24B1A007CF8EE /* ToDosVC.swift */; };
 		4A251A041CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A251A021CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld */; };
-		4A3245A21CA4A64900A996E3 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3245A11CA4A64900A996E3 /* ToDo.swift */; };
 		4A3DC0391C9E0C15009AB92A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC0381C9E0C15009AB92A /* AppDelegate.swift */; };
 		4A3DC03E1C9E0C15009AB92A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC03C1C9E0C15009AB92A /* Main.storyboard */; };
 		4A3DC0401C9E0C15009AB92A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC03F1C9E0C15009AB92A /* Assets.xcassets */; };
 		4A3DC0431C9E0C15009AB92A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC0411C9E0C15009AB92A /* LaunchScreen.storyboard */; };
-		4A3DC04E1C9E0DB4009AB92A /* RootTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC04D1C9E0DB4009AB92A /* RootTableVC.swift */; };
 		4A3DC0531C9E2240009AB92A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3DC0521C9E2240009AB92A /* CloudKit.framework */; };
 		4A3DC05A1C9F1F66009AB92A /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC0581C9F1F66009AB92A /* Interface.storyboard */; };
 		4A3DC05C1C9F1F66009AB92A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC05B1C9F1F66009AB92A /* Assets.xcassets */; };
@@ -37,7 +33,6 @@
 		4ABD924D1CA36D8400C43F6C /* Onboard2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924C1CA36D8400C43F6C /* Onboard2VC.swift */; };
 		4ABD924F1CA36D9000C43F6C /* Onboard3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924E1CA36D9000C43F6C /* Onboard3VC.swift */; };
 		4AFD90D31CB2F287000B6706 /* EditToDoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFD90D21CB2F287000B6706 /* EditToDoVC.swift */; };
-		4AFD90D91CB2FE52000B6706 /* ToDoObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFD90D81CB2FE52000B6706 /* ToDoObject.swift */; };
 		6ED9B6B0E1EE00AACCD67E4D /* Pods_Giddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 590E06F7877135B36A45D041 /* Pods_Giddy.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,11 +82,8 @@
 		2FDE641A502A0175F39A2FD9 /* Pods-Giddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Giddy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Giddy/Pods-Giddy.release.xcconfig"; sourceTree = "<group>"; };
 		4A202EEE1CB3C4C100643252 /* GiddyToDo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GiddyToDo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4A202EEF1CB3C4C100643252 /* GiddyToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiddyToDo.swift; sourceTree = "<group>"; };
-		4A202EF41CBD4C8400643252 /* TableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewExtension.swift; sourceTree = "<group>"; };
-		4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		4A251A001CB24B1A007CF8EE /* ToDosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDosVC.swift; sourceTree = "<group>"; };
 		4A251A031CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GiddyDataModel.xcdatamodel; sourceTree = "<group>"; };
-		4A3245A11CA4A64900A996E3 /* ToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		4A3DC0351C9E0C15009AB92A /* Giddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Giddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A3DC0381C9E0C15009AB92A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A3DC03D1C9E0C15009AB92A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -99,7 +91,6 @@
 		4A3DC0421C9E0C15009AB92A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A3DC0441C9E0C15009AB92A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A3DC04A1C9E0CB4009AB92A /* Giddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Giddy.entitlements; sourceTree = "<group>"; };
-		4A3DC04D1C9E0DB4009AB92A /* RootTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTableVC.swift; sourceTree = "<group>"; };
 		4A3DC0521C9E2240009AB92A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4A3DC0561C9F1F66009AB92A /* Giddy Apple Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Giddy Apple Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A3DC0591C9F1F66009AB92A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -117,7 +108,6 @@
 		4ABD924C1CA36D8400C43F6C /* Onboard2VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard2VC.swift; sourceTree = "<group>"; };
 		4ABD924E1CA36D9000C43F6C /* Onboard3VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard3VC.swift; sourceTree = "<group>"; };
 		4AFD90D21CB2F287000B6706 /* EditToDoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditToDoVC.swift; sourceTree = "<group>"; };
-		4AFD90D81CB2FE52000B6706 /* ToDoObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoObject.swift; sourceTree = "<group>"; };
 		590E06F7877135B36A45D041 /* Pods_Giddy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Giddy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8D0DCCF96785FFF6395DADC /* Pods-Giddy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Giddy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Giddy/Pods-Giddy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,17 +132,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4A3245A01CA4A60F00A996E3 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				4A3245A11CA4A64900A996E3 /* ToDo.swift */,
-				4A2519DC1CB1C1AF007CF8EE /* ToDoItem.swift */,
-				4AFD90D81CB2FE52000B6706 /* ToDoObject.swift */,
-				4A202EF41CBD4C8400643252 /* TableViewExtension.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
 		4A3DC02C1C9E0C15009AB92A = {
 			isa = PBXGroup;
 			children = (
@@ -180,7 +159,6 @@
 		4A3DC0371C9E0C15009AB92A /* Giddy */ = {
 			isa = PBXGroup;
 			children = (
-				4A3245A01CA4A60F00A996E3 /* Model */,
 				4A3DC0511C9E0DDC009AB92A /* Controllers */,
 				4A3DC0501C9E0DCC009AB92A /* View */,
 			);
@@ -213,7 +191,6 @@
 		4A3DC0511C9E0DDC009AB92A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4A3DC04D1C9E0DB4009AB92A /* RootTableVC.swift */,
 				4A251A001CB24B1A007CF8EE /* ToDosVC.swift */,
 				4AFD90D21CB2F287000B6706 /* EditToDoVC.swift */,
 			);
@@ -480,18 +457,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ABD924F1CA36D9000C43F6C /* Onboard3VC.swift in Sources */,
-				4A3DC04E1C9E0DB4009AB92A /* RootTableVC.swift in Sources */,
-				4A3245A21CA4A64900A996E3 /* ToDo.swift in Sources */,
 				4A251A041CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld in Sources */,
 				4A251A011CB24B1A007CF8EE /* ToDosVC.swift in Sources */,
 				4ABD924B1CA36D7500C43F6C /* Onboard1VC.swift in Sources */,
 				4A3DC0841C9F2B0A009AB92A /* ToDoWatchItem.swift in Sources */,
 				4A202EF11CB3C4C100643252 /* GiddyToDo.swift in Sources */,
 				4ABD924D1CA36D8400C43F6C /* Onboard2VC.swift in Sources */,
-				4A202EF51CBD4C8400643252 /* TableViewExtension.swift in Sources */,
 				4A3DC0391C9E0C15009AB92A /* AppDelegate.swift in Sources */,
-				4A2519DD1CB1C1AF007CF8EE /* ToDoItem.swift in Sources */,
-				4AFD90D91CB2FE52000B6706 /* ToDoObject.swift in Sources */,
 				4A202EF01CB3C4C100643252 /* GiddyToDo+CoreDataProperties.swift in Sources */,
 				4AFD90D31CB2F287000B6706 /* EditToDoVC.swift in Sources */,
 				4A3DC07E1C9F20A9009AB92A /* NotificationController.swift in Sources */,
