@@ -218,6 +218,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Spc-rw-1WS">
                                 <rect key="frame" x="20" y="271" width="280" height="46"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="73j-c7-USl"/>
+                                </constraints>
                                 <state key="normal" title="Mark as done"/>
                                 <connections>
                                     <action selector="onMarkAsDoneTapped:" destination="Jkb-Au-rLG" eventType="touchUpInside" id="PM4-eR-ZD7"/>
@@ -231,7 +234,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="e5M-OX-NYq" firstAttribute="top" secondItem="Spc-rw-1WS" secondAttribute="bottom" constant="163" id="5pf-Hq-KQV"/>
                             <constraint firstItem="0Du-Un-JIv" firstAttribute="trailing" secondItem="py3-1D-zfb" secondAttribute="trailing" id="6z0-mH-E4m"/>
                             <constraint firstItem="Spc-rw-1WS" firstAttribute="top" secondItem="py3-1D-zfb" secondAttribute="bottom" constant="8" symbolic="YES" id="DPi-ya-GtA"/>
                             <constraint firstItem="py3-1D-zfb" firstAttribute="leading" secondItem="Spc-rw-1WS" secondAttribute="leading" id="JtN-Ei-zEp"/>
@@ -445,7 +447,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yiA-Qs-dS9"/>
-        <segue reference="4bd-kY-rZb"/>
+        <segue reference="bYK-Bo-ada"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.97647058819999999" green="0.69019607839999997" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>
