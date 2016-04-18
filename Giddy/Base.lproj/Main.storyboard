@@ -135,13 +135,13 @@
                             <rect key="frame" x="96" y="5.5" width="128" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Giddy San Francisco" translatesAutoresizingMaskIntoConstraints="NO" id="XjG-FZ-ajb">
-                                    <rect key="frame" x="0.0" y="6" width="128" height="24"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Giddy logo Avenir" translatesAutoresizingMaskIntoConstraints="NO" id="XjG-FZ-ajb">
+                                    <rect key="frame" x="0.0" y="0.0" width="128" height="33"/>
                                 </imageView>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="XjG-FZ-ajb" secondAttribute="bottom" constant="3" id="RBl-oe-UqN"/>
-                                <constraint firstItem="XjG-FZ-ajb" firstAttribute="top" secondItem="lAY-ql-lxW" secondAttribute="top" constant="6" id="YQt-gk-oUe"/>
+                                <constraint firstAttribute="bottom" secondItem="XjG-FZ-ajb" secondAttribute="bottom" id="RBl-oe-UqN"/>
+                                <constraint firstItem="XjG-FZ-ajb" firstAttribute="top" secondItem="lAY-ql-lxW" secondAttribute="top" id="YQt-gk-oUe"/>
                                 <constraint firstItem="XjG-FZ-ajb" firstAttribute="leading" secondItem="lAY-ql-lxW" secondAttribute="leading" id="mUz-Pg-Oky"/>
                                 <constraint firstAttribute="trailing" secondItem="XjG-FZ-ajb" secondAttribute="trailing" id="mYt-Xn-J6U"/>
                             </constraints>
@@ -192,7 +192,7 @@
             </objects>
             <point key="canvasLocation" x="1084" y="1581"/>
         </scene>
-        <!--Edit to-do-->
+        <!--Edit To DoVC-->
         <scene sceneID="gwM-FO-tfI">
             <objects>
                 <viewController id="Jkb-Au-rLG" customClass="EditToDoVC" customModule="Giddy" customModuleProvider="target" sceneMemberID="viewController">
@@ -245,7 +245,35 @@
                             <constraint firstItem="0Du-Un-JIv" firstAttribute="centerX" secondItem="9BJ-W0-edq" secondAttribute="centerX" id="x0E-nK-sX4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Edit to-do" id="kgm-t1-nxp"/>
+                    <navigationItem key="navigationItem" id="kgm-t1-nxp">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="j3E-Zz-B7F">
+                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzs-5u-dgm">
+                                    <rect key="frame" x="0.0" y="0.0" width="128" height="33"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Edit to-do" translatesAutoresizingMaskIntoConstraints="NO" id="QKv-2I-kBz">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="33"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="QKv-2I-kBz" firstAttribute="leading" secondItem="kzs-5u-dgm" secondAttribute="leading" id="7zl-Ur-NQk"/>
+                                        <constraint firstAttribute="trailing" secondItem="QKv-2I-kBz" secondAttribute="trailing" id="UBL-pG-rue"/>
+                                        <constraint firstAttribute="bottom" secondItem="QKv-2I-kBz" secondAttribute="bottom" id="UK2-4D-z1h"/>
+                                        <constraint firstItem="QKv-2I-kBz" firstAttribute="top" secondItem="kzs-5u-dgm" secondAttribute="top" id="dPE-2m-cHP"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="kzs-5u-dgm" secondAttribute="bottom" id="51e-x4-VDA"/>
+                                <constraint firstAttribute="trailing" secondItem="kzs-5u-dgm" secondAttribute="trailing" id="TXU-Jh-l99"/>
+                                <constraint firstItem="kzs-5u-dgm" firstAttribute="top" secondItem="j3E-Zz-B7F" secondAttribute="top" id="Vzz-jG-9wX"/>
+                                <constraint firstItem="kzs-5u-dgm" firstAttribute="leading" secondItem="j3E-Zz-B7F" secondAttribute="leading" id="XSd-pZ-wbD"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="editTextField" destination="0Du-Un-JIv" id="OU8-dR-gTE"/>
@@ -441,7 +469,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Giddy San Francisco" width="166" height="61"/>
+        <image name="Edit to-do" width="138" height="41"/>
+        <image name="Giddy logo Avenir" width="83" height="41"/>
         <image name="love" width="740" height="740"/>
         <image name="plus" width="205" height="205"/>
     </resources>
