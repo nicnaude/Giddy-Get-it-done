@@ -33,7 +33,6 @@
 		4ABD924D1CA36D8400C43F6C /* Onboard2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924C1CA36D8400C43F6C /* Onboard2VC.swift */; };
 		4ABD924F1CA36D9000C43F6C /* Onboard3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924E1CA36D9000C43F6C /* Onboard3VC.swift */; };
 		4AFD90D31CB2F287000B6706 /* EditToDoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFD90D21CB2F287000B6706 /* EditToDoVC.swift */; };
-		6ED9B6B0E1EE00AACCD67E4D /* Pods_Giddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 590E06F7877135B36A45D041 /* Pods_Giddy.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,7 +117,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A3DC0531C9E2240009AB92A /* CloudKit.framework in Frameworks */,
-				6ED9B6B0E1EE00AACCD67E4D /* Pods_Giddy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,7 +414,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Giddy/Pods-Giddy-frameworks.sh\"\n";
+			shellScript = "";
 			showEnvVarsInLog = 0;
 		};
 		49149DF8BF2BD6072E62864B /* Check Pods Manifest.lock */ = {
@@ -431,7 +429,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "";
 			showEnvVarsInLog = 0;
 		};
 		9905075C4F81170C16DB0B08 /* Copy Pods Resources */ = {
@@ -446,7 +444,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Giddy/Pods-Giddy-resources.sh\"\n";
+			shellScript = "";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
