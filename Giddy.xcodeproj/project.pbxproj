@@ -15,7 +15,6 @@
 		4A3DC03E1C9E0C15009AB92A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC03C1C9E0C15009AB92A /* Main.storyboard */; };
 		4A3DC0401C9E0C15009AB92A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC03F1C9E0C15009AB92A /* Assets.xcassets */; };
 		4A3DC0431C9E0C15009AB92A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC0411C9E0C15009AB92A /* LaunchScreen.storyboard */; };
-		4A3DC0531C9E2240009AB92A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3DC0521C9E2240009AB92A /* CloudKit.framework */; };
 		4A3DC05A1C9F1F66009AB92A /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC0581C9F1F66009AB92A /* Interface.storyboard */; };
 		4A3DC05C1C9F1F66009AB92A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A3DC05B1C9F1F66009AB92A /* Assets.xcassets */; };
 		4A3DC0631C9F1F66009AB92A /* Giddy Apple Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4A3DC0621C9F1F66009AB92A /* Giddy Apple Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -78,7 +77,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2FDE641A502A0175F39A2FD9 /* Pods-Giddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Giddy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Giddy/Pods-Giddy.release.xcconfig"; sourceTree = "<group>"; };
 		4A202EEE1CB3C4C100643252 /* GiddyToDo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GiddyToDo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4A202EEF1CB3C4C100643252 /* GiddyToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiddyToDo.swift; sourceTree = "<group>"; };
 		4A251A001CB24B1A007CF8EE /* ToDosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDosVC.swift; sourceTree = "<group>"; };
@@ -90,7 +88,6 @@
 		4A3DC0421C9E0C15009AB92A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A3DC0441C9E0C15009AB92A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A3DC04A1C9E0CB4009AB92A /* Giddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Giddy.entitlements; sourceTree = "<group>"; };
-		4A3DC0521C9E2240009AB92A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4A3DC0561C9F1F66009AB92A /* Giddy Apple Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Giddy Apple Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A3DC0591C9F1F66009AB92A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		4A3DC05B1C9F1F66009AB92A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -107,8 +104,6 @@
 		4ABD924C1CA36D8400C43F6C /* Onboard2VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard2VC.swift; sourceTree = "<group>"; };
 		4ABD924E1CA36D9000C43F6C /* Onboard3VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard3VC.swift; sourceTree = "<group>"; };
 		4AFD90D21CB2F287000B6706 /* EditToDoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditToDoVC.swift; sourceTree = "<group>"; };
-		590E06F7877135B36A45D041 /* Pods_Giddy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Giddy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B8D0DCCF96785FFF6395DADC /* Pods-Giddy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Giddy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Giddy/Pods-Giddy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +111,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A3DC0531C9E2240009AB92A /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,14 +127,11 @@
 		4A3DC02C1C9E0C15009AB92A = {
 			isa = PBXGroup;
 			children = (
-				4A3DC0521C9E2240009AB92A /* CloudKit.framework */,
 				4A3DC0371C9E0C15009AB92A /* Giddy */,
 				4A3DC04F1C9E0DBC009AB92A /* Supporting files */,
 				4A3DC0571C9F1F66009AB92A /* Giddy Apple Watch */,
 				4A3DC0661C9F1F66009AB92A /* Giddy Apple Watch Extension */,
 				4A3DC0361C9E0C15009AB92A /* Products */,
-				809396941571D1B063388A63 /* Pods */,
-				F37330538CBD7A7D2C199B94 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -245,23 +236,6 @@
 				4A251A021CB2E8CD007CF8EE /* GiddyDataModel.xcdatamodeld */,
 			);
 			name = CoreData;
-			sourceTree = "<group>";
-		};
-		809396941571D1B063388A63 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B8D0DCCF96785FFF6395DADC /* Pods-Giddy.debug.xcconfig */,
-				2FDE641A502A0175F39A2FD9 /* Pods-Giddy.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		F37330538CBD7A7D2C199B94 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				590E06F7877135B36A45D041 /* Pods_Giddy.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -607,7 +581,6 @@
 		};
 		4A3DC0481C9E0C15009AB92A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B8D0DCCF96785FFF6395DADC /* Pods-Giddy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Giddy/Giddy.entitlements;
@@ -623,7 +596,6 @@
 		};
 		4A3DC0491C9E0C15009AB92A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FDE641A502A0175F39A2FD9 /* Pods-Giddy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Giddy/Giddy.entitlements;
