@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--To DosVC-->
+        <!--RootVC-->
         <scene sceneID="foP-AW-w35">
             <objects>
-                <viewController id="XPF-OX-6p2" customClass="ToDosVC" customModule="Giddy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XPF-OX-6p2" customClass="RootVC" customModule="Giddy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A9K-iQ-HcH"/>
                         <viewControllerLayoutGuide type="bottom" id="syH-S7-4qe"/>
@@ -18,22 +18,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JYm-mZ-iSs">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JYm-mZ-iSs">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="cell" rowHeight="45" id="HPQ-50-fxx">
+                                    <tableViewCell clipsSubviews="YES" contentMode="left" selectionStyle="blue" showsReorderControl="YES" accessoryType="disclosureIndicator" indentationLevel="10" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="cell" rowHeight="45" id="HPQ-50-fxx">
                                         <rect key="frame" x="0.0" y="92" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HPQ-50-fxx" id="pGS-rY-Cr0">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" tableViewCell="HPQ-50-fxx" id="pGS-rY-Cr0">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="45"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <segue destination="Jkb-Au-rLG" kind="show" id="4bd-kY-rZb"/>
+                                            <segue destination="Jkb-Au-rLG" kind="show" identifier="editTheToDo" id="4bd-kY-rZb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -104,24 +104,24 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="top" secondItem="aR5-HA-9hP" secondAttribute="top" id="3kr-eg-h7j"/>
                             <constraint firstItem="ptI-C9-C0R" firstAttribute="top" secondItem="A9K-iQ-HcH" secondAttribute="bottom" id="4yU-5o-Ge4"/>
-                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="bottom" secondItem="syH-S7-4qe" secondAttribute="top" id="6uc-HQ-PPr"/>
+                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="trailing" secondItem="f4c-ch-IGn" secondAttribute="trailing" id="9PK-1g-gjx"/>
                             <constraint firstItem="1ej-bb-jfB" firstAttribute="top" secondItem="ptI-C9-C0R" secondAttribute="top" id="BLT-pA-O64"/>
-                            <constraint firstItem="ptI-C9-C0R" firstAttribute="leading" secondItem="JYm-mZ-iSs" secondAttribute="leading" id="CJH-RF-bA5"/>
-                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="leading" secondItem="aR5-HA-9hP" secondAttribute="leading" id="Ic3-1P-egV"/>
                             <constraint firstItem="f4c-ch-IGn" firstAttribute="trailing" secondItem="1ej-bb-jfB" secondAttribute="trailing" id="JmB-AT-NX0"/>
                             <constraint firstItem="ptI-C9-C0R" firstAttribute="leading" secondItem="aR5-HA-9hP" secondAttribute="leading" id="PyJ-R1-rg3"/>
                             <constraint firstItem="1ej-bb-jfB" firstAttribute="leading" secondItem="ptI-C9-C0R" secondAttribute="leading" id="SX1-YU-Q99"/>
                             <constraint firstItem="ptI-C9-C0R" firstAttribute="top" secondItem="A9K-iQ-HcH" secondAttribute="bottom" id="TzY-Hp-VUJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DjO-kr-TuO" secondAttribute="trailing" constant="4" id="UMX-nL-ehe"/>
-                            <constraint firstAttribute="trailing" secondItem="JYm-mZ-iSs" secondAttribute="trailing" id="UUJ-0j-e7T"/>
                             <constraint firstAttribute="trailing" secondItem="ptI-C9-C0R" secondAttribute="trailing" id="XEf-dn-AJU"/>
                             <constraint firstItem="1ej-bb-jfB" firstAttribute="bottom" secondItem="syH-S7-4qe" secondAttribute="top" id="aFN-If-mWJ"/>
                             <constraint firstItem="f4c-ch-IGn" firstAttribute="top" secondItem="1ej-bb-jfB" secondAttribute="top" id="aT4-Jd-jcD"/>
+                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="top" secondItem="aR5-HA-9hP" secondAttribute="top" id="c93-v6-WLa"/>
+                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="leading" secondItem="f4c-ch-IGn" secondAttribute="leading" id="qz8-Ks-493"/>
                             <constraint firstItem="f4c-ch-IGn" firstAttribute="bottom" secondItem="syH-S7-4qe" secondAttribute="top" id="vXh-Sv-a0w"/>
+                            <constraint firstItem="JYm-mZ-iSs" firstAttribute="bottom" secondItem="syH-S7-4qe" secondAttribute="top" id="vuc-71-XrA"/>
                             <constraint firstItem="1ej-bb-jfB" firstAttribute="trailing" secondItem="ptI-C9-C0R" secondAttribute="trailing" id="wNN-zV-Cqw"/>
                             <constraint firstAttribute="bottom" secondItem="DjO-kr-TuO" secondAttribute="bottom" constant="20" symbolic="YES" id="xQF-Nc-UxP"/>
                             <constraint firstItem="f4c-ch-IGn" firstAttribute="leading" secondItem="ptI-C9-C0R" secondAttribute="leading" id="y8t-hP-MXm"/>
@@ -156,7 +156,6 @@
                         <outlet property="plusButton" destination="DjO-kr-TuO" id="dxM-7z-e4y"/>
                         <outlet property="tableView" destination="JYm-mZ-iSs" id="rXs-oX-E2N"/>
                         <outlet property="textFieldView" destination="ptI-C9-C0R" id="GaI-eJ-SY5"/>
-                        <segue destination="Jkb-Au-rLG" kind="show" identifier="editToDo" id="bYK-Bo-ada"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kbZ-gD-AER" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -207,79 +206,69 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="py3-1D-zfb">
                                 <rect key="frame" x="20" y="217" width="280" height="46"/>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="av7-Sd-uZc"/>
                                 </constraints>
-                                <state key="normal" title="Save"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="onSaveButtonTapped:" destination="Jkb-Au-rLG" eventType="touchUpInside" id="Gup-Uj-pgu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Spc-rw-1WS">
                                 <rect key="frame" x="20" y="271" width="280" height="46"/>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="73j-c7-USl"/>
                                 </constraints>
-                                <state key="normal" title="Mark as done"/>
+                                <state key="normal" title="Mark as done">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="onMarkAsDoneTapped:" destination="Jkb-Au-rLG" eventType="touchUpInside" id="PM4-eR-ZD7"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Du-Un-JIv">
-                                <rect key="frame" x="20" y="86" width="280" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Du-Un-JIv">
+                                <rect key="frame" x="20" y="86" width="280" height="115"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tj0-S3-onV">
+                                <rect key="frame" x="20" y="338" width="280" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0Du-Un-JIv" firstAttribute="trailing" secondItem="py3-1D-zfb" secondAttribute="trailing" id="6z0-mH-E4m"/>
+                            <constraint firstItem="0Du-Un-JIv" firstAttribute="leading" secondItem="9BJ-W0-edq" secondAttribute="leadingMargin" constant="4" id="BT9-gO-8rX"/>
                             <constraint firstItem="Spc-rw-1WS" firstAttribute="top" secondItem="py3-1D-zfb" secondAttribute="bottom" constant="8" symbolic="YES" id="DPi-ya-GtA"/>
                             <constraint firstItem="py3-1D-zfb" firstAttribute="leading" secondItem="Spc-rw-1WS" secondAttribute="leading" id="JtN-Ei-zEp"/>
+                            <constraint firstItem="0Du-Un-JIv" firstAttribute="centerX" secondItem="9BJ-W0-edq" secondAttribute="centerX" id="NNY-y0-6GA"/>
+                            <constraint firstItem="tj0-S3-onV" firstAttribute="leading" secondItem="Spc-rw-1WS" secondAttribute="leading" id="NrL-At-qKl"/>
                             <constraint firstItem="py3-1D-zfb" firstAttribute="centerY" secondItem="9BJ-W0-edq" secondAttribute="centerY" id="Nu5-bc-Ogq"/>
-                            <constraint firstItem="0Du-Un-JIv" firstAttribute="leading" secondItem="9BJ-W0-edq" secondAttribute="leadingMargin" constant="4" id="RTY-vs-LBe"/>
                             <constraint firstItem="py3-1D-zfb" firstAttribute="trailing" secondItem="Spc-rw-1WS" secondAttribute="trailing" id="XES-pl-rlf"/>
-                            <constraint firstItem="0Du-Un-JIv" firstAttribute="leading" secondItem="py3-1D-zfb" secondAttribute="leading" id="mI1-JK-xPN"/>
-                            <constraint firstItem="0Du-Un-JIv" firstAttribute="top" secondItem="1aU-mc-G3l" secondAttribute="bottom" constant="22" id="rYe-gu-7J1"/>
-                            <constraint firstItem="0Du-Un-JIv" firstAttribute="centerX" secondItem="9BJ-W0-edq" secondAttribute="centerX" id="x0E-nK-sX4"/>
+                            <constraint firstItem="py3-1D-zfb" firstAttribute="top" secondItem="0Du-Un-JIv" secondAttribute="bottom" constant="16" id="YjJ-Co-EGv"/>
+                            <constraint firstItem="tj0-S3-onV" firstAttribute="trailing" secondItem="Spc-rw-1WS" secondAttribute="trailing" id="aTS-ld-FhU"/>
+                            <constraint firstItem="tj0-S3-onV" firstAttribute="top" secondItem="Spc-rw-1WS" secondAttribute="bottom" constant="21" id="dYD-eR-UIo"/>
+                            <constraint firstItem="0Du-Un-JIv" firstAttribute="trailing" secondItem="py3-1D-zfb" secondAttribute="trailing" id="dnK-PR-b5f"/>
+                            <constraint firstItem="0Du-Un-JIv" firstAttribute="leading" secondItem="py3-1D-zfb" secondAttribute="leading" id="tnP-Au-NNU"/>
+                            <constraint firstItem="0Du-Un-JIv" firstAttribute="top" secondItem="1aU-mc-G3l" secondAttribute="bottom" constant="22" id="vax-bE-0Nx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kgm-t1-nxp">
                         <nil key="title"/>
-                        <view key="titleView" contentMode="scaleToFill" id="j3E-Zz-B7F">
-                            <rect key="frame" x="96" y="5.5" width="128" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzs-5u-dgm">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="33"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Edit to-do" translatesAutoresizingMaskIntoConstraints="NO" id="QKv-2I-kBz">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="33"/>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="QKv-2I-kBz" firstAttribute="leading" secondItem="kzs-5u-dgm" secondAttribute="leading" id="7zl-Ur-NQk"/>
-                                        <constraint firstAttribute="trailing" secondItem="QKv-2I-kBz" secondAttribute="trailing" id="UBL-pG-rue"/>
-                                        <constraint firstAttribute="bottom" secondItem="QKv-2I-kBz" secondAttribute="bottom" id="UK2-4D-z1h"/>
-                                        <constraint firstItem="QKv-2I-kBz" firstAttribute="top" secondItem="kzs-5u-dgm" secondAttribute="top" id="dPE-2m-cHP"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="bottom" secondItem="kzs-5u-dgm" secondAttribute="bottom" id="51e-x4-VDA"/>
-                                <constraint firstAttribute="trailing" secondItem="kzs-5u-dgm" secondAttribute="trailing" id="TXU-Jh-l99"/>
-                                <constraint firstItem="kzs-5u-dgm" firstAttribute="top" secondItem="j3E-Zz-B7F" secondAttribute="top" id="Vzz-jG-9wX"/>
-                                <constraint firstItem="kzs-5u-dgm" firstAttribute="leading" secondItem="j3E-Zz-B7F" secondAttribute="leading" id="XSd-pZ-wbD"/>
-                            </constraints>
-                        </view>
+                        <barButtonItem key="rightBarButtonItem" title="Mark as done" id="j49-dS-CQZ"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="editTextField" destination="0Du-Un-JIv" id="OU8-dR-gTE"/>
                         <outlet property="markAsDoneButton" destination="Spc-rw-1WS" id="GQv-Lx-iP8"/>
                         <outlet property="saveButton" destination="py3-1D-zfb" id="5rs-Bd-Eo9"/>
+                        <outlet property="testLabel" destination="tj0-S3-onV" id="RM7-tw-Ud9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1a-pq-uQL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -470,14 +459,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Edit to-do" width="138" height="41"/>
         <image name="Giddy logo Avenir" width="83" height="41"/>
         <image name="love" width="740" height="740"/>
         <image name="plus" width="205" height="205"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yiA-Qs-dS9"/>
-        <segue reference="bYK-Bo-ada"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.97647058819999999" green="0.69019607839999997" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -1,5 +1,5 @@
 //
-//  ToDosVCViewController.swift
+//  RootVCViewController.swift
 //  Giddy
 //
 //  Created by Nicholas Naudé on 04/04/2016.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate {
+class RootVC: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var addToDoTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -19,12 +19,11 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     @IBOutlet weak var imageOverlay: UIView!
     var giddyToDo : [GiddyToDo] = []
     var managedObjectContext: NSManagedObjectContext? = nil
+    var selectedToDo: GiddyToDo?
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-//        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             managedObjectContext = appDelegate.managedObjectContext
@@ -36,12 +35,12 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
         //watch textField for changes
-        addToDoTextField.addTarget(self, action: #selector(ToDosVC.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        addToDoTextField.addTarget(self, action: #selector(RootVC.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         
         hideTextFieldView()
         self.darkOverlay.alpha = 0
         
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ToDosVC.handleTap(_:)))
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RootVC.handleTap(_:)))
         self.darkOverlay.addGestureRecognizer(gestureRecognizer)
     }
     //
@@ -53,10 +52,18 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        //        self.tableView.contentInset = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
         configureButton()
-    }
-    //
+    }//
     
+    //    override func viewWillAppear(animated: Bool) {
+    //        //        self.tableView.contentInset = UIEdgeInsetsMake(self.tableView.contentInset.top, -16, self.tableView.contentInset.bottom, self.tableView.contentInset.right)
+    //        //
+    //        self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
+    //
+    //    }//
+    //
     
     func handleTap(gestureRecognizer: UIGestureRecognizer) {
         hideTextFieldView()
@@ -193,7 +200,7 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-    
+        
         cell.textLabel!.text = object.valueForKey("content")!.description as String
         
         cell.textLabel!.font = UIFont(name:"SF UI Display Regular", size:18)
@@ -205,47 +212,20 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
             let image : UIImage = UIImage(named: "checked")!
             cell.imageView!.image = image
         }
-    
+        
         cell.imageView!.transform = CGAffineTransformMakeScale(3, 3)
         cell.imageView!.userInteractionEnabled = true
         cell.imageView!.tag = indexPath.row
         cell.backgroundColor? = UIColor.whiteColor()
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(ToDosVC.tappedMe))
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(RootVC.tappedMe))
         tap.numberOfTapsRequired = 1
         cell.imageView!.addGestureRecognizer(tap)
         
         return cell
     }
     //
-    
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if(self.tableView.respondsToSelector(Selector("setSeparatorInset:"))){
-            self.tableView.separatorInset = UIEdgeInsetsZero
-        }
-        
-        if(self.tableView.respondsToSelector(Selector("setLayoutMargins:"))){
-            self.tableView.layoutMargins = UIEdgeInsetsZero
-        }
-        
-        if(cell.respondsToSelector(Selector("setLayoutMargins:"))){
-            cell.layoutMargins = UIEdgeInsetsZero
-        }     
-    }
-    //
-    
-//    func colorForIndex(index: Int) -> UIColor {
-//        let itemCount = 7
-//        let val = (CGFloat(index) / CGFloat(itemCount)) * 0.6
-//        return UIColor(red: 1.0, green: val, blue: 0.0, alpha: 1.0)
-//    }
-//    
-//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
-//                   forRowAtIndexPath indexPath: NSIndexPath) {
-//        cell.backgroundColor = colorForIndex(indexPath.row)
-//    }
-//    //
     
     
     func tappedMe(sender: UITapGestureRecognizer) {
@@ -276,71 +256,8 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
         } else {
             print("Could not find index path")
         }
-    }
+    }//
     
-    
-    //func longPressGestureRecognized(sender: UILongPressGestureRecognizer) {
-    //    let touch = sender.locationInView(tableView)
-    //
-    //    if let indexPath = tableView.indexPathForRowAtPoint(touch) {
-    //
-    //        var cell = self.tableView.cellForRowAtIndexPath(indexPath)
-    //        let object = fetchedResultsController.objectAtIndexPath(indexPath)
-    //
-    //        let context = fetchedResultsController.managedObjectContext
-    //
-    //        UIView.animateWithDuration(0.7, delay: 4, options: .CurveEaseOut, animations: {
-    //            cell!.imageView?.image = UIImage(named: "checked")
-    //            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-    //
-    //            }, completion: { finished in
-    //                print("Object deleted")
-    //        })
-    //
-    //        context.deleteObject(fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
-    //
-    //        self.tableView.reloadData()
-    //        print(object)
-    //        //
-    //    } else {
-    //        print("Could not find index path")
-    //    }
-    
-    
-    //    }
-    
-    //        if gestureRecognizer.state == UIGestureRecognizerState.Began {
-    //            print("Long press detected.")
-    //
-    //            let p = gestureRecognizer.locationInView(self.tableView)
-    //            let indexPath = self.tableView.indexPathForRowAtPoint(p)
-    //            performSegueWithIdentifier("editToDo", sender: self)
-    //        }
-    //}
-    
-    
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let cell = tableView.cellForRowAtIndexPath(indexPath)!
-//        
-//        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-//        
-//        let context = self.fetchedResultsController.managedObjectContext
-//        
-//        UIView.animateWithDuration(0.7, delay: 4, options: .CurveEaseOut, animations: {
-//            cell.imageView?.image = UIImage(named: "checked")
-//            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-//            
-//            }, completion: { finished in
-//                print("Object deleted")
-//        })
-//        
-//        context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
-//        
-//        self.tableView.reloadData()
-//        print(object)
-    }
-    //
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
@@ -460,24 +377,54 @@ class ToDosVC: UIViewController, UITextFieldDelegate, NSFetchedResultsController
     //
     
     
+    func segueTapped(sender: UITapGestureRecognizer) {
+    }
+    
+    
+    
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
     }
     //
     
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedToDo = self.fetchedResultsController.objectAtIndexPath(indexPath) as? GiddyToDo
+        print(selectedToDo)
+        //        selectedTask = tasks[indexPath.row]
+        performSegueWithIdentifier("editTheToDo", sender: self)
+    }//
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "editToDo" {
-            let destination = segue.destinationViewController as! EditToDoVC
+        
+        if segue.identifier == "editTheToDo" {
+            let detailVC = segue.destinationViewController as! EditToDoVC
+            let indexPath = self.tableView.indexPathForSelectedRow
+            let thisTask = fetchedResultsController.objectAtIndexPath(indexPath!) as! GiddyToDo
+            detailVC.detailTaskModel = thisTask
+            detailVC.delegate = self
             
-            //            let p = gestureRecognizer.locationInView(self.tableView)
-            //            let indexPath = self.tableView.indexPathForRowAtPoint(p)
-            //
-            //            let point = sender!.convertPoint(CGPointZero, toView: self.tableView)
-            //            let indexPath = self.tableView.indexPathForRowAtPoint(point)
-            //            let object = self.fetchedResultsController.objectAtIndexPath(indexPath!)
-            //            destination.editTextField.text = object.valueForKey("content")!.description as String
-            
+        }
+        else if segue.identifier == "showTaskAdd" {
+            let addTaskVC:AddTaskViewController = segue.destinationViewController as! AddTaskViewController
+            addTaskVC.delegate = self
         }
     }
     
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        
+//        if segue.identifier == "editTheToDo" {
+//            let detailVC = segue.destinationViewController as! EditToDoVC
+////            detailVC.detailTaskModel = selectedToDo
+////            detailVC.delegate = self
+////            let object = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! GiddyToDo
+//            detailVC.selectedGiddy = selectedToDo!
+//        }
+//    }
+    
 } //END
+
+
+
+
