@@ -220,7 +220,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="kgm-t1-nxp">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" title="Mark as done" id="j49-dS-CQZ"/>
+                        <barButtonItem key="rightBarButtonItem" title="Mark as done" id="j49-dS-CQZ">
+                            <connections>
+                                <action selector="onMarkAsDoneTapped:" destination="Jkb-Au-rLG" id="hx3-Xe-8Zo"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>

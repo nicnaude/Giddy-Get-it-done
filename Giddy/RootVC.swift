@@ -19,21 +19,22 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     @IBOutlet weak var imageOverlay: UIView!
     
     var editToDoVC: EditToDoVC? = nil
-    var managedObjectContext: NSManagedObjectContext? = nil
+//    var managedObjectContext: NSManagedObjectContext? = nil
     var giddyToDo : [GiddyToDo] = []
     var selectedToDo: GiddyToDo! = nil
     var record: NSManagedObject!
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         // Initialize Fetch Request
         let fetchRequest = NSFetchRequest(entityName: "GiddyToDo")
         
         // Add Sort Descriptors
-        let sortDescriptor = NSSortDescriptor(key: "timeStamp", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "timeStamp", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         // Initialize Fetched Results Controller
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
         // Configure Fetched Results Controller
         fetchedResultsController.delegate = self
@@ -45,6 +46,8 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         imageOverlay.hidden = true
         
@@ -96,8 +99,10 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         if segue.identifier == "editTheToDo" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! GiddyToDo
+                let selectedRecord = fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
                 print(object)
                 let controller = segue.destinationViewController as! EditToDoVC
+                controller.record = selectedRecord
                 controller.detailItem = object.content! as String
                 print("Controller.detailItem: \(object)")
                 //                controller.title = object.content

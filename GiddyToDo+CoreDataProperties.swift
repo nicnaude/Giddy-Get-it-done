@@ -14,8 +14,8 @@ import CoreData
 
 extension GiddyToDo {
 
-    @NSManaged var content: String?
-    @NSManaged var doneStatus: String?
-    @NSManaged var timeStamp: NSDate?
+    @NSManaged var content: String!
+    @NSManaged var doneStatus: String!
+    @NSManaged var timeStamp: NSDate!
 
 }

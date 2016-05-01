@@ -18,7 +18,8 @@ class EditToDoVC: UIViewController {
     var selectedGiddy = GiddyToDo()
     
     var record: NSManagedObject!
-    var managedObjectContext: NSManagedObjectContext!
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
     
     var detailItem: AnyObject! {
         didSet {
@@ -33,6 +34,11 @@ class EditToDoVC: UIViewController {
     }
     //
     
+    @IBAction func onMarkAsDoneTapped(sender: AnyObject) {
+        managedObjectContext.deleteObject(record)
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    }
     
     override func viewWillDisappear(animated: Bool) {
         print(detailItem)
