@@ -83,8 +83,10 @@ class EditToDoVC: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "unwindToRoot" {
-        return
+        if (segue.identifier == "unwindToRoot") {
+            let destinatation = segue.destinationViewController as! RootVC
+            destinatation.tableView.reloadData()
+            print("Yay! Kittens")
         }
     }
     

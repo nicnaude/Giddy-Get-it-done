@@ -28,7 +28,6 @@
 		4A3DC0871C9F30B0009AB92A /* AppleWatchInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC0811C9F2549009AB92A /* AppleWatchInterfaceController.swift */; };
 		4A3DC0881C9F30B1009AB92A /* AppleWatchInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC0811C9F2549009AB92A /* AppleWatchInterfaceController.swift */; };
 		4A5A615E1CD62FFA00805217 /* GiddyDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A5A615C1CD62FFA00805217 /* GiddyDataModel.xcdatamodeld */; };
-		4A5A61641CD632F100805217 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5A61631CD632F100805217 /* DataController.swift */; };
 		4ABD924B1CA36D7500C43F6C /* Onboard1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924A1CA36D7500C43F6C /* Onboard1VC.swift */; };
 		4ABD924D1CA36D8400C43F6C /* Onboard2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924C1CA36D8400C43F6C /* Onboard2VC.swift */; };
 		4ABD924F1CA36D9000C43F6C /* Onboard3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924E1CA36D9000C43F6C /* Onboard3VC.swift */; };
@@ -101,7 +100,6 @@
 		4A3DC0811C9F2549009AB92A /* AppleWatchInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppleWatchInterfaceController.swift; path = ../AppleWatchInterfaceController.swift; sourceTree = "<group>"; };
 		4A3DC0831C9F2B0A009AB92A /* ToDoWatchItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoWatchItem.swift; sourceTree = "<group>"; };
 		4A5A615D1CD62FFA00805217 /* GiddyDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GiddyDataModel.xcdatamodel; sourceTree = "<group>"; };
-		4A5A61631CD632F100805217 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		4ABD924A1CA36D7500C43F6C /* Onboard1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard1VC.swift; sourceTree = "<group>"; };
 		4ABD924C1CA36D8400C43F6C /* Onboard2VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard2VC.swift; sourceTree = "<group>"; };
 		4ABD924E1CA36D9000C43F6C /* Onboard3VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard3VC.swift; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 			isa = PBXGroup;
 			children = (
 				4A251A001CB24B1A007CF8EE /* RootVC.swift */,
-				4A5A61631CD632F100805217 /* DataController.swift */,
 				4AFD90D21CB2F287000B6706 /* EditToDoVC.swift */,
 			);
 			name = Controllers;
@@ -431,7 +428,6 @@
 				4ABD924D1CA36D8400C43F6C /* Onboard2VC.swift in Sources */,
 				4A3DC0391C9E0C15009AB92A /* AppDelegate.swift in Sources */,
 				4A26A1171CD6916E009296AE /* GiddyToDo.swift in Sources */,
-				4A5A61641CD632F100805217 /* DataController.swift in Sources */,
 				4AFD90D31CB2F287000B6706 /* EditToDoVC.swift in Sources */,
 				4A3DC07E1C9F20A9009AB92A /* NotificationController.swift in Sources */,
 				4A26A1161CD6916E009296AE /* GiddyToDo+CoreDataProperties.swift in Sources */,

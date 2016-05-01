@@ -95,10 +95,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "unwindToRoot" {
-            return
-        } else if segue.identifier == "editTheToDo" {
+        if segue.identifier == "editTheToDo" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! GiddyToDo
                 let selectedRecord = fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
@@ -109,7 +106,10 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
                 print("Controller.detailItem: \(object)")
                 //                controller.title = object.content
                 //               controller.editTextField.text = object.content
+            } else if (segue.identifier == "unwindToRoot") {
+                print("Yay! Hamsters!")
             }
+
         }
     }
     //
