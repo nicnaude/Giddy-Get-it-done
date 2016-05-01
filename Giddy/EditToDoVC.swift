@@ -36,8 +36,8 @@ class EditToDoVC: UIViewController {
     
     @IBAction func onMarkAsDoneTapped(sender: AnyObject) {
         managedObjectContext.deleteObject(record)
-        dismissViewControllerAnimated(true, completion: nil)
-        
+        print("\(record) successfully deleted")
+        self.performSegueWithIdentifier("unwindToRoot", sender: self)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -80,6 +80,12 @@ class EditToDoVC: UIViewController {
         
         // Present Alert Controller
         presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "unwindToRoot" {
+        return
+        }
     }
     
 }

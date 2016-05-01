@@ -17,9 +17,10 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     @IBOutlet weak var textFieldView: UIView!
     @IBOutlet weak var darkOverlay: UIView!
     @IBOutlet weak var imageOverlay: UIView!
+    @IBAction func unwindToMenu(segue: UIStoryboardSegue) {}
     
     var editToDoVC: EditToDoVC? = nil
-//    var managedObjectContext: NSManagedObjectContext? = nil
+    //    var managedObjectContext: NSManagedObjectContext? = nil
     var giddyToDo : [GiddyToDo] = []
     var selectedToDo: GiddyToDo! = nil
     var record: NSManagedObject!
@@ -49,15 +50,13 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         
         var managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
-        imageOverlay.hidden = true
-        
         do {
             try self.fetchedResultsController.performFetch()
         } catch {
             let fetchError = error as NSError
             print("\(fetchError), \(fetchError.userInfo)")
         }
-
+        
         
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             managedObjectContext = appDelegate.managedObjectContext
@@ -96,7 +95,10 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "editTheToDo" {
+        
+        if segue.identifier == "unwindToRoot" {
+            return
+        } else if segue.identifier == "editTheToDo" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! GiddyToDo
                 let selectedRecord = fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
@@ -109,16 +111,6 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
                 //               controller.editTextField.text = object.content
             }
         }
-    }
-    //
-    
-    
-    func handleTap(gestureRecognizer: UIGestureRecognizer) {
-        hideTextFieldView()
-        self.addToDoTextField.resignFirstResponder()
-        self.plusButton.hidden = false
-        fadeOutOverlay()
-        self.addToDoTextField.text = ""
     }
     //
     
@@ -237,71 +229,19 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
                 //print("Unresolved error \(error), \(error.userInfo)")
                 abort()
             }
-            
-            ///
-            //
-            //            let appDel : AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-            //            let context : NSManagedObjectContext = appDel.managedObjectContext
-            //
-            //
-            //            let entity = self.fetchedResultsController.fetchRequest.entity!
-            //            let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
-            //
-            //            newManagedObject.setValue(addToDoTextField.text, forKey: "content")
-            //            newManagedObject.setValue("no", forKey: "doneStatus")
-            //            newManagedObject.setValue(NSDate(), forKey: "timeStamp")
-            //
-            //            do {
-            //                try context.save()
-            //                print("Saved successfully.")
-            //                addToDoTextField.text = ""
-            //                addToDoTextField.resignFirstResponder()
-            //                hideTextFieldView()
-            //                fadeOutOverlay()
-            //                self.plusButton.hidden = false
-            //            } catch {
-            //                // Replace this implementation with code to handle the error appropriately.
-            //                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //                //print("Unresolved error \(error), \(error.userInfo)")
-            //                abort()
-            //        }
         }
         
         return true
     }
     //
     
-    
-    
-    // MARK: TableView methods:
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
-        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-        
-        cell.textLabel!.text = object.valueForKey("content")!.description as String
-        
-        cell.textLabel!.font = UIFont(name:"SF UI Display Regular", size:18)
-        
-        if object.valueForKey("doneStatus") as! String == "no" {
-            let image : UIImage = UIImage(named: "unchecked")!
-            cell.imageView!.image = image
-        } else if object.valueForKey("doneStatus") as! String == "yes" {
-            let image : UIImage = UIImage(named: "checked")!
-            cell.imageView!.image = image
-        }
-        
-        cell.imageView!.transform = CGAffineTransformMakeScale(3, 3)
-        cell.imageView!.userInteractionEnabled = true
-        cell.imageView!.tag = indexPath.row
-        cell.backgroundColor? = UIColor.whiteColor()
-        
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(RootVC.tappedMe))
-        tap.numberOfTapsRequired = 1
-        cell.imageView!.addGestureRecognizer(tap)
-        
-        return cell
+    //MARK: Gesture recognizer methods:
+    func handleTap(gestureRecognizer: UIGestureRecognizer) {
+        hideTextFieldView()
+        self.addToDoTextField.resignFirstResponder()
+        self.plusButton.hidden = false
+        fadeOutOverlay()
+        self.addToDoTextField.text = ""
     }
     //
     
@@ -335,7 +275,40 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
             print("Could not find index path")
         }
     }//
+
     
+    // MARK: TableView methods:
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
+        
+        cell.textLabel!.text = object.valueForKey("content")!.description as String
+        
+        cell.textLabel!.font = UIFont(name:"SF UI Display Regular", size:18)
+        
+        if object.valueForKey("doneStatus") as! String == "no" {
+            let image : UIImage = UIImage(named: "unchecked")!
+            cell.imageView!.image = image
+        } else if object.valueForKey("doneStatus") as! String == "yes" {
+            let image : UIImage = UIImage(named: "checked")!
+            cell.imageView!.image = image
+        }
+        
+        cell.imageView!.transform = CGAffineTransformMakeScale(3, 3)
+        cell.imageView!.userInteractionEnabled = true
+        cell.imageView!.tag = indexPath.row
+        cell.backgroundColor? = UIColor.whiteColor()
+        
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(RootVC.tappedMe))
+        tap.numberOfTapsRequired = 1
+        cell.imageView!.addGestureRecognizer(tap)
+        
+        return cell
+    }
+    //
+
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
@@ -346,10 +319,12 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     // MARK: Table View Data Source Methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if let sections = fetchedResultsController.sections {
+            imageOverlay.hidden = true
             return sections.count
+        } else {
+            imageOverlay.hidden = false
+            return 0
         }
-        
-        return 0
     }
     
     
@@ -357,8 +332,10 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         if let sections = fetchedResultsController.sections {
             let sectionInfo = sections[section]
             return sectionInfo.numberOfObjects
+        } else {
+            imageOverlay.hidden = false
+            return 0
         }
-        return 0
     }
     
     
@@ -371,7 +348,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         if let contentForLabel = record.valueForKey("content") as? String {
             cell.textLabel!.text = contentForLabel
         }
-
+        
         if record.valueForKey("doneStatus") as! String == "no" {
             let image : UIImage = UIImage(named: "unchecked")!
             cell.imageView!.image = image
@@ -379,28 +356,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
             let image : UIImage = UIImage(named: "checked")!
             cell.imageView!.image = image
         }
-        
-//        cell.didTapButtonHandler = {
-//            if let done = record.valueForKey("done") as? Bool {
-//                record.setValue(!done, forKey: "done")
-//            }
-//        }
     }
-
-
-    
-    
-    //    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    //
-    //        let sectionInfo = self.fetchedResultsController.sections![section]
-    //        if sectionInfo.numberOfObjects == 0 {
-    //            fadeInDefaultImage()
-    //        } else {
-    //            fadeOutDefaultImage()
-    //        }
-    //
-    //        return sectionInfo.numberOfObjects
-    //    }
     //
     
     
@@ -426,16 +382,8 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         }
     }
     //
+
     
-    
-//    // Configure cell
-//    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-//        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-//        cell.textLabel!.text = object.valueForKey("content")!.description as String
-//    }
-//    //
-    
-    // MARK: -
     // MARK: Fetched Results Controller Delegate Methods
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         tableView.beginUpdates()
@@ -474,79 +422,6 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
             break;
         }
     }
-    
-    
-    
-    //    // MARK: - Fetched results controller
-    //    var fetchedResultsController: NSFetchedResultsController {
-    //        if _fetchedResultsController != nil {
-    //            return _fetchedResultsController!
-    //        }
-    //
-    //        let fetchRequest = NSFetchRequest()
-    //        let entity = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: self.managedObjectContext!)
-    //        fetchRequest.entity = entity
-    //
-    //        // Edit the sort key as appropriate.
-    //        let sortDescriptor = NSSortDescriptor(key: "timeStamp", ascending: false)
-    //
-    //        fetchRequest.sortDescriptors = [sortDescriptor]
-    //
-    //        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
-    //        aFetchedResultsController.delegate = self
-    //        _fetchedResultsController = aFetchedResultsController
-    //
-    //        do {
-    //            try _fetchedResultsController!.performFetch()
-    //        } catch {
-    //            print("An error occured")
-    //            abort()
-    //        }
-    //        return _fetchedResultsController!
-    //    }
-    //    var _fetchedResultsController: NSFetchedResultsController? = nil
-    //
-    //
-    //    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-    //        self.tableView.beginUpdates()
-    //    }
-    //    //
-    //
-    //
-    //    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-    //        switch type {
-    //        case .Insert:
-    //            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Top)
-    //        case .Delete:
-    //            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Top)
-    //        default:
-    //            return
-    //        }
-    //    }
-    //    //
-    //
-    //
-    //    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-    //        switch type {
-    //        case .Insert:
-    //            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-    //        case .Delete:
-    //            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-    //        case .Update:
-    //            self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
-    //        case .Move:
-    //            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-    //            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-    //        }
-    //    }
-    //    //
-    //
-    //
-    //
-    //    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-    //        self.tableView.endUpdates()
-    //    }
-    //    //
     
 } //END
 

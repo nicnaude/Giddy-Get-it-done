@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIGestureRecognizerDelega
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         window?.tintColor = UIColor(red:0.98, green:0.68, blue:0.09, alpha:1.0)
