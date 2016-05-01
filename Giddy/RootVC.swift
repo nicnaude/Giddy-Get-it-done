@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class RootVC: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate {
+class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var addToDoTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -17,17 +17,50 @@ class RootVC: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerD
     @IBOutlet weak var textFieldView: UIView!
     @IBOutlet weak var darkOverlay: UIView!
     @IBOutlet weak var imageOverlay: UIView!
-    var giddyToDo : [GiddyToDo] = []
+    
+    var editToDoVC: EditToDoVC? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
-    var selectedToDo: GiddyToDo?
+    var giddyToDo : [GiddyToDo] = []
+    var selectedToDo: GiddyToDo! = nil
+    var record: NSManagedObject!
+    
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        // Initialize Fetch Request
+        let fetchRequest = NSFetchRequest(entityName: "GiddyToDo")
+        
+        // Add Sort Descriptors
+        let sortDescriptor = NSSortDescriptor(key: "timeStamp", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        // Initialize Fetched Results Controller
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        
+        // Configure Fetched Results Controller
+        fetchedResultsController.delegate = self
+        
+        return fetchedResultsController
+    }()
+    //
+    
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
+        imageOverlay.hidden = true
+        
+        do {
+            try self.fetchedResultsController.performFetch()
+        } catch {
+            let fetchError = error as NSError
+            print("\(fetchError), \(fetchError.userInfo)")
+        }
+
         
         if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             managedObjectContext = appDelegate.managedObjectContext
+            let context : NSManagedObjectContext = appDelegate.managedObjectContext
         }
+        print("MOC: \(managedObjectContext)")
         
         // set nav color
         navigationController?.navigationBar.barTintColor = UIColor(red:0.98, green:0.68, blue:0.09, alpha:1.0)
@@ -45,25 +78,35 @@ class RootVC: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerD
     }
     //
     
-    func imageTapped(img: AnyObject)
-    {
-        // Your action
-    }
     
+    override func viewWillAppear(animated: Bool) {
+        tableView.reloadData()
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        //        self.tableView.contentInset = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
         configureButton()
-    }//
+        tableView.reloadData()
+    }
+    //
     
-    //    override func viewWillAppear(animated: Bool) {
-    //        //        self.tableView.contentInset = UIEdgeInsetsMake(self.tableView.contentInset.top, -16, self.tableView.contentInset.bottom, self.tableView.contentInset.right)
-    //        //
-    //        self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
+    
+    // MARK: - Segues
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "editTheToDo" {
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! GiddyToDo
+                print(object)
+                let controller = segue.destinationViewController as! EditToDoVC
+                controller.detailItem = object.content! as String
+                print("Controller.detailItem: \(object)")
+                //                controller.title = object.content
+                //               controller.editTextField.text = object.content
+            }
+        }
+    }
     //
-    //    }//
-    //
+    
     
     func handleTap(gestureRecognizer: UIGestureRecognizer) {
         hideTextFieldView()
@@ -166,6 +209,7 @@ class RootVC: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerD
     // MARK: Textfield method:
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if addToDoTextField.text != "" {
+            ///
             let context = self.fetchedResultsController.managedObjectContext
             let entity = self.fetchedResultsController.fetchRequest.entity!
             let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
@@ -188,11 +232,40 @@ class RootVC: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerD
                 //print("Unresolved error \(error), \(error.userInfo)")
                 abort()
             }
+            
+            ///
+            //
+            //            let appDel : AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+            //            let context : NSManagedObjectContext = appDel.managedObjectContext
+            //
+            //
+            //            let entity = self.fetchedResultsController.fetchRequest.entity!
+            //            let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
+            //
+            //            newManagedObject.setValue(addToDoTextField.text, forKey: "content")
+            //            newManagedObject.setValue("no", forKey: "doneStatus")
+            //            newManagedObject.setValue(NSDate(), forKey: "timeStamp")
+            //
+            //            do {
+            //                try context.save()
+            //                print("Saved successfully.")
+            //                addToDoTextField.text = ""
+            //                addToDoTextField.resignFirstResponder()
+            //                hideTextFieldView()
+            //                fadeOutOverlay()
+            //                self.plusButton.hidden = false
+            //            } catch {
+            //                // Replace this implementation with code to handle the error appropriately.
+            //                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            //                //print("Unresolved error \(error), \(error.userInfo)")
+            //                abort()
+            //        }
         }
         
         return true
     }
     //
+    
     
     
     // MARK: TableView methods:
@@ -264,24 +337,70 @@ class RootVC: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerD
     }
     //
     
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        let sectionInfo = self.fetchedResultsController.sections![section]
-        if sectionInfo.numberOfObjects == 0 {
-            fadeInDefaultImage()
-        } else {
-            fadeOutDefaultImage()
+    // MARK: -
+    // MARK: Table View Data Source Methods
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if let sections = fetchedResultsController.sections {
+            return sections.count
         }
         
-        return sectionInfo.numberOfObjects
+        return 0
     }
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let sections = fetchedResultsController.sections {
+            let sectionInfo = sections[section]
+            return sectionInfo.numberOfObjects
+        }
+        return 0
+    }
+    
+    
+    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        // Fetch Record
+        let cell = UITableViewCell()
+        let record = fetchedResultsController.objectAtIndexPath(indexPath)
+        
+        // Update Cell
+        if let contentForLabel = record.valueForKey("content") as? String {
+            cell.textLabel!.text = contentForLabel
+        }
+
+        if record.valueForKey("doneStatus") as! String == "no" {
+            let image : UIImage = UIImage(named: "unchecked")!
+            cell.imageView!.image = image
+        } else if record.valueForKey("doneStatus") as! String == "yes" {
+            let image : UIImage = UIImage(named: "checked")!
+            cell.imageView!.image = image
+        }
+        
+//        cell.didTapButtonHandler = {
+//            if let done = record.valueForKey("done") as? Bool {
+//                record.setValue(!done, forKey: "done")
+//            }
+//        }
+    }
+
+
+    
+    
+    //    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    //
+    //        let sectionInfo = self.fetchedResultsController.sections![section]
+    //        if sectionInfo.numberOfObjects == 0 {
+    //            fadeInDefaultImage()
+    //        } else {
+    //            fadeOutDefaultImage()
+    //        }
+    //
+    //        return sectionInfo.numberOfObjects
+    //    }
     //
     
     
     // allow editing of the tableview
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
     //
@@ -304,124 +423,125 @@ class RootVC: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerD
     //
     
     
-    // Configure cell
-    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-        cell.textLabel!.text = object.valueForKey("content")!.description as String
-    }
-    //
+//    // Configure cell
+//    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+//        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
+//        cell.textLabel!.text = object.valueForKey("content")!.description as String
+//    }
+//    //
     
-    
-    // MARK: - Fetched results controller
-    var fetchedResultsController: NSFetchedResultsController {
-        if _fetchedResultsController != nil {
-            return _fetchedResultsController!
-        }
-        
-        let fetchRequest = NSFetchRequest()
-        let entity = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: self.managedObjectContext!)
-        fetchRequest.entity = entity
-        
-        // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "timeStamp", ascending: false)
-        
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
-        aFetchedResultsController.delegate = self
-        _fetchedResultsController = aFetchedResultsController
-        
-        do {
-            try _fetchedResultsController!.performFetch()
-        } catch {
-            print("An error occured")
-            abort()
-        }
-        return _fetchedResultsController!
-    }
-    var _fetchedResultsController: NSFetchedResultsController? = nil
-    
-    
+    // MARK: -
+    // MARK: Fetched Results Controller Delegate Methods
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.beginUpdates()
+        tableView.beginUpdates()
     }
-    //
-    
-    
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-        switch type {
-        case .Insert:
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Top)
-        case .Delete:
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Top)
-        default:
-            return
-        }
-    }
-    //
-    
-    
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        switch type {
-        case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-        case .Update:
-            self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
-        case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        }
-    }
-    //
-    
-    
-    func segueTapped(sender: UITapGestureRecognizer) {
-    }
-    
-    
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.endUpdates()
+        tableView.endUpdates()
     }
-    //
     
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedToDo = self.fetchedResultsController.objectAtIndexPath(indexPath) as? GiddyToDo
-        print(selectedToDo)
-        //        selectedTask = tasks[indexPath.row]
-        performSegueWithIdentifier("editTheToDo", sender: self)
-    }//
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "editTheToDo" {
-            let detailVC = segue.destinationViewController as! EditToDoVC
-            let indexPath = self.tableView.indexPathForSelectedRow
-            let thisTask = fetchedResultsController.objectAtIndexPath(indexPath!) as! GiddyToDo
-            detailVC.detailTaskModel = thisTask
-            detailVC.delegate = self
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch (type) {
+        case .Insert:
+            if let indexPath = newIndexPath {
+                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }
+            break;
+        case .Delete:
+            if let indexPath = indexPath {
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }
+            break;
+        case .Update:
+            if let indexPath = indexPath {
+                let cell = tableView.cellForRowAtIndexPath(indexPath) // as! ToDoCell
+                configureCell(cell!, atIndexPath: indexPath)
+            }
+            break;
+        case .Move:
+            if let indexPath = indexPath {
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }
             
-        }
-        else if segue.identifier == "showTaskAdd" {
-            let addTaskVC:AddTaskViewController = segue.destinationViewController as! AddTaskViewController
-            addTaskVC.delegate = self
+            if let newIndexPath = newIndexPath {
+                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+            }
+            break;
         }
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        
-//        if segue.identifier == "editTheToDo" {
-//            let detailVC = segue.destinationViewController as! EditToDoVC
-////            detailVC.detailTaskModel = selectedToDo
-////            detailVC.delegate = self
-////            let object = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! GiddyToDo
-//            detailVC.selectedGiddy = selectedToDo!
-//        }
-//    }
+    
+    
+    //    // MARK: - Fetched results controller
+    //    var fetchedResultsController: NSFetchedResultsController {
+    //        if _fetchedResultsController != nil {
+    //            return _fetchedResultsController!
+    //        }
+    //
+    //        let fetchRequest = NSFetchRequest()
+    //        let entity = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: self.managedObjectContext!)
+    //        fetchRequest.entity = entity
+    //
+    //        // Edit the sort key as appropriate.
+    //        let sortDescriptor = NSSortDescriptor(key: "timeStamp", ascending: false)
+    //
+    //        fetchRequest.sortDescriptors = [sortDescriptor]
+    //
+    //        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+    //        aFetchedResultsController.delegate = self
+    //        _fetchedResultsController = aFetchedResultsController
+    //
+    //        do {
+    //            try _fetchedResultsController!.performFetch()
+    //        } catch {
+    //            print("An error occured")
+    //            abort()
+    //        }
+    //        return _fetchedResultsController!
+    //    }
+    //    var _fetchedResultsController: NSFetchedResultsController? = nil
+    //
+    //
+    //    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    //        self.tableView.beginUpdates()
+    //    }
+    //    //
+    //
+    //
+    //    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    //        switch type {
+    //        case .Insert:
+    //            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Top)
+    //        case .Delete:
+    //            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Top)
+    //        default:
+    //            return
+    //        }
+    //    }
+    //    //
+    //
+    //
+    //    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    //        switch type {
+    //        case .Insert:
+    //            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+    //        case .Delete:
+    //            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+    //        case .Update:
+    //            self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
+    //        case .Move:
+    //            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+    //            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+    //        }
+    //    }
+    //    //
+    //
+    //
+    //
+    //    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    //        self.tableView.endUpdates()
+    //    }
+    //    //
     
 } //END
 

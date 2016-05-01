@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class EditToDoVC: UIViewController {
     
@@ -16,25 +17,65 @@ class EditToDoVC: UIViewController {
     @IBOutlet weak var testLabel: UILabel!
     var selectedGiddy = GiddyToDo()
     
+    var record: NSManagedObject!
+    var managedObjectContext: NSManagedObjectContext!
+    
+    var detailItem: AnyObject! {
+        didSet {
+            print("Detail Item: \(detailItem)")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        testLabel.text = selectedGiddy.content
-        // Do any additional setup after loading the view.
+        print("EditToDoVC moc: \(managedObjectContext)")
+        self.editTextField.text = detailItem.description
     }
+    //
     
-    override func viewWillAppear(animated: Bool) {
-        saveButton.layer.cornerRadius = 23
-        saveButton.layer.borderWidth = 0
+    
+    override func viewWillDisappear(animated: Bool) {
+        print(detailItem)
+        let content = editTextField.text
         
-        markAsDoneButton.layer.cornerRadius = 23
-        markAsDoneButton.layer.borderWidth = 0
+        if let isEmpty = content?.isEmpty where isEmpty == false {
+            // Update Record
+            record.setValue(content, forKey: "content")
+            
+            do {
+                // Save Record
+                try record.managedObjectContext?.save()
+                
+                // Dismiss View Controller
+                navigationController?.popViewControllerAnimated(true)
+                
+            } catch {
+                let saveError = error as NSError
+                print("\(saveError), \(saveError.userInfo)")
+                
+                // Show Alert View
+                showAlertWithTitle("Warning", message: "Your to-do could not be saved.", cancelButtonTitle: "OK")
+            }
+            
+        } else {
+            // Show Alert View
+            showAlertWithTitle("Warning", message: "Your to-do needs a name.", cancelButtonTitle: "OK")
+        }
     }
     
-    @IBAction func onSaveButtonTapped(sender: UIButton) {
-        print("Save tapped")
+    // MARK: -
+    // MARK: Helper Methods
+    private func showAlertWithTitle(title: String, message: String, cancelButtonTitle: String) {
+        // Initialize Alert Controller
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        // Configure Alert Controller
+        alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .Default, handler: nil))
+        
+        // Present Alert Controller
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func onMarkAsDoneTapped(sender: UIButton) {
-        print("Done tapped")
-    }
 }
+
+

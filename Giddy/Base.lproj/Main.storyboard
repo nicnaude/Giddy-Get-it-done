@@ -24,11 +24,11 @@
                                 <color key="separatorColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="left" selectionStyle="blue" showsReorderControl="YES" accessoryType="disclosureIndicator" indentationLevel="10" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="cell" rowHeight="45" id="HPQ-50-fxx">
+                                    <tableViewCell clipsSubviews="YES" contentMode="left" selectionStyle="blue" showsReorderControl="YES" indentationLevel="10" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="cell" rowHeight="45" id="HPQ-50-fxx">
                                         <rect key="frame" x="0.0" y="92" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" tableViewCell="HPQ-50-fxx" id="pGS-rY-Cr0">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="45"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -204,59 +204,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="py3-1D-zfb">
-                                <rect key="frame" x="20" y="217" width="280" height="46"/>
-                                <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="46" id="av7-Sd-uZc"/>
-                                </constraints>
-                                <state key="normal" title="Save">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="onSaveButtonTapped:" destination="Jkb-Au-rLG" eventType="touchUpInside" id="Gup-Uj-pgu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Spc-rw-1WS">
-                                <rect key="frame" x="20" y="271" width="280" height="46"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="46" id="73j-c7-USl"/>
-                                </constraints>
-                                <state key="normal" title="Mark as done">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="onMarkAsDoneTapped:" destination="Jkb-Au-rLG" eventType="touchUpInside" id="PM4-eR-ZD7"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Du-Un-JIv">
-                                <rect key="frame" x="20" y="86" width="280" height="115"/>
+                                <rect key="frame" x="20" y="86" width="280" height="374"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tj0-S3-onV">
-                                <rect key="frame" x="20" y="338" width="280" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0Du-Un-JIv" firstAttribute="leading" secondItem="9BJ-W0-edq" secondAttribute="leadingMargin" constant="4" id="BT9-gO-8rX"/>
-                            <constraint firstItem="Spc-rw-1WS" firstAttribute="top" secondItem="py3-1D-zfb" secondAttribute="bottom" constant="8" symbolic="YES" id="DPi-ya-GtA"/>
-                            <constraint firstItem="py3-1D-zfb" firstAttribute="leading" secondItem="Spc-rw-1WS" secondAttribute="leading" id="JtN-Ei-zEp"/>
-                            <constraint firstItem="0Du-Un-JIv" firstAttribute="centerX" secondItem="9BJ-W0-edq" secondAttribute="centerX" id="NNY-y0-6GA"/>
-                            <constraint firstItem="tj0-S3-onV" firstAttribute="leading" secondItem="Spc-rw-1WS" secondAttribute="leading" id="NrL-At-qKl"/>
-                            <constraint firstItem="py3-1D-zfb" firstAttribute="centerY" secondItem="9BJ-W0-edq" secondAttribute="centerY" id="Nu5-bc-Ogq"/>
-                            <constraint firstItem="py3-1D-zfb" firstAttribute="trailing" secondItem="Spc-rw-1WS" secondAttribute="trailing" id="XES-pl-rlf"/>
-                            <constraint firstItem="py3-1D-zfb" firstAttribute="top" secondItem="0Du-Un-JIv" secondAttribute="bottom" constant="16" id="YjJ-Co-EGv"/>
-                            <constraint firstItem="tj0-S3-onV" firstAttribute="trailing" secondItem="Spc-rw-1WS" secondAttribute="trailing" id="aTS-ld-FhU"/>
-                            <constraint firstItem="tj0-S3-onV" firstAttribute="top" secondItem="Spc-rw-1WS" secondAttribute="bottom" constant="21" id="dYD-eR-UIo"/>
-                            <constraint firstItem="0Du-Un-JIv" firstAttribute="trailing" secondItem="py3-1D-zfb" secondAttribute="trailing" id="dnK-PR-b5f"/>
-                            <constraint firstItem="0Du-Un-JIv" firstAttribute="leading" secondItem="py3-1D-zfb" secondAttribute="leading" id="tnP-Au-NNU"/>
-                            <constraint firstItem="0Du-Un-JIv" firstAttribute="top" secondItem="1aU-mc-G3l" secondAttribute="bottom" constant="22" id="vax-bE-0Nx"/>
+                            <constraint firstItem="0Du-Un-JIv" firstAttribute="centerX" secondItem="9BJ-W0-edq" secondAttribute="centerX" id="byt-QQ-FfC"/>
+                            <constraint firstAttribute="bottom" secondItem="0Du-Un-JIv" secondAttribute="bottom" constant="20" symbolic="YES" id="jLV-HC-meS"/>
+                            <constraint firstItem="0Du-Un-JIv" firstAttribute="top" secondItem="1aU-mc-G3l" secondAttribute="bottom" constant="22" id="n8X-Ym-D6p"/>
+                            <constraint firstItem="0Du-Un-JIv" firstAttribute="leading" secondItem="9BJ-W0-edq" secondAttribute="leadingMargin" constant="4" id="nLh-fg-JAd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kgm-t1-nxp">
@@ -266,9 +225,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="editTextField" destination="0Du-Un-JIv" id="OU8-dR-gTE"/>
-                        <outlet property="markAsDoneButton" destination="Spc-rw-1WS" id="GQv-Lx-iP8"/>
-                        <outlet property="saveButton" destination="py3-1D-zfb" id="5rs-Bd-Eo9"/>
-                        <outlet property="testLabel" destination="tj0-S3-onV" id="RM7-tw-Ud9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1a-pq-uQL" userLabel="First Responder" sceneMemberID="firstResponder"/>

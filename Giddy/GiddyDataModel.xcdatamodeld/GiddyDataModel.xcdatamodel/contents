@@ -6,6 +6,6 @@
         <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="GiddyToDo" positionX="-63" positionY="0" width="128" height="90"/>
+        <element name="GiddyToDo" positionX="-63" positionY="-18" width="128" height="90"/>
     </elements>
 </model>
