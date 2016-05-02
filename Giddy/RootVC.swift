@@ -24,7 +24,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     var giddyToDo : [GiddyToDo] = []
     var selectedToDo: GiddyToDo! = nil
     var record: NSManagedObject!
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         // Initialize Fetch Request
@@ -35,7 +35,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         // Initialize Fetched Results Controller
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
         
         // Configure Fetched Results Controller
         fetchedResultsController.delegate = self
@@ -76,11 +76,11 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     //
     
     
-//    override func viewWillAppear(animated: Bool) {
-//        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//            self.tableView.reloadData()
-//            }
-//        )}
+        override func viewWillAppear(animated: Bool) {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+                }
+            )}
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -99,6 +99,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
                 let controller = segue.destinationViewController as! EditToDoVC
                 controller.record = selectedRecord
                 controller.detailItem = object.content! as String
+                controller.selectedGiddyContent = object.content! as String
                 print("Controller.detailItem: \(object)")
                 //                controller.title = object.content
                 //               controller.editTextField.text = object.content
@@ -203,16 +204,14 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if addToDoTextField.text != "" {
             ///
-            let context = self.fetchedResultsController.managedObjectContext
-            let entity = self.fetchedResultsController.fetchRequest.entity!
-            let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
-            
-            newManagedObject.setValue(addToDoTextField.text, forKey: "content")
-            newManagedObject.setValue("no", forKey: "doneStatus")
-            newManagedObject.setValue(NSDate(), forKey: "timeStamp")
+            let entityDescription = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: moc)
+            let allTheToDos = GiddyToDo(entity:entityDescription!, insertIntoManagedObjectContext:moc)
+            allTheToDos.content = addToDoTextField.text
+            allTheToDos.doneStatus = "no"
+            allTheToDos.timeStamp = NSDate()
             
             do {
-                try context.save()
+                try moc.save()
                 print("Saved successfully.")
                 addToDoTextField.text = ""
                 addToDoTextField.resignFirstResponder()
@@ -220,10 +219,8 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
                 fadeOutOverlay()
                 self.plusButton.hidden = false
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                //print("Unresolved error \(error), \(error.userInfo)")
-                abort()
+                showAlertWithTitle("Error", message: "Unable to load to-do.", cancelButtonTitle: "Cancel")
+                //                abort()
             }
         }
         return true
@@ -263,7 +260,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
             
             context.deleteObject(fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
             
-//            self.tableView.reloadData()
+            //            self.tableView.reloadData()
             print(object)
             //
         } else {
@@ -305,20 +302,6 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     //
     
     
-    // MARK: Table View Data Source Methods
-    //    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    ////        if let sections = fetchedResultsController.sections {
-    ////            imageOverlay.hidden = true
-    ////            print(sections.count)
-    ////            return sections.count
-    ////        } else {
-    ////            imageOverlay.hidden = false
-    ////            return 0
-    ////        }
-    //        return 1
-    //    }
-    
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = fetchedResultsController.sections {
             let sectionInfo = sections[section]
@@ -329,6 +312,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
             return 0
         }
     }
+    //
     
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
@@ -413,6 +397,19 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
             }
             break;
         }
+    }
+    
+    // MARK: -
+    // MARK: Helper Methods
+    private func showAlertWithTitle(title: String, message: String, cancelButtonTitle: String) {
+        // Initialize Alert Controller
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        // Configure Alert Controller
+        alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .Default, handler: nil))
+        
+        // Present Alert Controller
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
 } //END

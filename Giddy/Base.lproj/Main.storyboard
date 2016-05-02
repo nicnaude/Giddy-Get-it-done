@@ -204,18 +204,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Du-Un-JIv">
-                                <rect key="frame" x="20" y="86" width="280" height="374"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RDa-ks-A8d">
+                                <rect key="frame" x="16" y="90" width="288" height="364"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Jkb-Au-rLG" id="yS0-sE-Grs"/>
+                                </connections>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0Du-Un-JIv" firstAttribute="centerX" secondItem="9BJ-W0-edq" secondAttribute="centerX" id="byt-QQ-FfC"/>
-                            <constraint firstAttribute="bottom" secondItem="0Du-Un-JIv" secondAttribute="bottom" constant="20" symbolic="YES" id="jLV-HC-meS"/>
-                            <constraint firstItem="0Du-Un-JIv" firstAttribute="top" secondItem="1aU-mc-G3l" secondAttribute="bottom" constant="22" id="n8X-Ym-D6p"/>
-                            <constraint firstItem="0Du-Un-JIv" firstAttribute="leading" secondItem="9BJ-W0-edq" secondAttribute="leadingMargin" constant="4" id="nLh-fg-JAd"/>
+                            <constraint firstItem="e5M-OX-NYq" firstAttribute="top" secondItem="RDa-ks-A8d" secondAttribute="bottom" constant="26" id="FmP-qR-6cC"/>
+                            <constraint firstItem="RDa-ks-A8d" firstAttribute="centerX" secondItem="9BJ-W0-edq" secondAttribute="centerX" id="GaW-gT-Xgc"/>
+                            <constraint firstItem="RDa-ks-A8d" firstAttribute="top" secondItem="1aU-mc-G3l" secondAttribute="bottom" constant="26" id="TLH-Pp-Wak"/>
+                            <constraint firstItem="RDa-ks-A8d" firstAttribute="leading" secondItem="9BJ-W0-edq" secondAttribute="leadingMargin" id="VRB-vg-Pdy"/>
+                            <constraint firstItem="RDa-ks-A8d" firstAttribute="trailing" secondItem="9BJ-W0-edq" secondAttribute="trailingMargin" id="lWY-Nx-xx4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kgm-t1-nxp">
@@ -228,7 +233,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="editTextField" destination="0Du-Un-JIv" id="OU8-dR-gTE"/>
+                        <outlet property="editTextView" destination="RDa-ks-A8d" id="gJR-ra-Iwt"/>
                         <segue destination="adF-dh-ElG" kind="unwind" identifier="unwindToRoot" unwindAction="unwindToMenu:" id="nRg-bm-vdk"/>
                     </connections>
                 </viewController>
