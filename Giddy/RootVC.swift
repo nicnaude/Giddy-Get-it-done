@@ -20,6 +20,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     @IBAction func unwindToMenu(segue: UIStoryboardSegue) {}
     
     var editToDoVC: EditToDoVC? = nil
+    
     //    var managedObjectContext: NSManagedObjectContext? = nil
     var giddyToDo : [GiddyToDo] = []
     var selectedToDo: GiddyToDo! = nil
@@ -76,11 +77,11 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     //
     
     
-        override func viewWillAppear(animated: Bool) {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.tableView.reloadData()
-                }
-            )}
+    override func viewWillAppear(animated: Bool) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.tableView.reloadData()
+            }
+        )}
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -95,14 +96,10 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! GiddyToDo
                 let selectedRecord = fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
-                print(object)
                 let controller = segue.destinationViewController as! EditToDoVC
                 controller.record = selectedRecord
                 controller.detailItem = object.content! as String
                 controller.selectedGiddyContent = object.content! as String
-                print("Controller.detailItem: \(object)")
-                //                controller.title = object.content
-                //               controller.editTextField.text = object.content
             } else if (segue.identifier == "unwindToRoot") {
                 print("Yay! Hamsters!")
             }
@@ -291,6 +288,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         cell.imageView!.userInteractionEnabled = true
         cell.imageView!.tag = indexPath.row
         cell.backgroundColor? = UIColor.whiteColor()
+        cell.textLabel!.font = UIFont(name:"Avenir", size:17)
         
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(RootVC.tappedMe))

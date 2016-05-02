@@ -89,11 +89,11 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DjO-kr-TuO">
-                                <rect key="frame" x="250" y="410" width="50" height="50"/>
+                                <rect key="frame" x="245" y="405" width="55" height="55"/>
                                 <color key="backgroundColor" red="0.97647058819999999" green="0.69019607839999997" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="ke2-kp-5gI"/>
-                                    <constraint firstAttribute="height" constant="50" id="opJ-n3-AMn"/>
+                                    <constraint firstAttribute="width" constant="55" id="ke2-kp-5gI"/>
+                                    <constraint firstAttribute="height" constant="55" id="opJ-n3-AMn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" backgroundImage="plus">
@@ -204,28 +204,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDa-ks-A8d">
-                                <rect key="frame" x="16" y="64" width="288" height="390"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="peV-GO-WGI">
+                                <rect key="frame" x="20" y="72" width="280" height="388"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="yes" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Jkb-Au-rLG" id="yS0-sE-Grs"/>
-                                </connections>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="e5M-OX-NYq" firstAttribute="top" secondItem="RDa-ks-A8d" secondAttribute="bottom" constant="26" id="FmP-qR-6cC"/>
-                            <constraint firstItem="RDa-ks-A8d" firstAttribute="centerX" secondItem="9BJ-W0-edq" secondAttribute="centerX" id="GaW-gT-Xgc"/>
-                            <constraint firstItem="RDa-ks-A8d" firstAttribute="top" secondItem="1aU-mc-G3l" secondAttribute="bottom" id="TLH-Pp-Wak"/>
-                            <constraint firstItem="RDa-ks-A8d" firstAttribute="leading" secondItem="9BJ-W0-edq" secondAttribute="leadingMargin" id="VRB-vg-Pdy"/>
-                            <constraint firstItem="RDa-ks-A8d" firstAttribute="trailing" secondItem="9BJ-W0-edq" secondAttribute="trailingMargin" id="lWY-Nx-xx4"/>
+                            <constraint firstItem="peV-GO-WGI" firstAttribute="top" secondItem="1aU-mc-G3l" secondAttribute="bottom" constant="8" symbolic="YES" id="3pV-3L-94l"/>
+                            <constraint firstAttribute="bottom" secondItem="peV-GO-WGI" secondAttribute="bottom" constant="20" symbolic="YES" id="nIg-c2-Hkd"/>
+                            <constraint firstItem="peV-GO-WGI" firstAttribute="centerX" secondItem="9BJ-W0-edq" secondAttribute="centerX" id="p8f-BQ-Xv3"/>
+                            <constraint firstItem="peV-GO-WGI" firstAttribute="leading" secondItem="9BJ-W0-edq" secondAttribute="leadingMargin" constant="4" id="rai-2U-BRB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kgm-t1-nxp">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" image="Edit to-do" id="j49-dS-CQZ">
+                        <barButtonItem key="rightBarButtonItem" image="mark done" id="j49-dS-CQZ">
                             <connections>
                                 <action selector="onMarkAsDoneTapped:" destination="Jkb-Au-rLG" id="hx3-Xe-8Zo"/>
                             </connections>
@@ -233,7 +229,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="editTextView" destination="RDa-ks-A8d" id="gJR-ra-Iwt"/>
+                        <outlet property="editTextView" destination="peV-GO-WGI" id="MK4-uG-tNT"/>
                         <segue destination="adF-dh-ElG" kind="unwind" identifier="unwindToRoot" unwindAction="unwindToMenu:" id="nRg-bm-vdk"/>
                     </connections>
                 </viewController>
@@ -426,9 +422,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Edit to-do" width="138" height="41"/>
         <image name="Giddy logo Avenir" width="83" height="41"/>
         <image name="love" width="740" height="740"/>
+        <image name="mark done" width="134" height="19"/>
         <image name="plus" width="205" height="205"/>
     </resources>
     <inferredMetricsTieBreakers>

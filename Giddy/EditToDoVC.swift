@@ -26,7 +26,7 @@ class EditToDoVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController!.navigationBar.topItem!.title = ""
+        self.navigationController!.navigationBar.topItem!.title = "Back"
         editTextView.becomeFirstResponder()
         self.automaticallyAdjustsScrollViewInsets = false
         fetchSelectedToDo()
@@ -72,7 +72,6 @@ class EditToDoVC: UIViewController, UITextFieldDelegate {
             if result.count > 0 {
                 let allTheToDos = result[0] as! GiddyToDo
                 editTextView.text = allTheToDos.content as String
-                self.title = allTheToDos.content as String
             } else {
                 showAlertWithTitle("Error", message: "Unable to load to-do.", cancelButtonTitle: "Cancel")
             }
@@ -96,7 +95,6 @@ class EditToDoVC: UIViewController, UITextFieldDelegate {
             try moc.save()
             print("Saved successfully.")
             editTextView.resignFirstResponder()
-            self.title = "Updated To-Do"
             //            self.title = allTheToDos.content as String
         } catch {
             showAlertWithTitle("Error", message: "Unable to load to-do.", cancelButtonTitle: "Cancel")
@@ -119,7 +117,6 @@ class EditToDoVC: UIViewController, UITextFieldDelegate {
             try moc.save()
             print("Saved successfully.")
             editTextView.resignFirstResponder()
-            //            self.title = allTheToDos.content as String
         } catch {
             showAlertWithTitle("Error", message: "Unable to load to-do.", cancelButtonTitle: "Cancel")
         }
