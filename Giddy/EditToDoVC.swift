@@ -26,10 +26,33 @@ class EditToDoVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController!.navigationBar.topItem!.title = ""
         editTextView.becomeFirstResponder()
+        self.automaticallyAdjustsScrollViewInsets = false
         fetchSelectedToDo()
         print("EditToDoVC moc: \(moc)")
         self.editTextView.text = detailItem.description
+        
+        //Resize textview when keyboard is shown:
+        NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillShowNotification, object: nil, queue: nil, usingBlock: {(note: NSNotification) in
+            if let keyboardFrame = note.userInfo?[UIKeyboardFrameEndUserInfoKey]{
+                let frame = keyboardFrame as! NSValue
+                let rect = frame.CGRectValue()
+                UIView.animateWithDuration(0.25, delay: 0, options: .CurveEaseInOut, animations: {
+                    self.editTextView.contentInset = UIEdgeInsetsMake(0.0, 0.0, rect.size.height, 0.0)
+                    }, completion: nil)
+            }
+        })
+        
+        //Resize textview back to original size.
+        NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillHideNotification, object: nil, queue: nil, usingBlock: {_ in 
+            
+            UIView.animateWithDuration(0.25, delay: 0, options: .CurveEaseInOut, animations: {
+                
+                self.editTextView.contentInset = UIEdgeInsetsZero
+                
+                }, completion: nil)
+            })
     }
     //
     
