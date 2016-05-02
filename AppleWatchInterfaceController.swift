@@ -8,7 +8,8 @@
 
 import WatchKit
 import Foundation
-
+import CoreData
+import WatchCoreDataProxy
 
 class AppleWatchInterfaceController: WKInterfaceController {
     
