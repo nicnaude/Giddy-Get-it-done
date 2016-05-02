@@ -48,7 +48,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         do {
             try self.fetchedResultsController.performFetch()
@@ -57,11 +57,6 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
             print("\(fetchError), \(fetchError.userInfo)")
         }
         
-        
-        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-            managedObjectContext = appDelegate.managedObjectContext
-            let context : NSManagedObjectContext = appDelegate.managedObjectContext
-        }
         print("MOC: \(managedObjectContext)")
         
         // set nav color
@@ -81,14 +76,15 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     //
     
     
-    override func viewWillAppear(animated: Bool) {
-        tableView.reloadData()
-    }
+//    override func viewWillAppear(animated: Bool) {
+//        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//            self.tableView.reloadData()
+//            }
+//        )}
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         configureButton()
-        tableView.reloadData()
     }
     //
     
@@ -109,7 +105,6 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
             } else if (segue.identifier == "unwindToRoot") {
                 print("Yay! Hamsters!")
             }
-
         }
     }
     //
@@ -121,11 +116,6 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         plusButton.layer.borderColor = UIColor(red:0.0/255.0, green:122.0/255.0, blue:255.0/255.0, alpha:1).CGColor as CGColorRef
         plusButton.layer.borderWidth = 0
         plusButton.clipsToBounds = true
-    }
-    //
-    
-    
-    func textFieldDidChange(textField: UITextField) {
     }
     //
     
@@ -203,7 +193,13 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     //
     
     
-    // MARK: Textfield method:
+    // MARK: Textfield methods:
+    func textFieldDidChange(textField: UITextField) {
+        print("Typing detected.")
+    }
+    //
+    
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if addToDoTextField.text != "" {
             ///
@@ -230,7 +226,6 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
                 abort()
             }
         }
-        
         return true
     }
     //
@@ -268,14 +263,14 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
             
             context.deleteObject(fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
             
-            self.tableView.reloadData()
+//            self.tableView.reloadData()
             print(object)
             //
         } else {
             print("Could not find index path")
         }
     }//
-
+    
     
     // MARK: TableView methods:
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -308,32 +303,29 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         return cell
     }
     //
-
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
-    //
     
-    // MARK: -
     // MARK: Table View Data Source Methods
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if let sections = fetchedResultsController.sections {
-            imageOverlay.hidden = true
-            return sections.count
-        } else {
-            imageOverlay.hidden = false
-            return 0
-        }
-    }
+    //    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    ////        if let sections = fetchedResultsController.sections {
+    ////            imageOverlay.hidden = true
+    ////            print(sections.count)
+    ////            return sections.count
+    ////        } else {
+    ////            imageOverlay.hidden = false
+    ////            return 0
+    ////        }
+    //        return 1
+    //    }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = fetchedResultsController.sections {
             let sectionInfo = sections[section]
+            imageOverlay.hidden = true
             return sectionInfo.numberOfObjects
         } else {
-            imageOverlay.hidden = false
+            imageOverlay.hidden = true
             return 0
         }
     }
@@ -382,7 +374,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         }
     }
     //
-
+    
     
     // MARK: Fetched Results Controller Delegate Methods
     func controllerWillChangeContent(controller: NSFetchedResultsController) {

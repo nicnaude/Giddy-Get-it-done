@@ -53,7 +53,7 @@ class EditToDoVC: UIViewController {
                 try record.managedObjectContext?.save()
                 
                 // Dismiss View Controller
-                navigationController?.popViewControllerAnimated(true)
+                self.performSegueWithIdentifier("unwindToRoot", sender: self)
                 
             } catch {
                 let saveError = error as NSError
@@ -82,13 +82,17 @@ class EditToDoVC: UIViewController {
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "unwindToRoot") {
-            let destinatation = segue.destinationViewController as! RootVC
-            destinatation.tableView.reloadData()
-            print("Yay! Kittens")
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if (segue.identifier == "unwindToRoot") {
+//            let destinatation = segue.destinationViewController as! RootVC
+//            
+//            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                
+//                destinatation.tableView.reloadData()
+//                }
+//            )}
+//        print("Yay! Kittens")
+//    }
     
 }
 
