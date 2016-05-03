@@ -25,7 +25,8 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     var giddyToDo : [GiddyToDo] = []
     var selectedToDo: GiddyToDo! = nil
     var record: NSManagedObject!
-    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var moc: NSManagedObjectContext? = nil
+//    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         // Initialize Fetch Request
@@ -36,7 +37,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         // Initialize Fetched Results Controller
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)
         
         // Configure Fetched Results Controller
         fetchedResultsController.delegate = self
@@ -49,7 +50,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+//        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         do {
             try self.fetchedResultsController.performFetch()
@@ -58,7 +59,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
             print("\(fetchError), \(fetchError.userInfo)")
         }
         
-        print("MOC: \(managedObjectContext)")
+        print("MOC: \(moc)")
         
         // set nav color
         navigationController?.navigationBar.barTintColor = UIColor(red:0.98, green:0.68, blue:0.09, alpha:1.0)
@@ -201,14 +202,14 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if addToDoTextField.text != "" {
             ///
-            let entityDescription = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: moc)
+            let entityDescription = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: moc!)
             let allTheToDos = GiddyToDo(entity:entityDescription!, insertIntoManagedObjectContext:moc)
             allTheToDos.content = addToDoTextField.text
             allTheToDos.doneStatus = "no"
             allTheToDos.timeStamp = NSDate()
             
             do {
-                try moc.save()
+                try moc!.save()
                 print("Saved successfully.")
                 addToDoTextField.text = ""
                 addToDoTextField.resignFirstResponder()

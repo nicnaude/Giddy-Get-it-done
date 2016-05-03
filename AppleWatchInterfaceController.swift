@@ -9,7 +9,7 @@
 import WatchKit
 import Foundation
 import CoreData
-import GiddyKit
+//import GiddyKit
 
 class AppleWatchInterfaceController: WKInterfaceController {
     

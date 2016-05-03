@@ -28,7 +28,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>com.nicholasnaude.Giddy</string>
+	<string>com.nicholasnaude.GiddyApp</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>

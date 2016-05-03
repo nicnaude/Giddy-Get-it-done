@@ -34,7 +34,7 @@ public class DataAccess: NSObject {
     
     public lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("Giddy", withExtension: "momd")!
+        let modelURL = NSBundle.mainBundle().URLForResource("GiddyDataModel", withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
     
@@ -45,7 +45,7 @@ public class DataAccess: NSObject {
         
         ///
         let containerPath = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.projectds.giddy.Documents")?.path
-        let sqlitePath = NSString(format:"%@/%@", containerPath!, "Giddy")
+        let sqlitePath = NSString(format:"%@/%@", containerPath!, "GiddyDataModel")
         let url = NSURL(fileURLWithPath: sqlitePath as String)
         
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
