@@ -42,15 +42,18 @@ public class DataAccess: NSObject {
         // Initialize Persistent Store Coordinator
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         
-        
         ///
-        let containerPath = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.projectds.giddy.Documents")?.path
-        let sqlitePath = NSString(format:"%@/%@", containerPath!, "GiddyDataModel")
-        let url = NSURL(fileURLWithPath: sqlitePath as String)
-        
-        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        var error: NSError? = nil
+//        let containerPath = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.projectds.coredatawatch.Documents")?.path
+//        print("Container path: \(containerPath)")
+//        let sqlitePath =  NSString(format:"%@/%@", containerPath!, "coredatawatch")
+//        print("sqlitepath: \(sqlitePath)")
+//        
+//        let url = NSURL(fileURLWithPath: sqlitePath as String)
+//        
+//        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+//        var error: NSError? = nil
         ///
+        
         //delete from here:
         // URL Documents Directory
         let URLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)

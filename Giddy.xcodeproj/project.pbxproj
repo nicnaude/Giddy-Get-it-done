@@ -216,7 +216,6 @@
 				4A5A615C1CD62FFA00805217 /* GiddyDataModel.xcdatamodeld */,
 				4A3DC04A1C9E0CB4009AB92A /* Giddy.entitlements */,
 				4A3DC0441C9E0C15009AB92A /* Info.plist */,
-				4A3DC0381C9E0C15009AB92A /* AppDelegate.swift */,
 			);
 			name = "Supporting files";
 			path = Giddy;
@@ -236,6 +235,7 @@
 		4A3DC0511C9E0DDC009AB92A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4A3DC0381C9E0C15009AB92A /* AppDelegate.swift */,
 				4A251A001CB24B1A007CF8EE /* RootVC.swift */,
 				4AFD90D21CB2F287000B6706 /* EditToDoVC.swift */,
 			);

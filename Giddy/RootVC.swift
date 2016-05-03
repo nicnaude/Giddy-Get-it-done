@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import GiddyKit
 
 class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
@@ -25,7 +26,8 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     var giddyToDo : [GiddyToDo] = []
     var selectedToDo: GiddyToDo! = nil
     var record: NSManagedObject!
-    var moc: NSManagedObjectContext? = nil
+//    var moc: NSManagedObjectContext? = nil
+    let moc = DataAccess.sharedInstance.managedObjectContext
 //    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
@@ -37,7 +39,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         // Initialize Fetched Results Controller
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc!, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: DataAccess.sharedInstance.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
         // Configure Fetched Results Controller
         fetchedResultsController.delegate = self
@@ -202,14 +204,14 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if addToDoTextField.text != "" {
             ///
-            let entityDescription = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: moc!)
+            let entityDescription = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: DataAccess.sharedInstance.managedObjectContext)
             let allTheToDos = GiddyToDo(entity:entityDescription!, insertIntoManagedObjectContext:moc)
             allTheToDos.content = addToDoTextField.text
             allTheToDos.doneStatus = "no"
             allTheToDos.timeStamp = NSDate()
             
             do {
-                try moc!.save()
+                try DataAccess.sharedInstance.managedObjectContext.save()
                 print("Saved successfully.")
                 addToDoTextField.text = ""
                 addToDoTextField.resignFirstResponder()

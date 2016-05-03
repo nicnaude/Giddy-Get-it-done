@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import GiddyKit
 
 class EditToDoVC: UIViewController, UITextFieldDelegate {
     
@@ -15,8 +16,9 @@ class EditToDoVC: UIViewController, UITextFieldDelegate {
     var selectedGiddyContent = String()
     
     var record: NSManagedObject!
-    var moc: NSManagedObjectContext? = nil
+//    var moc: NSManagedObjectContext? = nil
 //    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let moc = DataAccess.sharedInstance.managedObjectContext
     
     
     var detailItem: AnyObject! {
@@ -60,7 +62,7 @@ class EditToDoVC: UIViewController, UITextFieldDelegate {
     
     //Fetch entity
     func fetchSelectedToDo() {
-        let entityDescription = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: moc!)
+        let entityDescription = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: DataAccess.sharedInstance.managedObjectContext)
         let request = NSFetchRequest()
         request.entity = entityDescription
         let condition = NSPredicate(format: "content = %@", selectedGiddyContent)
@@ -69,7 +71,7 @@ class EditToDoVC: UIViewController, UITextFieldDelegate {
         print("I found what you're looking for: \(request.predicate)")
         
         do {
-            let result = try moc!.executeFetchRequest(request)
+            let result = try moc.executeFetchRequest(request)
             if result.count > 0 {
                 let allTheToDos = result[0] as! GiddyToDo
                 editTextView.text = allTheToDos.content as String
@@ -84,7 +86,7 @@ class EditToDoVC: UIViewController, UITextFieldDelegate {
     
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        let entityDescription = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: moc!)
+        let entityDescription = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: moc)
         let request = NSFetchRequest()
         request.entity = entityDescription
         let condition = NSPredicate(format: "content = %@", selectedGiddyContent)
@@ -93,7 +95,7 @@ class EditToDoVC: UIViewController, UITextFieldDelegate {
         print("I found what you're looking for: \(request.predicate)")
         
         do {
-            try moc!.save()
+            try moc.save()
             print("Saved successfully.")
             editTextView.resignFirstResponder()
             //            self.title = allTheToDos.content as String
@@ -106,7 +108,7 @@ class EditToDoVC: UIViewController, UITextFieldDelegate {
     
     
     override func viewDidDisappear(animated: Bool) {
-        let entityDescription = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: moc!)
+        let entityDescription = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: moc)
         let request = NSFetchRequest()
         request.entity = entityDescription
         let condition = NSPredicate(format: "content = %@", selectedGiddyContent)
@@ -115,7 +117,7 @@ class EditToDoVC: UIViewController, UITextFieldDelegate {
         print("I found what you're looking for: \(request.predicate)")
         
         do {
-            try moc!.save()
+            try moc.save()
             print("Saved successfully.")
             editTextView.resignFirstResponder()
         } catch {
@@ -127,7 +129,7 @@ class EditToDoVC: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func onMarkAsDoneTapped(sender: AnyObject) {
-        moc!.deleteObject(record)
+        moc.deleteObject(record)
         print("\(record) successfully deleted")
         self.performSegueWithIdentifier("unwindToRoot", sender: self)
     }
