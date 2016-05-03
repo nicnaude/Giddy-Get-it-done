@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import GiddyKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UIGestureRecognizerDelegate {
@@ -41,83 +42,83 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIGestureRecognizerDelega
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+        DataAccess.sharedInstance.saveContext()
     }
 
-    // MARK: - Core Data stack
-    
-    lazy var applicationDocumentsDirectory: NSURL = {
-        // The directory the application uses to store the Core Data store file. This code uses a directory named "com.nicholasnaude.Giddy" in the application's documents Application Support directory.
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        print(urls)
-        return urls[urls.count-1]
-    }()
-    
-    lazy var managedObjectModel: NSManagedObjectModel = {
-        // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("GiddyDataModel", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
-    }()
-    
-    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
-        // Initialize Persistent Store Coordinator
-        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        
-        // URL Documents Directory
-        let URLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        let applicationDocumentsDirectory = URLs[(URLs.count - 1)]
-        
-        // URL Persistent Store
-        let URLPersistentStore = applicationDocumentsDirectory.URLByAppendingPathComponent("Done.sqlite")
-        
-        do {
-            // Add Persistent Store to Persistent Store Coordinator
-            try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: URLPersistentStore, options: nil)
-            
-        } catch {
-            // Populate Error
-            var userInfo = [String: AnyObject]()
-            userInfo[NSLocalizedDescriptionKey] = "There was an error creating or loading the application's saved data."
-            userInfo[NSLocalizedFailureReasonErrorKey] = "There was an error creating or loading the application's saved data."
-            
-            userInfo[NSUnderlyingErrorKey] = error as NSError
-            let wrappedError = NSError(domain: "com.tutsplus.Done", code: 1001, userInfo: userInfo)
-            
-            NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
-            
-            abort()
-        }
-        
-        return persistentStoreCoordinator
-    }()
-    
-    lazy var managedObjectContext: NSManagedObjectContext = {
-        let persistentStoreCoordinator = self.persistentStoreCoordinator
-        
-        // Initialize Managed Object Context
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-        
-        // Configure Managed Object Context
-        managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
-        
-        return managedObjectContext
-    }()
-    
-    // MARK: - Core Data Saving support
-    
-    func saveContext () {
-        if managedObjectContext.hasChanges {
-            do {
-                try managedObjectContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                abort()
-            }
-        }
-    }
-    
+//    // MARK: - Core Data stack
+//    
+//    lazy var applicationDocumentsDirectory: NSURL = {
+//        // The directory the application uses to store the Core Data store file. This code uses a directory named "com.nicholasnaude.Giddy" in the application's documents Application Support directory.
+//        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+//        print(urls)
+//        return urls[urls.count-1]
+//    }()
+//    
+//    lazy var managedObjectModel: NSManagedObjectModel = {
+//        // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
+//        let modelURL = NSBundle.mainBundle().URLForResource("GiddyDataModel", withExtension: "momd")!
+//        return NSManagedObjectModel(contentsOfURL: modelURL)!
+//    }()
+//    
+//    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+//        // Initialize Persistent Store Coordinator
+//        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+//        
+//        // URL Documents Directory
+//        let URLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+//        let applicationDocumentsDirectory = URLs[(URLs.count - 1)]
+//        
+//        // URL Persistent Store
+//        let URLPersistentStore = applicationDocumentsDirectory.URLByAppendingPathComponent("Done.sqlite")
+//        
+//        do {
+//            // Add Persistent Store to Persistent Store Coordinator
+//            try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: URLPersistentStore, options: nil)
+//            
+//        } catch {
+//            // Populate Error
+//            var userInfo = [String: AnyObject]()
+//            userInfo[NSLocalizedDescriptionKey] = "There was an error creating or loading the application's saved data."
+//            userInfo[NSLocalizedFailureReasonErrorKey] = "There was an error creating or loading the application's saved data."
+//            
+//            userInfo[NSUnderlyingErrorKey] = error as NSError
+//            let wrappedError = NSError(domain: "com.tutsplus.Done", code: 1001, userInfo: userInfo)
+//            
+//            NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
+//            
+//            abort()
+//        }
+//        
+//        return persistentStoreCoordinator
+//    }()
+//    
+//    lazy var managedObjectContext: NSManagedObjectContext = {
+//        let persistentStoreCoordinator = self.persistentStoreCoordinator
+//        
+//        // Initialize Managed Object Context
+//        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+//        
+//        // Configure Managed Object Context
+//        managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
+//        
+//        return managedObjectContext
+//    }()
+//    
+//    // MARK: - Core Data Saving support
+//    
+//    func saveContext () {
+//        if managedObjectContext.hasChanges {
+//            do {
+//                try managedObjectContext.save()
+//            } catch {
+//                // Replace this implementation with code to handle the error appropriately.
+//                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//                let nserror = error as NSError
+//                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+//                abort()
+//            }
+//        }
+//    }
+//    
 }
 
