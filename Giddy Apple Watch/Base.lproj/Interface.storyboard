@@ -10,23 +10,10 @@
             <objects>
                 <controller identifier="giddyWatch" id="oTg-S9-Xrh" customClass="AppleWatchInterfaceController" customModule="Giddy_Apple_Watch_Extension">
                     <items>
-                        <table alignment="left" id="CZ6-1Q-hKg">
-                            <items>
-                                <tableRow identifier="ToDoTableRowController" id="ps2-7D-faY" customClass="ToDoWatchItem" customModule="Giddy">
-                                    <group key="rootItem" width="1" alignment="left" id="o4r-vA-zec">
-                                        <items>
-                                            <label width="131.5" height="43.5" alignment="left" text="Get it done" id="wKa-ve-abT"/>
-                                        </items>
-                                    </group>
-                                    <connections>
-                                        <outlet property="titleLabel" destination="wKa-ve-abT" id="vxs-5a-YIE"/>
-                                    </connections>
-                                </tableRow>
-                            </items>
-                        </table>
+                        <label width="136" alignment="left" text="Label" id="2Nf-28-CJa"/>
                     </items>
                     <connections>
-                        <outlet property="tableView" destination="CZ6-1Q-hKg" id="z9f-Un-dpg"/>
+                        <outlet property="watchFaceLabel" destination="2Nf-28-CJa" id="2Cw-kv-HJF"/>
                     </connections>
                 </controller>
             </objects>

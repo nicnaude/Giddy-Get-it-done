@@ -23,6 +23,43 @@ public class DataAccess: NSObject {
     }
     
     
+    // MARK: Get data for Apple Watch:
+    public func getAppleWatchToDos()-> NSDate? {
+        
+        let request = NSFetchRequest()
+        let entity = NSEntityDescription.entityForName("GiddyToDo", inManagedObjectContext: self.managedObjectContext)
+        request.entity = entity
+        
+        let sortDescriptor = NSSortDescriptor(key: "timeStamp", ascending: false)
+        let sortDescriptors = [sortDescriptor]
+        
+        request.sortDescriptors = sortDescriptors
+        
+        var error: NSError? = nil
+        let results: [AnyObject]?
+        do {
+            results = try self.managedObjectContext.executeFetchRequest(request)
+        } catch let error1 as NSError {
+            error = error1
+            results = nil
+        }
+        //
+        //        if !(DataAccess.sharedInstance.managedObjectContext.save() != nil) {
+        //            print("Error fetching on the managed object context")
+        //        }
+        
+        var date: NSDate?
+        if results != nil {
+            let managedObject: NSManagedObject = results![0] as! NSManagedObject
+            date = managedObject.valueForKey("timeStamp") as? NSDate
+        }
+        
+        return date
+    }
+    
+    
+    
+    
     // MARK: - Core Data stack
     
     public lazy var applicationDocumentsDirectory: NSURL = {
@@ -43,15 +80,15 @@ public class DataAccess: NSObject {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         
         ///
-//        let containerPath = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.projectds.coredatawatch.Documents")?.path
-//        print("Container path: \(containerPath)")
-//        let sqlitePath =  NSString(format:"%@/%@", containerPath!, "coredatawatch")
-//        print("sqlitepath: \(sqlitePath)")
-//        
-//        let url = NSURL(fileURLWithPath: sqlitePath as String)
-//        
-//        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-//        var error: NSError? = nil
+        //        let containerPath = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.projectds.coredatawatch.Documents")?.path
+        //        print("Container path: \(containerPath)")
+        //        let sqlitePath =  NSString(format:"%@/%@", containerPath!, "coredatawatch")
+        //        print("sqlitepath: \(sqlitePath)")
+        //
+        //        let url = NSURL(fileURLWithPath: sqlitePath as String)
+        //
+        //        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        //        var error: NSError? = nil
         ///
         
         //delete from here:

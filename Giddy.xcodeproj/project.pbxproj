@@ -12,6 +12,9 @@
 		4A1EE3EC1CD8AF19002B0ED9 /* GiddyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1EE3E41CD8AF19002B0ED9 /* GiddyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A1EE3F11CD8AF35002B0ED9 /* DataAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1EE3F01CD8AF35002B0ED9 /* DataAccess.swift */; };
 		4A1EE3F41CD8B407002B0ED9 /* WatchCoreDataProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1EE3F31CD8B407002B0ED9 /* WatchCoreDataProxy.swift */; };
+		4A1F39621CD8E14000E65C7F /* GiddyKit.framework in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EE3E41CD8AF19002B0ED9 /* GiddyKit.framework */; };
+		4A2220E71CD8DB2600B9F757 /* GiddyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1EE3E41CD8AF19002B0ED9 /* GiddyKit.framework */; };
+		4A2220E81CD8DBE600B9F757 /* GiddyKit.framework in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EE3E41CD8AF19002B0ED9 /* GiddyKit.framework */; };
 		4A22A5281CD80A6700C48560 /* WatchCoreDataProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22A5271CD80A6700C48560 /* WatchCoreDataProxy.swift */; };
 		4A22A52B1CD80B1A00C48560 /* WatchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A22A52A1CD80B1A00C48560 /* WatchDataManager.swift */; };
 		4A251A011CB24B1A007CF8EE /* RootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A251A001CB24B1A007CF8EE /* RootVC.swift */; };
@@ -49,6 +52,13 @@
 			remoteGlobalIDString = 4A1EE3E31CD8AF19002B0ED9;
 			remoteInfo = GiddyKit;
 		};
+		4A2220E51CD8DB1D00B9F757 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A3DC02D1C9E0C15009AB92A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A1EE3E31CD8AF19002B0ED9;
+			remoteInfo = GiddyKit;
+		};
 		4A3DC0641C9F1F66009AB92A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4A3DC02D1C9E0C15009AB92A /* Project object */;
@@ -68,7 +78,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		4A22A5251CD8088100C48560 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -160,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A2220E71CD8DB2600B9F757 /* GiddyKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +384,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4A2220E61CD8DB1D00B9F757 /* PBXTargetDependency */,
 			);
 			name = "Giddy Apple Watch Extension";
 			productName = "Giddy Apple Watch Extension";
@@ -458,6 +470,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A1F39621CD8E14000E65C7F /* GiddyKit.framework in Resources */,
 				4A3DC0431C9E0C15009AB92A /* LaunchScreen.storyboard in Resources */,
 				4A3DC0401C9E0C15009AB92A /* Assets.xcassets in Resources */,
 				4A3DC03E1C9E0C15009AB92A /* Main.storyboard in Resources */,
@@ -477,6 +490,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A2220E81CD8DBE600B9F757 /* GiddyKit.framework in Resources */,
 				4A3DC0701C9F1F66009AB92A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,6 +595,11 @@
 			isa = PBXTargetDependency;
 			target = 4A1EE3E31CD8AF19002B0ED9 /* GiddyKit */;
 			targetProxy = 4A1EE3E91CD8AF19002B0ED9 /* PBXContainerItemProxy */;
+		};
+		4A2220E61CD8DB1D00B9F757 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A1EE3E31CD8AF19002B0ED9 /* GiddyKit */;
+			targetProxy = 4A2220E51CD8DB1D00B9F757 /* PBXContainerItemProxy */;
 		};
 		4A3DC0651C9F1F66009AB92A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -860,6 +879,7 @@
 				4A1EE3EF1CD8AF19002B0ED9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4A3DC0301C9E0C15009AB92A /* Build configuration list for PBXProject "Giddy" */ = {
 			isa = XCConfigurationList;

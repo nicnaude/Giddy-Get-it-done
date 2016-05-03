@@ -12,27 +12,19 @@ import CoreData
 //import GiddyKit
 
 class AppleWatchInterfaceController: WKInterfaceController {
-    
-    @IBOutlet var tableView: WKInterfaceTable!
+
+    @IBOutlet var watchFaceLabel: WKInterfaceLabel!
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
+
+        // Configure interface objects here.
+//        let date: NSDate? = DataAccess.sharedInstance.getAppleWatchToDos()
         
-        loadData()
-    }
-    
-    func loadData() {
-        
-        let toDos = ["one", "two", "three"]
-        
-        tableView.setNumberOfRows(toDos.count, withRowType: "ToDoTableRowController")
-        
-        for (index, value) in toDos.enumerate() {
-            
-//            let row = tableView.rowControllerAtIndex(index) as ToDoTableRowController
-//            row.titleLabel?.setText(value)
-            
-        }
+//        if date != nil {
+//            watchFaceLabel.setText(date!.description)
+//        }
+        watchFaceLabel.setText("Hello")
     }
     
     override func willActivate() {
