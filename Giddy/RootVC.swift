@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-import GiddyKit 
+import GiddyKit
 
 class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
