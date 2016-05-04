@@ -36,6 +36,7 @@ public class DataAccess: NSObject {
         request.sortDescriptors = sortDescriptors
         
         var error: NSError? = nil
+        print(error)
         let results: [AnyObject]?
         do {
             results = try self.managedObjectContext.executeFetchRequest(request)
