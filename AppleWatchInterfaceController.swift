@@ -9,23 +9,32 @@
 import WatchKit
 import Foundation
 import CoreData
-//import GiddyKit
+import GiddyKit
 
 class AppleWatchInterfaceController: WKInterfaceController {
-
-    @IBOutlet var watchFaceLabel: WKInterfaceLabel!
+    @IBOutlet var tableView: WKInterfaceTable!
+    @IBOutlet var watchLabel: WKInterfaceLabel!
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-
-        // Configure interface objects here.
-//        let date: NSDate? = DataAccess.sharedInstance.getAppleWatchToDos()
+//        setupTable()
+//         Configure interface objects here.
+         let date: NSDate? = DataAccess.sharedInstance.getAppleWatchToDos()
         
-//        if date != nil {
-//            watchFaceLabel.setText(date!.description)
-//        }
-        watchFaceLabel.setText("Hello")
+         if date != nil {
+         watchLabel.setText(date!.description)
+         }
     }
+    
+//    func setupTable() {
+//        tableView.setNumberOfRows(NSFetchedResultsController.count, withRowType: "CountryRow")
+//        
+//        for var i = 0; i < countries.count; ++i {
+//            if let row = tableView.rowControllerAtIndex(i) as? CountryRow {
+//                row.countryName.setText(countries[i])
+//            }
+//        }
+//    }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user

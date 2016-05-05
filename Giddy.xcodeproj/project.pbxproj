@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A06F9091CDA68760078E689 /* GiddyKit.framework in Resources */ = {isa = PBXBuildFile; fileRef = 4A1A5D981CDA2A56004FD9E0 /* GiddyKit.framework */; };
 		4A1A5D9B1CDA2A56004FD9E0 /* GiddyKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A1A5D9A1CDA2A56004FD9E0 /* GiddyKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A1A5D9F1CDA2A56004FD9E0 /* GiddyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1A5D981CDA2A56004FD9E0 /* GiddyKit.framework */; };
 		4A1A5DA01CDA2A56004FD9E0 /* GiddyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1A5D981CDA2A56004FD9E0 /* GiddyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A1A5DA51CDA2AAA004FD9E0 /* DataAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A5DA41CDA2AAA004FD9E0 /* DataAccess.swift */; };
 		4A1A5DA61CDA2AAA004FD9E0 /* DataAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A5DA41CDA2AAA004FD9E0 /* DataAccess.swift */; };
+		4A1A5DA81CDA2C1D004FD9E0 /* ToDoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A5DA71CDA2C1D004FD9E0 /* ToDoRow.swift */; };
+		4A1A5DA91CDA2D8B004FD9E0 /* GiddyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1A5D981CDA2A56004FD9E0 /* GiddyKit.framework */; };
 		4A251A011CB24B1A007CF8EE /* RootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A251A001CB24B1A007CF8EE /* RootVC.swift */; };
 		4A26A1161CD6916E009296AE /* GiddyToDo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26A1141CD6916E009296AE /* GiddyToDo+CoreDataProperties.swift */; };
 		4A26A1171CD6916E009296AE /* GiddyToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26A1151CD6916E009296AE /* GiddyToDo.swift */; };
@@ -40,6 +43,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4A06F9071CDA67CF0078E689 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A3DC02D1C9E0C15009AB92A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A1A5D971CDA2A56004FD9E0;
+			remoteInfo = GiddyKit;
+		};
 		4A1A5D9D1CDA2A56004FD9E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4A3DC02D1C9E0C15009AB92A /* Project object */;
@@ -66,14 +76,14 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		4A22A5251CD8088100C48560 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 8;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
 				4A1A5DA01CDA2A56004FD9E0 /* GiddyKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 		4A3DC0781C9F1F66009AB92A /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -104,6 +114,7 @@
 		4A1A5D9A1CDA2A56004FD9E0 /* GiddyKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GiddyKit.h; sourceTree = "<group>"; };
 		4A1A5D9C1CDA2A56004FD9E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A1A5DA41CDA2AAA004FD9E0 /* DataAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataAccess.swift; path = GiddyKit/DataAccess.swift; sourceTree = "<group>"; };
+		4A1A5DA71CDA2C1D004FD9E0 /* ToDoRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoRow.swift; sourceTree = "<group>"; };
 		4A1EE3DE1CD8A971002B0ED9 /* Giddy Apple Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Giddy Apple Watch Extension.entitlements"; sourceTree = "<group>"; };
 		4A22A5261CD808D200C48560 /* Giddy Apple Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Giddy Apple Watch.entitlements"; sourceTree = "<group>"; };
 		4A251A001CB24B1A007CF8EE /* RootVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootVC.swift; sourceTree = "<group>"; };
@@ -155,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A1A5DA91CDA2D8B004FD9E0 /* GiddyKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +255,7 @@
 				4A22A5261CD808D200C48560 /* Giddy Apple Watch.entitlements */,
 				4A3DC0581C9F1F66009AB92A /* Interface.storyboard */,
 				4A3DC0831C9F2B0A009AB92A /* ToDoWatchItem.swift */,
+				4A1A5DA71CDA2C1D004FD9E0 /* ToDoRow.swift */,
 				4A3DC0811C9F2549009AB92A /* AppleWatchInterfaceController.swift */,
 				4A3DC05B1C9F1F66009AB92A /* Assets.xcassets */,
 				4A3DC05D1C9F1F66009AB92A /* Info.plist */,
@@ -365,6 +378,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4A06F9081CDA67CF0078E689 /* PBXTargetDependency */,
 			);
 			name = "Giddy Apple Watch Extension";
 			productName = "Giddy Apple Watch Extension";
@@ -469,6 +483,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A06F9091CDA68760078E689 /* GiddyKit.framework in Resources */,
 				4A3DC0701C9F1F66009AB92A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,6 +562,7 @@
 				4A3DC07E1C9F20A9009AB92A /* NotificationController.swift in Sources */,
 				4A26A1161CD6916E009296AE /* GiddyToDo+CoreDataProperties.swift in Sources */,
 				4A3DC0871C9F30B0009AB92A /* AppleWatchInterfaceController.swift in Sources */,
+				4A1A5DA81CDA2C1D004FD9E0 /* ToDoRow.swift in Sources */,
 				4A3DC07D1C9F209A009AB92A /* ExtensionDelegate.swift in Sources */,
 				4A1A5DA51CDA2AAA004FD9E0 /* DataAccess.swift in Sources */,
 			);
@@ -567,6 +583,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4A06F9081CDA67CF0078E689 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A1A5D971CDA2A56004FD9E0 /* GiddyKit */;
+			targetProxy = 4A06F9071CDA67CF0078E689 /* PBXContainerItemProxy */;
+		};
 		4A1A5D9E1CDA2A56004FD9E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4A1A5D971CDA2A56004FD9E0 /* GiddyKit */;
@@ -625,7 +646,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = GiddyKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasnaude.GiddyKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -649,7 +670,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = GiddyKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasnaude.GiddyKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -700,6 +721,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				"SWIFT_INCLUDE_PATHS[arch=*]" = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -737,6 +759,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				"SWIFT_INCLUDE_PATHS[arch=*]" = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -754,6 +777,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasnaude.GiddyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/GiddyKit/**";
 			};
 			name = Debug;
 		};
@@ -769,6 +793,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasnaude.GiddyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/GiddyKit/**";
 			};
 			name = Release;
 		};
@@ -782,6 +807,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/GiddyKit/**";
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.1;
 			};
@@ -797,6 +823,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/GiddyKit/**";
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.1;
 			};
@@ -855,6 +882,7 @@
 				4A1A5DA31CDA2A56004FD9E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4A3DC0301C9E0C15009AB92A /* Build configuration list for PBXProject "Giddy" */ = {
 			isa = XCConfigurationList;

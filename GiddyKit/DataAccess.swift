@@ -1,4 +1,4 @@
-//
+    //
 //  DataAccess.swift
 //  Giddy
 //
@@ -57,8 +57,6 @@ public class DataAccess: NSObject {
         
         return date
     }
-    
-    
     
     
     // MARK: - Core Data stack
