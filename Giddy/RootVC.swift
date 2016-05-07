@@ -1,11 +1,3 @@
-//
-//  RootVCViewController.swift
-//  Giddy
-//
-//  Created by Nicholas Naudé on 04/04/2016.
-//  Copyright © 2016 Nicholas Naudé. All rights reserved.
-//
-
 import UIKit
 import CoreData
 import GiddyKit
@@ -21,14 +13,10 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     @IBAction func unwindToMenu(segue: UIStoryboardSegue) {}
     
     var editToDoVC: EditToDoVC? = nil
-    
-    //    var managedObjectContext: NSManagedObjectContext? = nil
     var giddyToDo : [GiddyToDo] = []
     var selectedToDo: GiddyToDo! = nil
     var record: NSManagedObject!
-//    var moc: NSManagedObjectContext? = nil
     let moc = DataAccess.sharedInstance.managedObjectContext
-//    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         // Initialize Fetch Request
