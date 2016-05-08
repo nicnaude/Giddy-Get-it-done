@@ -36,6 +36,7 @@
 		4A3DC0871C9F30B0009AB92A /* AppleWatchInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC0811C9F2549009AB92A /* AppleWatchInterfaceController.swift */; };
 		4A3DC0881C9F30B1009AB92A /* AppleWatchInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DC0811C9F2549009AB92A /* AppleWatchInterfaceController.swift */; };
 		4A5A615E1CD62FFA00805217 /* GiddyDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A5A615C1CD62FFA00805217 /* GiddyDataModel.xcdatamodeld */; };
+		4A6B20E61CDE15E400B15F2F /* WatchConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B20E51CDE15E400B15F2F /* WatchConnectivity.swift */; };
 		4ABD924B1CA36D7500C43F6C /* Onboard1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924A1CA36D7500C43F6C /* Onboard1VC.swift */; };
 		4ABD924D1CA36D8400C43F6C /* Onboard2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924C1CA36D8400C43F6C /* Onboard2VC.swift */; };
 		4ABD924F1CA36D9000C43F6C /* Onboard3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD924E1CA36D9000C43F6C /* Onboard3VC.swift */; };
@@ -113,7 +114,7 @@
 		4A1A5D981CDA2A56004FD9E0 /* GiddyKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GiddyKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A1A5D9A1CDA2A56004FD9E0 /* GiddyKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GiddyKit.h; sourceTree = "<group>"; };
 		4A1A5D9C1CDA2A56004FD9E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A1A5DA41CDA2AAA004FD9E0 /* DataAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataAccess.swift; path = GiddyKit/DataAccess.swift; sourceTree = "<group>"; };
+		4A1A5DA41CDA2AAA004FD9E0 /* DataAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataAccess.swift; sourceTree = "<group>"; };
 		4A1A5DA71CDA2C1D004FD9E0 /* ToDoRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoRow.swift; sourceTree = "<group>"; };
 		4A1EE3DE1CD8A971002B0ED9 /* Giddy Apple Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Giddy Apple Watch Extension.entitlements"; sourceTree = "<group>"; };
 		4A22A5261CD808D200C48560 /* Giddy Apple Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Giddy Apple Watch.entitlements"; sourceTree = "<group>"; };
@@ -140,6 +141,8 @@
 		4A3DC0811C9F2549009AB92A /* AppleWatchInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppleWatchInterfaceController.swift; path = ../AppleWatchInterfaceController.swift; sourceTree = "<group>"; };
 		4A3DC0831C9F2B0A009AB92A /* ToDoWatchItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoWatchItem.swift; sourceTree = "<group>"; };
 		4A5A615D1CD62FFA00805217 /* GiddyDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GiddyDataModel.xcdatamodel; sourceTree = "<group>"; };
+		4A6B20E51CDE15E400B15F2F /* WatchConnectivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConnectivity.swift; sourceTree = "<group>"; };
+		4A6B20E81CDF4C1F00B15F2F /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		4ABD924A1CA36D7500C43F6C /* Onboard1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard1VC.swift; sourceTree = "<group>"; };
 		4ABD924C1CA36D8400C43F6C /* Onboard2VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard2VC.swift; sourceTree = "<group>"; };
 		4ABD924E1CA36D9000C43F6C /* Onboard3VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboard3VC.swift; sourceTree = "<group>"; };
@@ -176,6 +179,7 @@
 		4A1A5D991CDA2A56004FD9E0 /* GiddyKit */ = {
 			isa = PBXGroup;
 			children = (
+				4A1A5DA41CDA2AAA004FD9E0 /* DataAccess.swift */,
 				4A1A5D9A1CDA2A56004FD9E0 /* GiddyKit.h */,
 				4A1A5D9C1CDA2A56004FD9E0 /* Info.plist */,
 			);
@@ -185,11 +189,10 @@
 		4A3DC02C1C9E0C15009AB92A = {
 			isa = PBXGroup;
 			children = (
-				4A1A5DA41CDA2AAA004FD9E0 /* DataAccess.swift */,
 				4A3DC0371C9E0C15009AB92A /* Giddy */,
-				4A3DC04F1C9E0DBC009AB92A /* Supporting files */,
 				4A3DC0571C9F1F66009AB92A /* Giddy Apple Watch */,
 				4A3DC0661C9F1F66009AB92A /* Giddy Apple Watch Extension */,
+				4A3DC04F1C9E0DBC009AB92A /* Supporting files */,
 				4A1A5D991CDA2A56004FD9E0 /* GiddyKit */,
 				4A3DC0361C9E0C15009AB92A /* Products */,
 			);
@@ -210,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				4A3DC0511C9E0DDC009AB92A /* Controllers */,
+				4A6B20E71CDE164400B15F2F /* Model */,
 				4A3DC0501C9E0DCC009AB92A /* View */,
 			);
 			path = Giddy;
@@ -218,6 +222,7 @@
 		4A3DC04F1C9E0DBC009AB92A /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				4A6B20E81CDF4C1F00B15F2F /* MyPlayground.playground */,
 				4A26A1141CD6916E009296AE /* GiddyToDo+CoreDataProperties.swift */,
 				4A26A1151CD6916E009296AE /* GiddyToDo.swift */,
 				4A5A615C1CD62FFA00805217 /* GiddyDataModel.xcdatamodeld */,
@@ -261,7 +266,7 @@
 				4A3DC05D1C9F1F66009AB92A /* Info.plist */,
 			);
 			path = "Giddy Apple Watch";
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		4A3DC0661C9F1F66009AB92A /* Giddy Apple Watch Extension */ = {
 			isa = PBXGroup;
@@ -282,6 +287,14 @@
 				4A3DC0681C9F1F66009AB92A /* PushNotificationPayload.apns */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4A6B20E71CDE164400B15F2F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4A6B20E51CDE15E400B15F2F /* WatchConnectivity.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		4ABD92501CA36D9900C43F6C /* Onboarding */ = {
@@ -558,6 +571,7 @@
 				4ABD924D1CA36D8400C43F6C /* Onboard2VC.swift in Sources */,
 				4A3DC0391C9E0C15009AB92A /* AppDelegate.swift in Sources */,
 				4A26A1171CD6916E009296AE /* GiddyToDo.swift in Sources */,
+				4A6B20E61CDE15E400B15F2F /* WatchConnectivity.swift in Sources */,
 				4AFD90D31CB2F287000B6706 /* EditToDoVC.swift in Sources */,
 				4A3DC07E1C9F20A9009AB92A /* NotificationController.swift in Sources */,
 				4A26A1161CD6916E009296AE /* GiddyToDo+CoreDataProperties.swift in Sources */,

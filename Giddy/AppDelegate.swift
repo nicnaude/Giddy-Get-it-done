@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  Giddy
-//
-//  Created by Nicholas Naudé on 19/03/2016.
-//  Copyright © 2016 Nicholas Naudé. All rights reserved.
-//
-
 import UIKit
 import CoreData
 import GiddyKit
@@ -22,8 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIGestureRecognizerDelega
         //        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         // splitViewController.delegate = self
         // let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
-        // let controller : NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
-        //
+        
+        let moc : NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
         window?.tintColor = UIColor(red:0.98, green:0.68, blue:0.09, alpha:1.0)
         return true
     }

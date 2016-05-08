@@ -78,69 +78,97 @@
             return NSManagedObjectModel(contentsOfURL: modelURL)!
         }()
         
-        public lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
-            // Initialize Persistent Store Coordinator
-            let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        
+        public lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+            // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
+            // Create the coordinator and store
             
-            //remove code from here:
-            // URL Documents Directory
-            let URLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-            let applicationDocumentsDirectory = URLs[(URLs.count - 1)]
+            let containerPath = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.giddyAppGroup")!.path
+            print(containerPath)
+            let sqlitePath = NSString(format: "%@/%@", containerPath!, "Giddy")
+            let url = NSURL(fileURLWithPath: sqlitePath as String)
             
-            // URL Persistent Store
-            let URLPersistentStore = applicationDocumentsDirectory.URLByAppendingPathComponent("Done.sqlite")
+            var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+            var error: NSError? = nil
             
+            var failureReason = "There was an error creating or loading the application's saved data."
+            
+            ///
+            do
+            {
+                try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            }
+            catch(let error as NSError)
+            {
+                NSLog(error.localizedDescription) //error has occurred.
+                abort() //abort
+            }
+            ///
+        return coordinator
+    }()
+    //        public lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+    //            // Initialize Persistent Store Coordinator
+    //            let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+    
+    //            //delete from here:
+    //            // URL Documents Directory
+    //            let URLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+    //            let applicationDocumentsDirectory = URLs[(URLs.count - 1)]
+    //
+    //            // URL Persistent Store
+    //            let URLPersistentStore = applicationDocumentsDirectory.URLByAppendingPathComponent("Done.sqlite")
+    //
+    //            do {
+    //                // Add Persistent Store to Persistent Store Coordinator
+    //                try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: URLPersistentStore, options: nil)
+    //
+    //            } catch {
+    //                // Populate Error
+    //                var userInfo = [String: AnyObject]()
+    //                //To here?
+    
+    //
+    //                userInfo[NSLocalizedDescriptionKey] = "There was an error creating or loading the application's saved data."
+    //                userInfo[NSLocalizedFailureReasonErrorKey] = "There was an error creating or loading the application's saved data."
+    //
+    //                userInfo[NSUnderlyingErrorKey] = error as NSError
+    //                let wrappedError = NSError(domain: "com.tutsplus.Done", code: 1001, userInfo: userInfo)
+    //
+    //                NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
+    //
+    //                abort()
+    //            }
+    //
+    //            return persistentStoreCoordinator
+    //        }()
+    
+    public lazy var managedObjectContext: NSManagedObjectContext = {
+        let persistentStoreCoordinator = self.persistentStoreCoordinator
+        
+        // Initialize Managed Object Context
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        
+        // Configure Managed Object Context
+        managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
+        
+        return managedObjectContext
+    }()
+    
+    // MARK: - Core Data Saving support
+    
+    public func saveContext () {
+        if managedObjectContext.hasChanges {
             do {
-                // Add Persistent Store to Persistent Store Coordinator
-                try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: URLPersistentStore, options: nil)
-                
+                try managedObjectContext.save()
             } catch {
-                // Populate Error
-                var userInfo = [String: AnyObject]()
-                //to here?
-                
-                
-                userInfo[NSLocalizedDescriptionKey] = "There was an error creating or loading the application's saved data."
-                userInfo[NSLocalizedFailureReasonErrorKey] = "There was an error creating or loading the application's saved data."
-                
-                userInfo[NSUnderlyingErrorKey] = error as NSError
-                let wrappedError = NSError(domain: "com.tutsplus.Done", code: 1001, userInfo: userInfo)
-                
-                NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
-                
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
                 abort()
             }
-            
-            return persistentStoreCoordinator
-        }()
-        
-        public lazy var managedObjectContext: NSManagedObjectContext = {
-            let persistentStoreCoordinator = self.persistentStoreCoordinator
-            
-            // Initialize Managed Object Context
-            var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-            
-            // Configure Managed Object Context
-            managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
-            
-            return managedObjectContext
-        }()
-        
-        // MARK: - Core Data Saving support
-        
-        public func saveContext () {
-            if managedObjectContext.hasChanges {
-                do {
-                    try managedObjectContext.save()
-                } catch {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    let nserror = error as NSError
-                    NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                    abort()
-                }
-            }
         }
-        
-        
+    }
+    
+    
     } // End

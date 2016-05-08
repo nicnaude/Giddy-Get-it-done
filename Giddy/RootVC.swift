@@ -1,6 +1,7 @@
 import UIKit
 import CoreData
 import GiddyKit
+import WatchConnectivity
 
 class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
@@ -39,8 +40,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        //        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         do {
             try self.fetchedResultsController.performFetch()
