@@ -2,12 +2,29 @@ import WatchKit
 import Foundation
 import CoreData
 import GiddyKit
+import WatchConnectivity
 
-class AppleWatchInterfaceController: WKInterfaceController {
+class AppleWatchInterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBOutlet var tableView: WKInterfaceTable!
     @IBOutlet var watchLabel: WKInterfaceLabel!
     
-//    let moc = DataAccess.sharedInstance.managedObjectContext
+    var watchSession : WCSession?
+    
+    //    let moc = DataAccess.sharedInstance.managedObjectContext
+    
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+        
+        if(WCSession.isSupported()){
+            watchSession = WCSession.defaultSession()
+            // Add self as a delegate of the session so we can handle messages
+            watchSession!.delegate = self
+            watchSession!.activateSession()
+        }
+    }
+    
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -17,13 +34,14 @@ class AppleWatchInterfaceController: WKInterfaceController {
             watchLabel.setText(date!.description)
         }
         watchLabel.setText("Hello")
-//        print(moc)
+        //        print(moc)
     }
     //
     
-    override func willActivate() {
-        super.willActivate()
+    func applicationWillResignActive() {
+        DataAccess.sharedInstance.saveContext()
     }
+    
     
     override func didDeactivate() {
         super.didDeactivate()

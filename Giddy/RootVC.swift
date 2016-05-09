@@ -3,7 +3,7 @@ import CoreData
 import GiddyKit
 import WatchConnectivity
 
-class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, WCSessionDelegate {
     
     @IBOutlet weak var addToDoTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -18,6 +18,7 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
     var selectedToDo: GiddyToDo! = nil
     var record: NSManagedObject!
     let moc = DataAccess.sharedInstance.managedObjectContext
+    var watchSession : WCSession?
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         // Initialize Fetch Request
@@ -64,6 +65,12 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RootVC.handleTap(_:)))
         self.darkOverlay.addGestureRecognizer(gestureRecognizer)
+        
+        if(WCSession.isSupported()){
+            watchSession = WCSession.defaultSession()
+            watchSession!.delegate = self
+            watchSession!.activateSession()
+        }
     }
     //
     
@@ -400,6 +407,19 @@ class RootVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFe
         // Present Alert Controller
         presentViewController(alertController, animated: true, completion: nil)
     }
+    
+    @IBAction func messageChanged(sender: AnyObject) {
+        if let message : String = addToDoTextField.text {
+            do {
+                try watchSession?.updateApplicationContext(
+                    ["message" : message]
+                )
+            } catch let error as NSError {
+                NSLog("Updating the context failed: " + error.localizedDescription)
+            }
+        }
+    }
+    
     
 } //END
 
